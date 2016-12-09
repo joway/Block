@@ -1,0 +1,54 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <meta name="format-detection" content="telephone=no">
+  <title>城西随笔 - Joway's Blog</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'img/logo/favicon.ico' %}"/>
+  {% block css %}
+    <link rel="stylesheet" href="{% static 'libs/css/normalize.css' %}"/>
+    <link rel="stylesheet" href="{% static 'libs/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'libs/css/animate.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'libs/css/typo.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+  {% endblock %}
+</head>
+<body>
+<div class="main">
+  {% include 'header/_header.html' %}
+
+  {% block content %}
+  {% endblock %}
+</div>
+<div class="footer">
+
+  {% block footer %}
+    {% include 'footer/_footer.html' %}
+  {% endblock %}
+</div>
+
+</body>
+
+{% block script %}
+  <script src="{% static 'libs/js/fetch.js' %}"></script>
+  <script src="{% static 'libs/js/jquery.min.js' %}"></script>
+  <script src="{% static 'libs/js/materialize.min.js' %}"></script>
+  <script src="{% static 'js/app.js' %}"></script>
+  <script src="{% static 'js/init.js' %}"></script>
+  <script src="{% static 'js/funcions.js' %}"></script>
+{% endblock %}
+
+{% block javascript %}
+  <script>
+    {% ifequal flavour 'mobile' %}
+      window.app.flavour = 'mobile';
+    {% else %}
+      window.app.flavour = 'desktop';
+    {% endifequal %}
+  </script>
+{% endblock %}
+</html>

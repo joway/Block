@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col s12 l3 right">
+        {% include 'components/_profile.html' %}
+      </div>
+      <div class="col s12 l9">
+        {% for article in articles %}
+          {% include 'articles/_article_card.html' %}
+        {% endfor %}
+
+        {% include 'components/_list_pagination.html' %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

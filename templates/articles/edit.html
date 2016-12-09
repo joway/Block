@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+{% load staticfiles %}
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'plugins/simplemde/simplemde.min.css' %}">
+{% endblock %}
+{% block script %}
+  {{ block.super }}
+  <script src="{% static 'plugins/simplemde/simplemde.min.js' %}"></script>
+{% endblock %}
+{% block javascript %}
+  {{ block.super }}
+  <script>
+
+    $(document).ready(function () {
+      $('select').material_select();
+    });
+
+    var simplemde = new SimpleMDE({element: document.getElementById("markdown-editor")});
+  </script>
+{% endblock %}
+{% block content %}
+  {% include 'components/_editor.html' %}
+{% endblock %}

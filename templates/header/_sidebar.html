@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<ul id="slide-out" class="side-nav black-text">
+  <div class="sidenav-top">
+    <li>
+      <div class="userView">
+        <div class="background" style="background-color: deepskyblue"></div>
+        <a href="/"><img class="circle" src="{% static 'img/logo/logo.png' %}"></a>
+        <a href="#!name"><span class="white-text name">Joway Wang</span></a>
+        <a href="#!email"><span class="white-text email">joway.w@gmail.com</span></a>
+      </div>
+    </li>
+
+    <li><a href="/"><i class="material-icons">home</i>主页</a></li>
+
+    <li>
+      <a class='' href='#' id="catalog-dropdown" onclick="sidebarCatalog()">
+        <i class="material-icons">turned_in_not</i>
+        目录<i class="material-icons right">arrow_drop_down</i>
+      </a>
+      <ul id='catalog' class="hidden">
+        <div class="divider"></div>
+        <li><a href="#!">随想 <span class="badge red white-text right">4</span></a></li>
+        <li><a href="#!">随想 <span class="badge red white-text right">4</span></a></li>
+        <li><a href="#!">随想 <span class="badge red white-text right">4</span></a></li>
+        <li><a href="#!">随想 <span class="badge red white-text right">4</span></a></li>
+        <li><a href="#!">随想 <span class="badge red white-text right">4</span></a></li>
+        <div class="divider"></div>
+      </ul>
+    </li>
+
+
+    <li><a href="/"><i class="material-icons">label_outline</i>标签云</a></li>
+    <li><a href="/"><i class="material-icons">receipt</i>简历</a></li>
+    <li><a href="/"><i class="material-icons">info</i>关于</a></li>
+  </div>
+
+  <div class="sidenav-bottom">
+    <li class="center-align">
+      <a href="#" class="img-link"><img src="{% static 'img/logo/github.png' %}" ></a>
+      <a href="#" class="img-link"><img src="{% static 'img/logo/weibo.png' %}" ></a>
+      <a href="#" class="img-link"><img src="{% static 'img/logo/instagram.png' %}" ></a>
+      <a href="#" class="img-link"><img src="{% static 'img/logo/twitter.png' %}" ></a>
+      <a href="#" class="img-link"><img src="{% static 'img/logo/facebook.png' %}" ></a>
+    </li>
+  </div>
+
+</ul>
+
+

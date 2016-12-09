@@ -1,0 +1,28 @@
+nav {
+  background-color: $color-background;
+  box-shadow: none;
+  margin-bottom: 40px;
+  padding-top: 10px;
+}
+
+.nav-icon {
+  color: #000 !important;
+  font-size: 32px !important;
+}
+
+.sidenav-top {
+  min-height: calc(100% - 64px);
+}
+
+.sidenav-bottom {
+}
+
+.sidenav-bottom img {
+  width: 32px;
+  margin: 0 6px;
+}
+
+.img-link {
+  display: inline !important;
+  padding: 0 !important;
+}

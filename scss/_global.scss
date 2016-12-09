@@ -1,0 +1,20 @@
+html, body {
+  background-color: $color-background !important;
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.main {
+  min-height: calc(100% - 200px);
+}
+.footer{
+  height: 200px;
+}
