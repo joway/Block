@@ -1,19 +1,11 @@
 {% extends '_base.html' %}
-{% load staticfiles %}
-
 {% block content %}
   <div class="container">
     <div class="row">
       <div class="col s10 l6 offset-s1 offset-l3">
         <div class="card center-align">
           <div class="card-content" style="padding: 50px">
-            <span class="card-title">第三方登陆</span>
-            <div style="margin: 50px">
-              <a href="{% url 'social:begin' 'github' %}?next={{ request.path }}" style="padding: 12px"><img
-                      src="{% static 'img/logo/github.png' %}" width="64"/></a>
-              <a href="{% url 'social:begin' 'weibo' %}?next={{ request.path }}" style="padding: 12px"><img
-                      src="{% static 'img/logo/weibo.png' %}" width="64"/></a>
-            </div>
+            {% include 'oauth/_social_btns.html' %}
           </div>
         </div>
       </div>

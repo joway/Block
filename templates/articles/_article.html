@@ -1,35 +1,23 @@
 {% load staticfiles %}
+{% load markup %}
 <div class="card">
   <article class="card-content">
-    <span class="card-title">Card Title</span>
+    {% if request.user.is_admin %}
+      <a class="btn-floating waves-effect waves-light black right" href="edit">
+        <i class="material-icons">mode_edit</i>
+      </a>
+    {% endif %}
 
-    <div>
-      <p>I am a very simple card. I am good at containing small bits of information.
-      I am convenient because I require little markup to use effectively.</p>
-      <p>I am a very simple card. I am good at containing small bits of information.
-      I am convenient because I require little markup to use effectively.</p>
-      <p>I am a very simple card. I am good at containing small bits of information.
-      I am convenient because I require little markup to use effectively.</p>
-      <p>I am a very simple card. I am good at containing small bits of information.
-      I am convenient because I require little markup to use effectively.</p>
-      <p>I am a very simple card. I am good at containing small bits of information.
-      I am convenient because I require little markup to use effectively.</p>
-      <p>今天天气真好123</p>
-      <p>今天天气真好123</p>
-      <p>今天天气真好123</p>
-      <p>今天天气真好123</p>
-      <p>今天天气真好123</p>
-      <p>今天天气真好123</p>
-      <p>今天天气真好123</p>
-      <p>今天天气真好123</p>
-      <p>今天天气真好123</p>
-      <p>今天天气真好123</p>
-      <p>今天天气真好123</p>
-      <p>今天天气真好123</p>
-      <p>今天天气真好123</p>
+    <h1 class="center-align">
+      {{ article.title }}
+    </h1>
+    <div class="article-content">
+      {% autoescape off %}
+        {{ article.content|markup }}
+      {% endautoescape %}
     </div>
   </article>
-  <div class="card-action">
-    <a href="#">This is a link</a>
-  </div>
+
+  <div class="divider"></div>
+  {% include 'components/_comment_panel.html' %}
 </div>

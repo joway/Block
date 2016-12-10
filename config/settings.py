@@ -18,6 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TESTING = ((" ".join(sys.argv)).find('manage.py test') != -1)
 
 ALLOWED_HOSTS = ['*']
+APPEND_SLASH = True
 
 try:
     from .local_settings import *
@@ -45,20 +46,28 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # local apps
     'users',
+    'articles',
 
     # third part
     'rest_framework',
     'django_mobile',
     'social.apps.django_app.default',
+    'actstream',
+    'taggit',
+    'pagedown',
+    'tracking',
+    'django_comments',
 )
 
 MIDDLEWARE_CLASSES = (
+    'tracking.middleware.VisitorTrackingMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'django.contrib.oauth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -67,6 +76,7 @@ MIDDLEWARE_CLASSES = (
 
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
+
 )
 
 ROOT_URLCONF = 'config.urls'
@@ -87,6 +97,9 @@ TEMPLATES = [
                 # social
                 'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
+                'config.context_processors.categories',
+                'config.context_processors.tags',
+                'config.context_processors.site_info',
             ],
             'loaders': [
                 'django_mobile.loader.Loader',
@@ -208,3 +221,21 @@ SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY', 'xxx')
 SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET', 'xxx')
 SOCIAL_AUTH_WEIBO_KEY = os.environ.get('SOCIAL_AUTH_WEIBO_KEY', 'xxx')
 SOCIAL_AUTH_WEIBO_SECRET = os.environ.get('SOCIAL_AUTH_WEIBO_SECRET', 'xxx')
+
+# django activity
+ACTSTREAM_SETTINGS = {
+    'MANAGER': 'actstream.managers.ActionManager',
+    'FETCH_RELATIONS': True,
+    'USE_PREFETCH': True,
+    'USE_JSONFIELD': True,
+    'GFK_FETCH_DEPTH': 1,
+}
+
+# django setting
+SITE_ID = 1
+
+# paging
+PAGING_SIZE = 10
+
+# django-tracking2
+TRACK_PAGEVIEWS = True

@@ -1,0 +1,10 @@
+{% load staticfiles %}
+<div class="center-align">
+  <h4 class="">第三方登陆</h4>
+  <div style="margin: 50px">
+    <a href="{% url 'social:begin' 'github' %}?next={{ request.path }}" style="padding: 12px"><img
+            src="{% static 'img/logo/github.png' %}" width="64"/></a>
+    <a href="{% url 'social:begin' 'weibo' %}?next={{ request.path }}" style="padding: 12px"><img
+            src="{% static 'img/logo/weibo.png' %}" width="64"/></a>
+  </div>
+</div>

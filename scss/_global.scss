@@ -15,6 +15,44 @@ a {
 .main {
   min-height: calc(100% - 200px);
 }
-.footer{
+
+.footer {
   height: 200px;
 }
+
+.article {
+  font-family: 'STSongti-SC-Regular', serif
+}
+
+.vertical-top {
+  vertical-align: top;
+}
+
+.vertical-bottom {
+  vertical-align: bottom;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.33em;
+}
+
+h4 {
+  font-size: 1.17em;
+}
+
+h5 {
+  font-size: .83em;
+}
+
+h6 {
+  font-size: .67em;
+}
+

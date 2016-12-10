@@ -3,8 +3,16 @@
       <div class="row valign-wrapper">
         <div class="col l8 s10 offset-l2 offset-s1 valign center-align">
           <h5>城西笔谈</h5>
-          <p>您是第 100 位访问用户 , 当天 UV : 100 ， PV : 100 </p>
-          <p>已持续运行 xx 天 , 内存占用 : 0.3 G,  可用性 : 98% </p>
+          <p>您是第 {{ analysis.analysis_pageview.UV_TOTAL | add:1 }} 位访问用户</p>
+          <div class="center-align" style="height: 30px">
+            <i class="material-icons" style="line-height: 30px">insert_chart</i>
+            <span class="vertical-top">日UV: {{ analysis.analysis_pageview.UV_DAILY }} , PV: {{ analysis.analysis_pageview.PV_DAILY }} ;
+            周 UV : {{ analysis.analysis_pageview.UV_WEEKLY }} , PV : {{ analysis.analysis_pageview.PV_WEEKLY }} ;
+            月 UV : {{ analysis.analysis_pageview.UV_MONTHLY }}, PV : {{ analysis.analysis_pageview.PV_MONTHLY }} ;
+            总 UV : {{ analysis.analysis_pageview.UV_TOTAL }} , PV : {{ analysis.analysis_pageview.PV_TOTAL }}</span>
+          </div>
+          <p>内存占用 : {{ analysis_server.mem_available }} G,
+            内存使用率: {{ analysis_server.mem_percent }} % </p>
           <p>Powered by Joway</p>
         </div>
       </div>

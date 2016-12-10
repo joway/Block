@@ -2,22 +2,23 @@
   <div class="row">
     <div class="col l10 offset-l1">
       <div class="input-field">
-        <input id="article-title" type="text" class="validate">
         <label for="article-title">标题</label>
+        <input id="article-title" type="text" class="validate">
       </div>
 
       <div class="input-field">
-        <select>
-          <option value="1">随感</option>
-          <option value="2">随感</option>
-          <option value="3">随感</option>
+        <select id="article-catalog">
+          <option value="programing">编程</option>
+          <option value="software">软件</option>
+          <option value="thinking">随感</option>
         </select>
-        <label>目录</label>
+        <label for="article-catalog">目录</label>
       </div>
 
+      <label for="markdown-editor">文章内容</label>
       <textarea id="markdown-editor"></textarea>
 
-      <a class="waves-effect waves-light btn-large right"><i class="material-icons right">cloud</i>发布</a>
+      <button class="waves-effect waves-light btn-large right" id="article-submit"><i class="material-icons right">cloud</i>发布</button>
 
     </div>
   </div>

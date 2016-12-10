@@ -1,0 +1,83 @@
+{% load comments %}
+{% load markup %}
+{% load i18n %}
+<div class="row comment-panel">
+  <div class="col s10 l10 offset-s1 offset-l1">
+    {% if request.user.is_anonymous %}
+      <div class="row comment-login">
+        {% include 'oauth/_social_btns.html' %}
+      </div>
+    {% else %}
+      <div class="row">
+        <div class="col s12 l12">
+          <i class="material-icons prefix">mode_edit</i>
+          <label for="comment-textarea">评论</label>
+          <textarea id="comment-textarea" class="materialize-textarea" name="comment"></textarea>
+          <button class="btn waves-effect waves-light right" name="action" id="comment-submit">提交
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="comment-content">
+      {% get_comment_list for article as comment_list %}
+      {% for comment in comment_list %}
+        <div class="row">
+          <div class="col s2 l1">
+            <a href="#c{{ comment.id }}" name="c{{ comment.id }}">
+              <img src="http://127.0.0.1:8001/static/img/logo/logo.png"
+                   alt="" class="comment-avatar">
+            </a>
+          </div>
+          <div class="col s10 l11">
+            <div class="">
+              <span class="comment-author"><strong>{{ comment.user.username }}</strong></span>
+              <div class="comment-words">{{ comment.comment | markup }}</div>
+              <div class="">
+                <span class="comment-date vertical-top">{{ comment.submit_date }}</span>
+                <div style="display: inline;margin-left: 32px">
+                  <a href=""><i class="material-icons grey-text">forum</i></a>
+                  <a href=""><i class="material-icons grey-text">thumb_up</i></a>
+                  <a href=""><i class="material-icons grey-text">thumb_down</i></a>
+                  {% if request.user.is_admin %}
+                    <a href="#modal-delete" data-id="{{ comment.id }}"><i class="material-icons red-text">delete</i></a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function (event) {
+    $('#comment-submit').click(function () {
+      var that = $(this);
+      var comment = $('#comment-textarea').val().trim();
+      if (!(comment)) {
+        prompt_warning('请输入完整的信息');
+      } else {
+        {% get_comment_form for article as form %}
+        var formData = new FormData();
+        formData.append('comment', comment);
+        formData.append('url', '{{ site.cur_full_url }}');
+        formData.append("content_type", '{{ form.content_type.value }}');
+        formData.append("object_pk", '{{ form.object_pk.value }}');
+        formData.append("timestamp", '{{ form.timestamp.value }}');
+        formData.append("security_hash", '{{ form.security_hash.value }}');
+
+        createComment(formData).then(function (response) {
+          if (response.ok) {
+            prompt_sucess('评论成功', 3000);
+            location.reload();
+          } else {
+            prompt_warning('评论失败', 3000);
+          }
+        });
+      }
+    });
+  });
+</script>

@@ -24,4 +24,4 @@ class IsAdminOrSelf(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         return request.method in [
-            "OPTIONS"] or request.user.is_superuser or request.user.is_staff or request.user == obj
+            "OPTIONS"] or request.user.is_superuser or request.user == obj

@@ -1,17 +1,20 @@
 {% load staticfiles %}
+{% load markup %}
+{% load colors %}
 <div class="card">
   <div class="card-content">
-    <span class="card-title">
-      <a href="{{ article }}">Card Title</a>
-      <span class="badge red">4</span>
-      <span class="badge red">4</span>
-      <span class="badge red">4</span>
+    <span class="card-title black-text">
+      <a href="/a/{{ article.uid }}" class="grey-text darken-5" style="font-size: 1.5em"><strong>{{ article.title }}</strong></a>
+      {% for tag in article.tags.all %}
+        <span class="badge {{ 'lighten' | random_color }}">{{ tag }}</span>
+      {% endfor %}
     </span>
-    <p>I am a very simple card. I am good at containing small bits of information.
-      I am convenient because I require little markup to use effectively.</p>
+    {% autoescape off %}
+      {{ article.digest | markup }}
+    {% endautoescape %}
   </div>
   <div class="card-action right-align">
     <span class="left">2016-10-10</span>
-    <a href="{{ article }}" class="grey-text">More</a>
+    <a href="/a/{{ article.uid }}" class="grey-text">More</a>
   </div>
 </div>

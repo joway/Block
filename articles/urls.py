@@ -4,7 +4,8 @@ from articles import views
 
 urlpatterns = [
     url(r'^$', views.list),
-    url(r'^(\d+)/$', views.detail),
-    url(r'^(\d+)/edit/$', views.edit),
+    url(r'^post/$', views.post),
+    url(r'^([A-Za-z0-9]+)/$', views.detail, name='article_detail'),
+    url(r'^([A-Za-z0-9]+)/edit/$', views.edit),
 
 ]

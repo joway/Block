@@ -22,13 +22,14 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, username, email, password, **extra_fields):
         return self._create_user(username=username, email=email, password=password
-                                 , is_superuser=True, **extra_fields)
+                                 , is_superuser=True, is_staff=True, **extra_fields)
 
 
-# 创建了自定义的User,也必须要创建自定义的UserManager
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('注册邮箱', unique=True, db_index=True)
     username = models.CharField('昵称', max_length=255, null=True, blank=True)
+
+    is_staff = models.IntegerField('维护人员', default=False)
 
     sex = models.BooleanField('性别', choices=((False, '男'), (True, '女')), default=False)
 
@@ -54,3 +55,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return "%s(%s)" % (self.username, self.email)
+
+    @property
+    def is_admin(self):
+        return self.is_staff or self.is_superuser

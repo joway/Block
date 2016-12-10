@@ -15,11 +15,19 @@
     <link rel="stylesheet" href="{% static 'libs/css/animate.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'libs/css/typo.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+
+  {% endblock %}
+
+  <script src="{% static 'js/app.js' %}"></script>
+
+
+  {% block init_block %}
   {% endblock %}
 </head>
 <body>
 <div class="main">
   {% include 'header/_header.html' %}
+  {% include 'components/modal/_modal.html' %}
 
   {% block content %}
   {% endblock %}
@@ -37,9 +45,12 @@
   <script src="{% static 'libs/js/fetch.js' %}"></script>
   <script src="{% static 'libs/js/jquery.min.js' %}"></script>
   <script src="{% static 'libs/js/materialize.min.js' %}"></script>
-  <script src="{% static 'js/app.js' %}"></script>
+
+  <script src="{% static 'js/apis.js' %}"></script>
   <script src="{% static 'js/init.js' %}"></script>
   <script src="{% static 'js/funcions.js' %}"></script>
+  <script src="{% static 'js/prompts.js' %}"></script>
+  <script src="{% static 'js/modals.js' %}"></script>
 {% endblock %}
 
 {% block javascript %}

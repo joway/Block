@@ -1,24 +1,19 @@
-{% extends '_base.html' %}
-{% load staticfiles %}
-{% block css %}
-  {{ block.super }}
-  <link rel="stylesheet" href="{% static 'plugins/simplemde/simplemde.min.css' %}">
-{% endblock %}
-{% block script %}
-  {{ block.super }}
-  <script src="{% static 'plugins/simplemde/simplemde.min.js' %}"></script>
-{% endblock %}
-{% block javascript %}
-  {{ block.super }}
+{% extends 'articles/_base_article_edit.html' %}
+{% block init_block %}
   <script>
 
-    $(document).ready(function () {
-      $('select').material_select();
-    });
+    function commentsToString(fn) {
+      return fn.toString().split('\n').slice(1, -1).join('\n') + '\n'
+    }
+    app.article = {
+      'uid': '{{ article.uid }}',
+      'title': '{{ article.title }}',
 
-    var simplemde = new SimpleMDE({element: document.getElementById("markdown-editor")});
+      'content': commentsToString(function () {/*
+{{  article.content }}
+*/}),
+      'catalog': '{{ article.catalog }}',
+      'action': 'update'
+    }
   </script>
-{% endblock %}
-{% block content %}
-  {% include 'components/_editor.html' %}
 {% endblock %}
