@@ -1,4 +1,4 @@
-FROM python:2.7.8
+FROM python:3.5.1
 MAINTAINER joway wong "joway.w@gmail.com"
 
 # Install packages

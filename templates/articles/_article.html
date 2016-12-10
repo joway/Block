@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load markup %}
+{% load colors %}
 <div class="card">
   <article class="card-content">
     {% if request.user.is_admin %}
@@ -11,6 +12,23 @@
     <h1 class="center-align">
       {{ article.title }}
     </h1>
+    <div class="row">
+      <div class="col l2 s6 left">
+        <span>{{ article.created_at | date }}</span>
+      </div>
+      <div class="col l2 s4 right">
+        <i class="material-icons left">turned_in</i>
+        <span class="badge {{ 'lighten' | random_color }} left">
+          <strong>{{ article.get_catalog_display }}</strong>
+        </span>
+      </div>
+      <div class="col l4 offset-l4 s6 hide-on-small-only">
+        <i class="material-icons left">label</i>
+        {% for tag in article.tag_list %}
+          <span class="badge {{ 'lighten' | random_color }} left" style="border-radius: 15px"><strong>{{ tag }}</strong></span>
+        {% endfor %}
+      </div>
+    </div>
     <div class="article-content">
       {% autoescape off %}
         {{ article.content|markup }}
