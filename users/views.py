@@ -6,5 +6,6 @@ from django.shortcuts import redirect
 
 @login_required
 def logout(request):
+    request.user.backend = 'django.contrib.auth.backends.ModelBackend'
     django_logout(request)
-    return redirect(to=reverse('articles.views.list'), permanent=True)
+    return redirect(to=reverse('articles.views.list'))

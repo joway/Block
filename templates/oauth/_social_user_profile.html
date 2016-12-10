@@ -1,0 +1,12 @@
+{% load staticfiles %}
+<div class="center-align">
+  <div style="margin: 50px">
+    <img src='{{ request.user.avatar }}' width="128px" style="border-radius: 50%">
+    <p style="margin: 12px">Username : {{ request.user.username }}</p>
+    <p style="margin: 12px">Email : {{ request.user.email }}</p>
+  </div>
+
+  <a href="/user/logout/">
+    <button class="waves-effect waves-light btn"><i class="material-icons right">input</i>退出</button>
+  </a>
+</div>

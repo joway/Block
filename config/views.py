@@ -7,5 +7,6 @@ def index(request):
     return redirect(to=reverse('articles.views.list'), permanent=True)
 
 
-def detail(request):
-    return render(request, 'articles/detail.html', locals())
+def error(request):
+    error_msg = request.GET.get('error', '未知错误')
+    return render(request, 'error.html', locals())

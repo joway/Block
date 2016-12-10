@@ -8,6 +8,8 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^$', views.index),
+    url(r'^error/$', views.error),
+
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
     url(r'^tracking/', include('tracking.urls')),
     url(r'^activity/', include('actstream.urls')),
@@ -16,7 +18,7 @@ urlpatterns = [
 
     url(r"^user/", include('users.urls')),
     url(r"^a/", include('articles.urls')),
-    url(r"^oauth/", include('oauth.urls')),
+    url(r"^oauth/", include('oauth.urls'), name='oauth'),
     url(r"^about/", include('about.urls')),
 
     url(r"^api/", include(router.urls)),

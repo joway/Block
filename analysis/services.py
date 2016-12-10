@@ -4,7 +4,7 @@ from tracking.models import Visitor
 
 from analysis.constants import ActivityType
 from utils.tracking import tracking_report
-from utils.utils import days_ago
+from utils.helpers import days_ago
 
 
 class ActionService(object):

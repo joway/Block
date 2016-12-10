@@ -5,11 +5,7 @@
       <div class="col s10 l6 offset-s1 offset-l3">
         <div class="card center-align">
           <div class="card-content" style="padding: 50px">
-            {% if request.user.is_authenticated %}
-              {% include 'oauth/_social_user_profile.html' %}
-            {% else %}
-              {% include 'oauth/_social_btns.html' %}
-            {% endif %}
+            <h1> {{ error_msg }}</h1>
           </div>
         </div>
       </div>

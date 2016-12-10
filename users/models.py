@@ -1,7 +1,7 @@
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser, BaseUserManager
 from django.db import models
 
-from utils.utils import get_random_string
+from utils.helpers import get_random_string
 
 
 class UserManager(BaseUserManager):
