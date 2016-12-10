@@ -3,6 +3,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
 from analysis.services import ActionService
+from utils.tag import topk
 from .models import Article
 from .paginations import ArticlePagination
 from .serializers import ArticleModelSerializer, ArticleCreateSerializer
@@ -23,20 +24,26 @@ class ArticleViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         serializer = ArticleCreateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(author=request.user)
+        serializer.save(author=request.user, tags=''.join(topk(serializer.data['content'], 3)))
         headers = self.get_success_headers(serializer.data)
 
         ActionService.post(request.user, serializer.instance)
 
-        return Response(self.get_serializer(instance=serializer.instance).data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(self.get_serializer(instance=serializer.instance).data, status=status.HTTP_201_CREATED,
+                        headers=headers)
 
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = ArticleCreateSerializer(instance, data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
+
+        instance.tags.clear()
+        instance.tags.add(*topk(serializer.data['content'], 3))
+
         headers = self.get_success_headers(serializer.data)
 
         ActionService.update(request.user, serializer.instance)
 
-        return Response(self.get_serializer(instance=serializer.instance).data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(self.get_serializer(instance=serializer.instance).data, status=status.HTTP_201_CREATED,
+                        headers=headers)

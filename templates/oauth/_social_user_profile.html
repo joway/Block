@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <div class="center-align">
   <div style="margin: 50px">
-    <img src='{{ request.user.avatar }}' width="128px" style="border-radius: 50%">
+    <img src='{{ request.user.avatar }}' width="128px" class="circle">
     <p style="margin: 12px">Username : {{ request.user.username }}</p>
     <p style="margin: 12px">Email : {{ request.user.email }}</p>
   </div>

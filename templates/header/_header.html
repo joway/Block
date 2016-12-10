@@ -10,7 +10,11 @@
 
       <div class="col s2 l2 offset-l8 offset-s8 right-align medium">
         <a href="/oauth/" data-activates="slide-out" id="side-nav-menu">
-          <i class="material-icons nav-icon">account_circle</i>
+          {% if request.user.is_authenticated %}
+            <img src="{{ request.user.avatar }}" width="32px" class="circle">
+          {% else %}
+            <i class="material-icons nav-icon">account_circle</i>
+          {% endif %}
         </a>
       </div>
     </div>

@@ -28,8 +28,6 @@ def callback_github(request):
     if 'message' in user_info:
         return HttpResponseRedirect('/error/?error=%s' % user_info['message'])
 
-    print(user_info)
-
     user, is_create = User.objects.get_or_create(email=user_info['email'])
     if is_create:
         user.is_staff = False

@@ -26,8 +26,7 @@
         <div class="row">
           <div class="col s2 l1">
             <a href="#c{{ comment.id }}" name="c{{ comment.id }}">
-              <img src="http://127.0.0.1:8001/static/img/logo/logo.png"
-                   alt="" class="comment-avatar">
+              <img src="{{ comment.user.avatar }}" class="comment-avatar circle">
             </a>
           </div>
           <div class="col s10 l11">

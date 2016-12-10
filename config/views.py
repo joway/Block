@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 
 def index(request):
-    return redirect(to=reverse('articles.views.list'), permanent=True)
+    return redirect(to=reverse('articles.views.list'))
 
 
 def error(request):
