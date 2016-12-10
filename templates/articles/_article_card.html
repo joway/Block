@@ -4,17 +4,30 @@
 <div class="card">
   <div class="card-content">
     <span class="card-title black-text">
-      <a href="/a/{{ article.uid }}" class="grey-text darken-5" style="font-size: 1.5em"><strong>{{ article.title }}</strong></a>
-      {% for tag in article.tags.all %}
-        <span class="badge {{ 'lighten' | random_color }}">{{ tag }}</span>
-      {% endfor %}
+      <a href="/a/{{ article.uid }}" class="grey-text darken-5"
+         style="font-size: 1.5em"><strong>{{ article.title }}</strong></a>
+
+      <div>
+        {% for tag in article.tags.all %}
+          <span class="badge {{ 'lighten' | random_color }}" style="border-radius: 5px">{{ tag }}</span>
+        {% endfor %}
+      </div>
     </span>
     {% autoescape off %}
       {{ article.digest | markup }}
     {% endautoescape %}
   </div>
-  <div class="card-action right-align">
-    <span class="left">2016-10-10</span>
-    <a href="/a/{{ article.uid }}" class="grey-text">More</a>
+  <div class="card-action">
+    <div class="row" style="margin-bottom: 0;">
+      <div class="col l2 s4">
+        <span class="left small">{{ article.created_at | date }}</span>
+      </div>
+      <div class="col l2 s4 offset-l8 offset-s4">
+        <span class="badge {{ 'lighten' | random_color }} right">
+          <strong>{{ article.get_catalog_display }}</strong>
+        </span>
+        <i class="material-icons right">turned_in</i>
+      </div>
+    </div>
   </div>
 </div>

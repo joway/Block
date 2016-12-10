@@ -21,7 +21,7 @@ RUN pip install -r requirements.txt
 RUN rm /etc/nginx/sites-enabled/default && \
     rm /etc/nginx/nginx.conf
 ADD ./.deploy/nginx/nginx.conf /etc/nginx/nginx.conf
-ADD ./.deploy/nginx/xiaoma.conf /etc/nginx/sites-enabled/xiaoma.conf
+ADD ./.deploy/nginx/* /etc/nginx/sites-enabled/
 ADD ./.deploy/supervisord.conf /etc/supervisor/conf.d/
 #RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 

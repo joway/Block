@@ -30,8 +30,8 @@ def tags(request):
 def site_info(request):
     context = {
         'analysis': {
-            'analysis_pageview': TrackingService.pageview_report(),
-            'analysis_server': server_info(),
+            'pageview': TrackingService.pageview_report(),
+            'server': server_info(),
         },
         'site': {
             'domain': settings.DOMAIN,

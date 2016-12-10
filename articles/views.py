@@ -6,6 +6,7 @@ from articles.models import Article
 
 
 def list(request):
+    print(request.user)
     articles = Article.objects.all()
 
     page = request.GET.get('page', '1')

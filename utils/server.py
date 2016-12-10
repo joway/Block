@@ -8,5 +8,5 @@ def server_info():
     return {
         'mem_available': round(mem.available / GB, 2),
         'mem_percent': mem.percent,
-        'cpu.user': cpu.user,
+        'cpu_user': cpu.user,
     }
