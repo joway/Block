@@ -1,7 +1,7 @@
 {% load comments %}
 {% load markup %}
 {% load i18n %}
-<div class="row comment-panel">
+<div class="row comment-panel" id="comment-panel">
   <div class="col s10 l10 offset-s1 offset-l1">
     {% if request.user.is_anonymous %}
       <div class="row comment-login">
@@ -36,9 +36,10 @@
               <div class="">
                 <span class="comment-date vertical-top">{{ comment.submit_date }}</span>
                 <div style="display: inline;margin-left: 32px">
-                  <a href=""><i class="material-icons grey-text">forum</i></a>
-                  <a href=""><i class="material-icons grey-text">thumb_up</i></a>
-                  <a href=""><i class="material-icons grey-text">thumb_down</i></a>
+                  <a onclick="referredTo(this)" href="javascript:void(0);"
+                   data-username="{{ comment.user.username }}"><i class="material-icons grey-text">forum</i></a>
+                  <a onclick="commentUp(this)" href="javascript:void(0);" data-id="{{ comment.id }}"><i class="material-icons grey-text" id="thumb-up-{{ comment.id }}">thumb_up</i></a>
+                  <a onclick="commentDown(this)" href="javascript:void(0);" data-id="{{ comment.id }}"><i class="material-icons grey-text" id="thumb-down-{{ comment.id }}">thumb_down</i></a>
                   {% if request.user.is_admin %}
                     <a href="#modal-delete" data-id="{{ comment.id }}"><i class="material-icons red-text">delete</i></a>
                   {% endif %}
@@ -54,11 +55,13 @@
 <script>
   document.addEventListener("DOMContentLoaded", function (event) {
     $('#comment-submit').click(function () {
-      var that = $(this);
+
       var comment = $('#comment-textarea').val().trim();
       if (!(comment)) {
         prompt_warning('请输入完整的信息');
       } else {
+        beginCircleLoding();
+
         {% get_comment_form for article as form %}
         var formData = new FormData();
         formData.append('comment', comment);
@@ -69,8 +72,9 @@
         formData.append("security_hash", '{{ form.security_hash.value }}');
 
         createComment(formData).then(function (response) {
+          endCircleLoding();
           if (response.ok) {
-            prompt_sucess('评论成功', 3000);
+            prompt_success('评论成功', 3000);
             location.reload();
           } else {
             prompt_warning('评论失败', 3000);

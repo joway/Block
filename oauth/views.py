@@ -1,11 +1,10 @@
 from django.contrib.auth import login as django_login
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from oauth.constants import SOCIAL_OAUTH_URLS
 from oauth.social_oauth import GithubSocialOauth
 from users.models import User
-from utils.helpers import get_random_string
 
 
 def index(request):
@@ -28,14 +27,10 @@ def callback_github(request):
     if 'message' in user_info:
         return HttpResponseRedirect('/error/?error=%s' % user_info['message'])
 
-    user, is_create = User.objects.get_or_create(email=user_info['email'])
-    if is_create:
-        user.is_staff = False
-        user.is_superuser = False
-        user.username = user_info['name']
-        user.avatar = user_info['avatar_url']
-        user.set_password(get_random_string(10))
-        user.save()
+    try:
+        user = User.objects.get(email=user_info['email'])
+    except User.DoesNotExist:
+        user = User.objects.create_user(username=user_info['name'], avatar=user_info['avatar_url'])
 
     user.backend = 'django.contrib.auth.backends.ModelBackend'
     django_login(request, user)

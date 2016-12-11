@@ -2,7 +2,7 @@ defusedxml==0.4.1
 Django==1.9.1
 django-activity-stream==0.6.3
 django-contrib-comments==1.7.3
-django-filter==0.15.3
+django-filter==1.0.1
 django-jsonfield==1.0.1
 django-mobile==0.7.0
 django-pagedown==0.1.1
@@ -11,10 +11,12 @@ django-tracking2==0.3.3
 djangorestframework==3.5.3
 jieba==0.38
 markdown2==2.3.2
-mysqlclient==1.3.7
+mysqlclient==1.3.9
 oauthlib==2.0.1
+packaging==16.8
 psutil==5.0.0
 PyJWT==1.4.2
+pyparsing==2.1.10
 python-social-auth==0.2.21
 python3-openid==3.0.10
 pytz==2016.10
@@ -22,4 +24,4 @@ requests==2.12.3
 requests-oauthlib==0.7.0
 shortuuid==0.4.3
 six==1.10.0
-uWSGI==2.0.13.1
+uWSGI==2.0.14

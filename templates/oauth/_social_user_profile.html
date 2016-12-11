@@ -5,8 +5,16 @@
     <p style="margin: 12px">Username : {{ request.user.username }}</p>
     <p style="margin: 12px">Email : {{ request.user.email }}</p>
   </div>
-
-  <a href="/user/logout/">
+  <div class="row">
+    {% if request.user.is_admin %}
+      <a href="/a/post/">
+        <button class="waves-effect waves-light light-blue lighten-1 btn">
+          <i class="material-icons">mode_edit</i><span class="vertical-top">发表新文章</span>
+        </button>
+      </a>
+    {% endif %}
+  </div>
+  <a href="/user/logout/" class="row">
     <button class="waves-effect waves-light btn"><i class="material-icons right">input</i>退出</button>
   </a>
 </div>

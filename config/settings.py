@@ -19,6 +19,7 @@ TESTING = ((" ".join(sys.argv)).find('manage.py test') != -1)
 
 ALLOWED_HOSTS = ['*']
 APPEND_SLASH = True
+PRODUCTION = True
 
 try:
     from .local_settings import *
@@ -139,7 +140,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-if DEBUG == 'True' or DEBUG == True or TESTING:
+if not PRODUCTION:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -252,4 +253,3 @@ TRACK_PAGEVIEWS = True
 # mysocial
 SOCIAL_CALLBACK_REDIRECT_BASE_URL = 'http://%s:8000' % DOMAIN + '/oauth/'
 GITHUB_SOCIAL_CALLBACK_REDIRECT_URL = SOCIAL_CALLBACK_REDIRECT_BASE_URL + 'github/'
-print(GITHUB_SOCIAL_CALLBACK_REDIRECT_URL)

@@ -10,3 +10,16 @@
     </div>
   </div>
 {% endblock %}
+{% block javascript %}
+  {{ block.super }}
+  <script>
+    var options = [
+      {
+        selector: '#comment-panel', offset: 0, callback: function (el) {
+        Materialize.fadeInImage($(el));
+      }
+      }
+    ];
+    Materialize.scrollFire(options);
+  </script>
+{% endblock %}

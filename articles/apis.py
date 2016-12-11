@@ -24,8 +24,11 @@ class ArticleViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         serializer = ArticleCreateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(author=request.user, tags=''.join(topk(serializer.data['content'], 3)))
+        serializer.save(author=request.user)
         headers = self.get_success_headers(serializer.data)
+
+        article = serializer.instance
+        article.tags.add(*topk(serializer.validated_data['content'], 3))
 
         ActionService.post(request.user, serializer.instance)
 
@@ -43,7 +46,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
         headers = self.get_success_headers(serializer.data)
 
-        ActionService.update(request.user, serializer.instance)
+        ActionService.update(request.user, instance)
 
         return Response(self.get_serializer(instance=serializer.instance).data, status=status.HTTP_201_CREATED,
                         headers=headers)

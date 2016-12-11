@@ -1,11 +1,12 @@
-from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser, BaseUserManager, Group
 from django.db import models
 
+from analysis.services import ActionService
 from utils.helpers import get_random_string
 
 
 class UserManager(BaseUserManager):
-    def _create_user(self, username, email, password=None, is_superuser=False, **extra_fields):
+    def _create_user(self, username, email, password=None, group=None, is_superuser=False, **extra_fields):
         """
         Creates and saves a User with the given email and password.
         """
@@ -14,15 +15,22 @@ class UserManager(BaseUserManager):
         if not password:
             password = get_random_string(length=10)
         user.set_password(password)
+
+        user.groups.add(group)
         user.save(using=self._db)
         return user
 
     def create_user(self, username, email, password=None, **extra_fields):
-        return self._create_user(username=username, email=email, password=password, **extra_fields)
+        group, _ = Group.objects.get_or_create('visitor')
+
+        user = self._create_user(username=username, email=email, password=password, group=group, **extra_fields)
+        ActionService.login(user)
+        return user
 
     def create_superuser(self, username, email, password, **extra_fields):
+        group, _ = Group.objects.get_or_create('admin')
         return self._create_user(username=username, email=email, password=password
-                                 , is_superuser=True, is_staff=True, **extra_fields)
+                                 , is_superuser=True, is_staff=True, group=group, **extra_fields)
 
 
 class User(AbstractBaseUser, PermissionsMixin):

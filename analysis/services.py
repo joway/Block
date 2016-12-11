@@ -3,8 +3,8 @@ from django.utils import timezone
 from tracking.models import Visitor
 
 from analysis.constants import ActivityType
-from utils.tracking import tracking_report
 from utils.helpers import days_ago
+from utils.tracking import tracking_report
 
 
 class ActionService(object):
@@ -19,6 +19,10 @@ class ActionService(object):
     @classmethod
     def post(cls, user, obj):
         action.send(user, verb=ActivityType.POST, target=user.groups.first(), action_object=obj)
+
+    @classmethod
+    def login(cls, user):
+        action.send(user, verb=ActivityType.LOGIN, target=user.groups.first())
 
 
 class TrackingService(object):
@@ -42,7 +46,7 @@ class TrackingService(object):
         try:
             obj = Visitor.objects.order_by('start_time').first()
             track_start_time = obj.start_time
-        except (IndexError, Visitor.DoesNotExist):
+        except (IndexError, Visitor.DoesNotExist, AttributeError):
             track_start_time = now
         total = tracking_report(track_start_time, now)
         return {

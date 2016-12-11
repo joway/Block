@@ -9,7 +9,6 @@
     app.article = {
       'uid': null,
       'title': '',
-      'content': '',
       'catalog': '',
     }
   </script>
@@ -24,7 +23,6 @@
 {% block javascript %}
   {{ block.super }}
   <script>
-
     $(document).ready(function () {
       var simplemde = new SimpleMDE({
         element: document.getElementById("markdown-editor"),
@@ -32,19 +30,24 @@
         spellChecker: false,
       });
 
-      simplemde.value(app.article.content);
+      app.editor = simplemde;
+
       $('#article-catalog').val(app.article.catalog);
       $('#article-title').val(app.article.title);
 
       $('select').material_select();
 
       $('#article-submit').click(function () {
+
         var article_content = simplemde.value();
         var article_catalog = $('#article-catalog').val();
         var article_title = $('#article-title').val().trim();
         if (!(article_content && article_title && article_catalog)) {
           prompt_warning('请输入完整的信息');
         } else {
+
+          beginCircleLoding();
+
           var formData = new FormData();
           formData.append('title', article_title);
           formData.append('catalog', article_catalog);
@@ -58,14 +61,17 @@
 
           action.then(function (response) {
             response.json().then(function (data) {
+              endCircleLoding();
+
               if (response.ok) {
-                prompt_sucess('发布成功', 3000);
+                prompt_success('发布成功', 3000);
                 location.href = '/a/' + data.uid + '';
               } else {
                 prompt_warning('发布失败', 3000);
               }
             })
           });
+
         }
       });
     });

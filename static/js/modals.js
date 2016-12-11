@@ -8,7 +8,7 @@ $(document).ready(function () {
         } else {
           location.reload();
         }
-        prompt_sucess('删除成功', 3000);
+        prompt_success('删除成功', 3000);
       } else {
         response.json().then(function (data) {
           prompt_warning(data.detail || '删除失败', 3000);

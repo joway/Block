@@ -28,6 +28,7 @@
 <div class="main">
   {% include 'header/_header.html' %}
   {% include 'components/modal/_modal.html' %}
+  {% include 'components/preloader/_preloader.html' %}
 
   {% block content %}
   {% endblock %}
@@ -51,6 +52,7 @@
   <script src="{% static 'js/funcions.js' %}"></script>
   <script src="{% static 'js/prompts.js' %}"></script>
   <script src="{% static 'js/modals.js' %}"></script>
+  <script src="{% static 'js/proloader.js' %}"></script>
 {% endblock %}
 
 {% block javascript %}
@@ -62,4 +64,5 @@
     {% endifequal %}
   </script>
 {% endblock %}
+
 </html>

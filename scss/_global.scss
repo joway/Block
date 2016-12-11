@@ -32,6 +32,17 @@ a {
   vertical-align: bottom;
 }
 
+.loading {
+  position: fixed;
+  display: none;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 100;
+}
+
 h1 {
   font-size: 2.5em;
 }
