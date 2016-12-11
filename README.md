@@ -1,10 +1,5 @@
-Django Seed
+# Block
 
-====
+===
 
-- Docker
-- Nginx
-- Uwsgi
-- supervisord
-- log
-- Social Auth
+Another Blog based on Django . 

@@ -1,7 +1,9 @@
 $(document).ready(function () {
   $('#modal-delete').find('.modal-confirm').click(function () {
     $('#modal-delete').modal('close');
+    beginCircleLoding();
     deleteComment(app.modal.delete.id).then(function (response) {
+      endCircleLoding();
       if (response.ok) {
         if (app.modal.delete.redirect) {
           location.pathname = app.modal.delete.redirect;
