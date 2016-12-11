@@ -43,3 +43,6 @@ class Article(models.Model):
     @property
     def digest(self):
         return self.content[:140] + '...'
+
+    def __str__(self):
+        return self.title

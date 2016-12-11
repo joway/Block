@@ -1,5 +1,5 @@
 class ActivityType(object):
-    COMMENT = 'comment'
-    POST = 'post'
-    UPDATE = 'update'
-    LOGIN = 'login'
+    COMMENT = '评论'
+    POST = '发表'
+    UPDATE = '更新'
+    LOGIN = '登陆'

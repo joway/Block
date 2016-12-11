@@ -32,3 +32,9 @@ def days_ago(dt, ago):
     start = time_localize(datetime.combine(_days_ago, dt.time()))
     end = time_localize(datetime.combine(today, dt.time()))
     return start, end
+
+
+def yesterday(dt):
+    today = dt.date()
+    _days_ago = today - timedelta(1)
+    return time_localize(datetime.combine(_days_ago, dt.time()))

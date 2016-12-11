@@ -47,3 +47,28 @@ function commentDown(element) {
   thumbUp.addClass('grey-text');
 
 }
+
+function initLineChart(element, data, label) {
+  var _values = [];
+  for (var k in data) {
+    _values.push(data[k]);
+  }
+
+  var weeklyChart = new Chart(element, {
+    type: 'line',
+    data: {
+      labels: Object.keys(data),
+      datasets: [{
+        label: label,
+        data: _values,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+        ],
+        borderWidth: 1
+      }]
+    },
+  });
+}

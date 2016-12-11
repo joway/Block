@@ -1,9 +1,12 @@
+from collections import OrderedDict
+from copy import deepcopy
+
 from actstream import action
 from django.utils import timezone
 from tracking.models import Visitor
 
 from analysis.constants import ActivityType
-from utils.helpers import days_ago
+from utils.helpers import days_ago, yesterday
 from utils.tracking import tracking_report
 
 
@@ -26,6 +29,23 @@ class ActionService(object):
 
 
 class TrackingService(object):
+    @classmethod
+    def chart_report(cls, days):
+        now = timezone.now()
+        reports = OrderedDict()
+        cur = now
+        for d in range(days):
+            _yesterday = yesterday(cur)
+            reports[str(cur.date().strftime('%Y-%m-%d'))] = tracking_report(_yesterday, cur)
+            cur = _yesterday
+
+        _reports = OrderedDict()
+        for i in range(days):
+            k, v = reports.popitem(last=True)
+            _reports[k] = v
+
+        return _reports
+
     @classmethod
     def pageview_report(cls):
         now = timezone.now()

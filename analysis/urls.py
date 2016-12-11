@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
-from oauth import views
+from analysis import views
 
 urlpatterns = [
-    url(r'^$', views.social),
+    url(r'^$', views.index),
 ]

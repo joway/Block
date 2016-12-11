@@ -1,0 +1,34 @@
+{% extends '_base.html' %}
+{% load staticfiles %}
+{% block script %}
+  {{ block.super }}
+  <script src="{% static 'libs/js/Chart.bundle.min.js' %}"></script>
+{% endblock %}
+{% block javascript %}
+  {{ block.super }}
+  <script>
+    $(document).ready(function () {
+      initLineChart($("#weekly-pageview-chart"), {{ weekly_data | safe }}, '周PV');
+
+      initLineChart($("#monthly-pageview-chart"), {{ monthly_data | safe }}, '月PV');
+    });
+  </script>
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col s10 l8 offset-s1 offset-l2">
+        <div class="card">
+          <div class="card-content" style="padding: 50px">
+            <div class="row">
+              <canvas id="weekly-pageview-chart" class="col s10 l10"></canvas>
+            </div>
+            <div class="row">
+              <canvas id="monthly-pageview-chart" class="col s10 l10"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
