@@ -1,17 +1,20 @@
 {% extends '_base.html' %}
 {% load staticfiles %}
-
+{% load cache %}
 {% block content %}
   <div class="container">
     <div class="row">
-      <div class="col s12 l4 right hide-on-small-only">
-        {% include 'components/_profile.html' %}
-      </div>
+      {% cache 360000 'index.profile' %}
+        <div class="col s12 l4 right hide-on-small-only">
+          {% include 'components/_profile.html' %}
+        </div>
+      {% endcache %}
       <div class="col s12 l8">
-        {% for article in articles %}
-          {% include 'articles/_article_card.html' %}
-        {% endfor %}
-
+        {% cache 60 'article.list' page %}
+          {% for article in articles %}
+            {% include 'articles/_article_card.html' %}
+          {% endfor %}
+        {% endcache %}
         {% include 'components/_list_pagination.html' %}
       </div>
     </div>

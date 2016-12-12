@@ -4,7 +4,7 @@
     <div class="row valign-wrapper">
       <div class="col l8 s10 offset-l2 offset-s1 valign center-align">
         <p style="font-size: 1.5em">城西笔谈</p>
-        {% cache 3600 footer.analysis %}
+        {% cache 3600 'footer.analysis' request.user %}
           <p>
             <i class="material-icons">trending_up</i>
             <span class="vertical-top">您是本站第 {{ analysis.pageview.UV_TOTAL | add:1 }} 位访问用户</span>
@@ -16,12 +16,12 @@
             月 UV : {{ analysis.pageview.UV_MONTHLY }}, PV : {{ analysis.pageview.PV_MONTHLY }} ;
             总 UV : {{ analysis.pageview.UV_TOTAL }} , PV : {{ analysis.pageview.PV_TOTAL }}</span>
           </div>
-        {% endcache %}
-        <div>
-          <i class="material-icons">dns</i>
-          <span class="vertical-top">内存占用 : {{ analysis.server.mem_available }} G,
+          <div>
+            <i class="material-icons">dns</i>
+            <span class="vertical-top">内存占用 : {{ analysis.server.mem_available }} G,
             内存使用率: {{ analysis.server.mem_percent }} % </span>
-        </div>
+          </div>
+        {% endcache %}
         <p>Powered by <a href="https://joway.wang">Joway</a></p>
       </div>
     </div>
