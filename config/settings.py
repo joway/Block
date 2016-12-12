@@ -247,16 +247,17 @@ else:
     SOCIAL_CALLBACK_REDIRECT_BASE_URL = 'http://%s:8000' % DOMAIN + '/oauth/'
 GITHUB_SOCIAL_CALLBACK_REDIRECT_URL = SOCIAL_CALLBACK_REDIRECT_BASE_URL + 'github/'
 
-# QINIU
 if PRODUCTION:
     # qiniu
-    QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY', 'xxx')
-    QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY', 'xxx')
-    QINIU_BUCKET_NAME = 'block'
-    QINIU_BUCKET_DOMAIN = 'static.joway.wang'
-    QINIU_SECURE_URL = True
-    DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
-    STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
+    QINIU_STORAGE = os.environ.get('QINIU_STORAGE', False)
+    if QINIU_STORAGE == 'True':
+        QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY', 'xxx')
+        QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY', 'xxx')
+        QINIU_BUCKET_NAME = 'block'
+        QINIU_BUCKET_DOMAIN = 'static.joway.wang'
+        QINIU_SECURE_URL = True
+        DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
+        STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
 # opbeat
 OPBEAT = {
