@@ -15,9 +15,10 @@ class UserManager(BaseUserManager):
         if not password:
             password = get_random_string(length=10)
         user.set_password(password)
+        user.save(using=self._db)
 
         user.groups.add(group)
-        user.save(using=self._db)
+        user.save()
         return user
 
     def create_user(self, username, email, password=None, **extra_fields):
