@@ -1,8 +1,10 @@
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 
 from articles.models import Article
+from users.decorators import admin_required
 
 
 def list(request):
@@ -36,11 +38,14 @@ def detail(request, article_uid):
     return render(request, 'articles/detail.html', locals())
 
 
+@login_required
+@admin_required
 def edit(request, article_uid):
     article = get_object_or_404(Article, uid=article_uid)
 
     return render(request, 'articles/edit.html', locals())
 
 
+@admin_required
 def post(request):
     return render(request, "articles/post.html", locals())

@@ -1,7 +1,8 @@
 from collections import OrderedDict
-from copy import deepcopy
 
 from actstream import action
+from django.conf import settings
+from django.contrib.sites.models import Site
 from django.utils import timezone
 from tracking.models import Visitor
 
@@ -25,7 +26,8 @@ class ActionService(object):
 
     @classmethod
     def login(cls, user):
-        action.send(user, verb=ActivityType.LOGIN, target=user.groups.first())
+        site = Site.objects.get(id=settings.SITE_ID)
+        action.send(user, verb=ActivityType.LOGIN, target=user.groups.first(), action_object=site)
 
 
 class TrackingService(object):
