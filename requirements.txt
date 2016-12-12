@@ -19,6 +19,7 @@ opbeat==3.5.1
 packaging==16.8
 psutil==5.0.0
 PyJWT==1.4.2
+pylibmc==1.5.1
 pyparsing==2.1.10
 python-social-auth==0.2.21
 python3-openid==3.0.10

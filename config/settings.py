@@ -206,16 +206,6 @@ STATICFILES_FINDERS = (
 
 AUTH_USER_MODEL = 'users.User'
 
-# QINIU
-if PRODUCTION:
-    QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY', 'xxx')
-    QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY', 'xxx')
-    QINIU_BUCKET_NAME = 'block'
-    QINIU_BUCKET_DOMAIN = 'static.joway.wang'
-    QINIU_SECURE_URL = True
-    DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
-    STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
-
 # restful
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.oauth` permissions,
@@ -224,28 +214,13 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ],
 }
-
 USE_X_FORWARDED_HOST = True
 
 # social
-AUTHENTICATION_BACKENDS = (
-    'social.backends.github.GithubOAuth2',
-    'social.backends.weibo.WeiboOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
 SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY', 'xxx')
 SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET', 'xxx')
 SOCIAL_AUTH_WEIBO_KEY = os.environ.get('SOCIAL_AUTH_WEIBO_KEY', 'xxx')
 SOCIAL_AUTH_WEIBO_SECRET = os.environ.get('SOCIAL_AUTH_WEIBO_SECRET', 'xxx')
-SOCIAL_AUTH_PIPELINE = (
-    'social.pipeline.social_auth.social_details',
-    'social.pipeline.social_auth.social_uid',
-    'social.pipeline.social_auth.auth_allowed',
-    'social.pipeline.social_auth.social_user',
-    'social.pipeline.social_auth.associate_user',
-    'social.pipeline.social_auth.load_extra_data',
-    'social.pipeline.user.user_details',
-)
 
 # django activity
 ACTSTREAM_SETTINGS = {
@@ -271,6 +246,17 @@ if PRODUCTION and not DEBUG:
 else:
     SOCIAL_CALLBACK_REDIRECT_BASE_URL = 'http://%s:8000' % DOMAIN + '/oauth/'
 GITHUB_SOCIAL_CALLBACK_REDIRECT_URL = SOCIAL_CALLBACK_REDIRECT_BASE_URL + 'github/'
+
+# QINIU
+if PRODUCTION:
+    # qiniu
+    QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY', 'xxx')
+    QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY', 'xxx')
+    QINIU_BUCKET_NAME = 'block'
+    QINIU_BUCKET_DOMAIN = 'static.joway.wang'
+    QINIU_SECURE_URL = True
+    DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
+    STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
 # opbeat
 OPBEAT = {
