@@ -196,8 +196,7 @@ STATICFILES_DIRS = (
 )
 # STATIC_URL = 'dn-stk.qbox.me/'
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, "collected_static")
-STATIC_ROOT = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "collected_static")
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -251,6 +250,7 @@ if PRODUCTION:
     # qiniu
     QINIU_STORAGE = os.environ.get('QINIU_STORAGE', False)
     if QINIU_STORAGE == 'True':
+        STATIC_ROOT = '/static/'
         QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY', 'xxx')
         QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY', 'xxx')
         QINIU_BUCKET_NAME = 'block'
