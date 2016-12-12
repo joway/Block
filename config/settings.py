@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'pagedown',
     'tracking',
     'django_comments',
+    'opbeat.contrib.django',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -77,7 +78,7 @@ MIDDLEWARE_CLASSES = (
 
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
-
+    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
 )
 
 ROOT_URLCONF = 'config.urls'
@@ -119,9 +120,13 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': 'log/django.log',
         },
-        # 'console': {
-        #     'class': 'logging.StreamHandler',
-        # },
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'opbeat': {
+            'level': 'WARNING',
+            'class': 'opbeat.contrib.django.handlers.OpbeatHandler',
+        },
     },
     'loggers': {
         'django': {
@@ -130,6 +135,17 @@ LOGGING = {
                          ],
             'level': os.getenv('LOG_LEVEL', 'INFO'),
             'propagate': True,
+        },
+        'site': {
+            'level': 'WARNING',
+            'handlers': ['opbeat'],
+            'propagate': False,
+        },
+        # Log errors from the Opbeat module to the console (recommended)
+        'opbeat.errors': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
         },
     },
 }
@@ -251,6 +267,11 @@ if PRODUCTION and not DEBUG:
     SOCIAL_CALLBACK_REDIRECT_BASE_URL = 'https://%s' % DOMAIN + '/oauth/'
 else:
     SOCIAL_CALLBACK_REDIRECT_BASE_URL = 'http://%s:8000' % DOMAIN + '/oauth/'
-
 GITHUB_SOCIAL_CALLBACK_REDIRECT_URL = SOCIAL_CALLBACK_REDIRECT_BASE_URL + 'github/'
-print(GITHUB_SOCIAL_CALLBACK_REDIRECT_URL)
+
+# opbeat
+OPBEAT = {
+    'ORGANIZATION_ID': os.environ.get('ORGANIZATION_ID', 'xxx'),
+    'APP_ID': os.environ.get('APP_ID', 'xxx'),
+    'SECRET_TOKEN': os.environ.get('SECRET_TOKEN', 'xxx'),
+}

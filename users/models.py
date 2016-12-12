@@ -21,14 +21,14 @@ class UserManager(BaseUserManager):
         return user
 
     def create_user(self, username, email, password=None, **extra_fields):
-        group, _ = Group.objects.get_or_create('visitor')
+        group, _ = Group.objects.get_or_create(name='visitor')
 
         user = self._create_user(username=username, email=email, password=password, group=group, **extra_fields)
         ActionService.login(user)
         return user
 
     def create_superuser(self, username, email, password, **extra_fields):
-        group, _ = Group.objects.get_or_create('admin')
+        group, _ = Group.objects.get_or_create(name='admin')
         return self._create_user(username=username, email=email, password=password
                                  , is_superuser=True, is_staff=True, group=group, **extra_fields)
 
