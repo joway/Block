@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load cache %}
 <ul id="slide-out" class="side-nav black-text">
   <div class="sidenav-top">
     <li>
@@ -19,16 +20,20 @@
       </a>
       <ul id='catalog' class="hidden">
         <div class="divider"></div>
-        {% for category in categories %}
-          <li><a href="/a/?category={{ category.identify }}">{{ category.name }}<span class="badge red white-text right">{{ category.count }}</span></a></li>
-        {% endfor %}
+        {% cache sidebar.categories %}
+          {% for category in categories %}
+            <li><a href="/a/?category={{ category.identify }}">{{ category.name }}<span
+                    class="badge red white-text right">{{ category.count }}</span></a></li>
+          {% endfor %}
+        {% endcache %}
         <div class="divider"></div>
       </ul>
     </li>
 
 
     <li><a href="/timeline/"><i class="material-icons">av_timer</i>Timeline</a></li>
-    <li><a href="https://www.instagram.com/joway.w/" target="_blank"><i class="material-icons">photo_library</i>画廊</a></li>
+    <li><a href="https://www.instagram.com/joway.w/" target="_blank"><i class="material-icons">photo_library</i>画廊</a>
+    </li>
     <li><a href="/analysis/"><i class="material-icons">assessment</i>统计</a></li>
     <li><a href="https://joway.github.io/Resume/" target="_blank"><i class="material-icons">receipt</i>简历</a></li>
     <li><a href="/about/"><i class="material-icons">info</i>关于</a></li>

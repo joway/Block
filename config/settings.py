@@ -278,3 +278,12 @@ OPBEAT = {
     'APP_ID': os.environ.get('APP_ID', 'xxx'),
     'SECRET_TOKEN': os.environ.get('SECRET_TOKEN', 'xxx'),
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+CACHES_TIME = 60 * 60

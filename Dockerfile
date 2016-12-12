@@ -7,7 +7,10 @@ RUN apt-get update && apt-get install -y \
     libmysqlclient-dev \
     mysql-client \
     nginx \
-    supervisor
+    supervisor \
+    memcached \
+    libmemcached-dev
+
 
 RUN mkdir /code /code/log/
 WORKDIR /code
