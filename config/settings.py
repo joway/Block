@@ -207,13 +207,14 @@ STATICFILES_FINDERS = (
 AUTH_USER_MODEL = 'users.User'
 
 # QINIU
-QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY', 'xxx')
-QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY', 'xxx')
-QINIU_BUCKET_NAME = 'block'
-QINIU_BUCKET_DOMAIN = 'static.joway.wang'
-QINIU_SECURE_URL = True
-DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
-STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
+if PRODUCTION:
+    QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY', 'xxx')
+    QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY', 'xxx')
+    QINIU_BUCKET_NAME = 'block'
+    QINIU_BUCKET_DOMAIN = 'static.joway.wang'
+    QINIU_SECURE_URL = True
+    DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
+    STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
 # restful
 REST_FRAMEWORK = {
