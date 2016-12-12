@@ -1,8 +1,7 @@
 # coding=utf-8
 from django.conf import settings
 from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
-from django.core.urlresolvers import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 from articles.models import Article
 

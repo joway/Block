@@ -7,6 +7,7 @@ django-filter==1.0.1
 django-jsonfield==1.0.1
 django-mobile==0.7.0
 django-pagedown==0.1.1
+django-qiniu-storage==2.3.0
 django-taggit==0.21.3
 django-tracking2==0.3.3
 djangorestframework==3.5.3
@@ -22,6 +23,7 @@ pyparsing==2.1.10
 python-social-auth==0.2.21
 python3-openid==3.0.10
 pytz==2016.10
+qiniu==7.1.0
 requests==2.12.3
 requests-oauthlib==0.7.0
 shortuuid==0.4.3
