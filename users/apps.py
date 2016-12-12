@@ -8,3 +8,4 @@ class UsersConfig(AppConfig):
         from actstream import registry
         registry.register(self.get_model('User'))
         registry.register(apps.get_model('auth.Group'))
+        registry.register(apps.get_model('sites.Site'))
