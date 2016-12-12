@@ -66,6 +66,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
     'tracking.middleware.VisitorTrackingMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -78,7 +79,6 @@ MIDDLEWARE_CLASSES = (
 
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
-    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
 )
 
 ROOT_URLCONF = 'config.urls'
@@ -196,7 +196,9 @@ STATICFILES_DIRS = (
 )
 # STATIC_URL = 'dn-stk.qbox.me/'
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "collected_static")
+# STATIC_ROOT = os.path.join(BASE_DIR, "collected_static")
+STATIC_ROOT = '/static/'
+
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
@@ -205,13 +207,13 @@ STATICFILES_FINDERS = (
 AUTH_USER_MODEL = 'users.User'
 
 # QINIU
-# QINIU_ACCESS_KEY = 'xxxx'
-# QINIU_SECRET_KEY = 'xxxx'
-# QINIU_BUCKET_NAME = 'xiaoma'
-# QINIU_BUCKET_DOMAIN = 'cdn.xiaoma.wang'
-# QINIU_SECURE_URL = False
-# DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
-
+QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY', 'xxx')
+QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY', 'xxx')
+QINIU_BUCKET_NAME = 'block'
+QINIU_BUCKET_DOMAIN = 'static.joway.wang'
+QINIU_SECURE_URL = True
+DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
+STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
 # restful
 REST_FRAMEWORK = {
