@@ -30,7 +30,7 @@ def callback_github(request):
     try:
         user = User.objects.get(email=user_info['email'])
     except User.DoesNotExist:
-        user = User.objects.create_user(username=user_info['name'], avatar=user_info['avatar_url'])
+        user = User.objects.create_user(email=user_info['email'], username=user_info['name'], avatar=user_info['avatar_url'])
 
     user.backend = 'django.contrib.auth.backends.ModelBackend'
     django_login(request, user)

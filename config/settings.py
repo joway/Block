@@ -194,12 +194,8 @@ AUTH_USER_MODEL = 'users.User'
 # QINIU_BUCKET_NAME = 'xiaoma'
 # QINIU_BUCKET_DOMAIN = 'cdn.xiaoma.wang'
 # QINIU_SECURE_URL = False
-
 # DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
 
-# Paging
-# PAGING_SIZE = 12
-# PAGING_RANGE = 6
 
 # restful
 REST_FRAMEWORK = {
@@ -251,5 +247,10 @@ PAGING_SIZE = 10
 TRACK_PAGEVIEWS = True
 
 # mysocial
-SOCIAL_CALLBACK_REDIRECT_BASE_URL = 'https://%s' % DOMAIN + '/oauth/'
+if PRODUCTION and not DEBUG:
+    SOCIAL_CALLBACK_REDIRECT_BASE_URL = 'https://%s' % DOMAIN + '/oauth/'
+else:
+    SOCIAL_CALLBACK_REDIRECT_BASE_URL = 'http://%s:8000' % DOMAIN + '/oauth/'
+
 GITHUB_SOCIAL_CALLBACK_REDIRECT_URL = SOCIAL_CALLBACK_REDIRECT_BASE_URL + 'github/'
+print(GITHUB_SOCIAL_CALLBACK_REDIRECT_URL)
