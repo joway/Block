@@ -15,9 +15,9 @@
 {% endblock %}
 
 {% block script %}
+  {{ block.super }}
   <script src="{% static 'libs/js/highlight.min.js' %}"></script>
 {% endblock %}
-
 {% block javascript %}
   {{ block.super }}
   <script>
@@ -29,7 +29,6 @@
       }
     ];
     Materialize.scrollFire(options);
-
     hljs.initHighlightingOnLoad();
   </script>
 {% endblock %}
