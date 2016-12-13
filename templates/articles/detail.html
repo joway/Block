@@ -1,6 +1,9 @@
 {% extends '_base.html' %}
 {% load staticfiles %}
-
+  {% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'libs/css/highlight.min.css' %}"/>
+  {% endblock %}
 {% block content %}
   <div class="container">
     <div class="row">
@@ -10,6 +13,11 @@
     </div>
   </div>
 {% endblock %}
+
+{% block script %}
+  <script src="{% static 'libs/js/highlight.min.js' %}"></script>
+{% endblock %}
+
 {% block javascript %}
   {{ block.super }}
   <script>
@@ -21,5 +29,7 @@
       }
     ];
     Materialize.scrollFire(options);
+
+    hljs.initHighlightingOnLoad();
   </script>
 {% endblock %}
