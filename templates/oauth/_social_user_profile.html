@@ -2,19 +2,23 @@
 <div class="center-align">
   <div style="margin: 50px">
     <img src='{{ request.user.avatar }}' width="128px" class="circle">
-    <p style="margin: 12px">Username : {{ request.user.username }}</p>
+    <p style="margin: 12px">用户名 : {{ request.user.username }}</p>
     <p style="margin: 12px">Email : {{ request.user.email }}</p>
   </div>
   <div class="row">
     {% if request.user.is_admin %}
       <a href="/a/post/">
         <button class="waves-effect waves-light light-blue lighten-1 btn">
-          <i class="material-icons">mode_edit</i><span class="vertical-top">发表新文章</span>
+          <i class="material-icons" style="margin-right: 10px">mode_edit</i><span class="vertical-top">撰文</span>
         </button>
       </a>
     {% endif %}
   </div>
-  <a href="/user/logout/" class="row">
-    <button class="waves-effect waves-light btn"><i class="material-icons right">input</i>退出</button>
-  </a>
+  <div class="row">
+    <a href="/user/logout/">
+      <button class="waves-effect waves-light btn">
+        <i class="material-icons" style="margin-right: 10px">input</i><span class="vertical-top">退出</span>
+      </button>
+    </a>
+  </div>
 </div>
