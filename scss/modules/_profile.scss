@@ -1,6 +1,9 @@
 .profile-avatar {
+  padding: 32px;
   img {
-    width: 60%;
+    width: 60% !important;
+    margin: auto !important;
+    border-radius: 50% !important;
   }
 }
 

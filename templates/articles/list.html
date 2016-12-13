@@ -5,12 +5,12 @@
   <div class="container">
     <div class="row">
       {% cache 360000 'index.profile' %}
-        <div class="col s12 l4 right hide-on-small-only">
+        <div class="col s12 m12 l4 right hide-on-med-and-down">
           {% include 'components/_profile.html' %}
         </div>
       {% endcache %}
-      <div class="col s12 l8">
-        {% cache 60 'article.list' page %}
+      <div class="col s12 m10 offset-m1 l8">
+        {% cache 600 'article.list' %}
           {% for article in articles %}
             {% include 'articles/_article_card.html' %}
           {% endfor %}
