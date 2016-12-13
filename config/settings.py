@@ -259,13 +259,6 @@ if PRODUCTION:
         DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
         STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
-# opbeat
-OPBEAT = {
-    'ORGANIZATION_ID': os.environ.get('ORGANIZATION_ID', 'xxx'),
-    'APP_ID': os.environ.get('APP_ID', 'xxx'),
-    'SECRET_TOKEN': os.environ.get('SECRET_TOKEN', 'xxx'),
-}
-
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
