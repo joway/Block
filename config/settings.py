@@ -28,10 +28,10 @@ except ImportError:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True')
-if DEBUG == 'False':
-    DEBUG = False
-else:
+if DEBUG == 'True':
     DEBUG = True
+else:
+    DEBUG = False
 
 DOMAIN = os.environ.get('DOMAIN', '127.0.0.1')
 
