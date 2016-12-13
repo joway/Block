@@ -11,15 +11,16 @@ nav {
 }
 
 .sidenav-top {
-  min-height: calc(100% - 64px);
+  min-height: calc(100% - 128px);
 }
 
 .sidenav-bottom {
+  max-height: 128px;
 }
 
 .sidenav-bottom img {
   width: 32px;
-  margin: 0 6px;
+  margin: 0 12px;
 }
 
 .img-link {
