@@ -17,6 +17,7 @@ urlpatterns = [
     url(r"^a/", include('articles.urls')),
     url(r"^user/", include('users.urls')),
     url(r'^error/$', views.error),
+    url(r'^cache/clear/$', views.cache_clear),
     url(r'^analysis/', include('analysis.urls')),
     url(r'^timeline/', include('timeline.urls')),
     url(r"^oauth/", include('oauth.urls'), name='oauth'),

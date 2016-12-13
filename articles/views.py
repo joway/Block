@@ -46,6 +46,7 @@ def edit(request, article_uid):
     return render(request, 'articles/edit.html', locals())
 
 
+@login_required
 @admin_required
 def post(request):
     return render(request, "articles/post.html", locals())
