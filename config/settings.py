@@ -34,6 +34,7 @@ else:
     DEBUG = False
 
 DOMAIN = os.environ.get('DOMAIN', '127.0.0.1')
+LOGIN_URL = '/oauth/'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'NONE')

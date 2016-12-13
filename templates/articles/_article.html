@@ -3,14 +3,14 @@
 {% load colors %}
 {% load cache %}
 <div class="card">
-  {% cache 6000 article %}
-    <article class="card-content">
-      {% if request.user.is_admin %}
-        <a class="btn-floating waves-effect waves-light black right" href="edit">
-          <i class="material-icons">mode_edit</i>
-        </a>
-      {% endif %}
+  <article class="card-content">
+    {% if request.user.is_admin %}
+      <a class="btn-floating waves-effect waves-light black right" href="edit">
+        <i class="material-icons">mode_edit</i>
+      </a>
+    {% endif %}
 
+    {% cache 6000 article %}
       <h1 class="center-align">
         {{ article.title }}
       </h1>
@@ -37,8 +37,8 @@
           {{ article.content|markup }}
         {% endautoescape %}
       </div>
-    </article>
-  {% endcache %}
+    {% endcache %}
+  </article>
 
   <div class="divider"></div>
   {% include 'components/_comment_panel.html' %}
