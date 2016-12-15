@@ -29,8 +29,8 @@ ADD ./.deploy/supervisord.conf /etc/supervisor/conf.d/
 #RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 ADD . /code
-RUN chmod +x ./*.sh \
-    && ./compile-scss.sh
+RUN chmod +x ./*.sh
+RUN ./compile-scss.sh
 
 EXPOSE 80
 EXPOSE 8000
