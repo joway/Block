@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     supervisor \
     memcached \
     libmemcached-dev \
-    ruby ruby-dev ruby-bundler
+    ruby ruby-dev ruby-bundler \
     && su -c "gem install sass"
 
 
