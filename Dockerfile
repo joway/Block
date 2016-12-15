@@ -9,10 +9,7 @@ RUN apt-get update && apt-get install -y \
     nginx \
     supervisor \
     memcached \
-    libmemcached-dev \
-    ruby ruby-dev ruby-bundler \
-    && su -c "gem install sass"
-
+    libmemcached-dev
 
 RUN mkdir /code /code/log/
 WORKDIR /code
@@ -32,7 +29,7 @@ ADD ./.deploy/supervisord.conf /etc/supervisor/conf.d/
 
 ADD . /code
 RUN chmod +x ./*.sh
-RUN ./compile-scss.sh
+#RUN ./compile-scss.sh
 
 EXPOSE 80
 EXPOSE 8000
