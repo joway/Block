@@ -10,7 +10,7 @@
       </a>
     {% endif %}
 
-    {% cache 6000 article.uid %}
+    {% cache 6000 request.path %}
       <h1 class="center-align">
         {{ article.title }}
       </h1>
