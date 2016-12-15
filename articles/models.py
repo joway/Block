@@ -47,5 +47,10 @@ class Article(models.Model):
     def digest(self):
         return self.content[:140] + '...'
 
+    @property
+    def url(self):
+        return '/a/%s/' % self.uid
+
     def __str__(self):
         return self.title
+
