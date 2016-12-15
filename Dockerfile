@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     libmemcached-dev \
     rubygems-integration \
     inotify-tools \
-    && sudo su -c "gem install sass"
+    && su -c "gem install sass"
 
 
 RUN mkdir /code /code/log/
