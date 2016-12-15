@@ -1,7 +1,6 @@
 {% load staticfiles %}
 {% load markup %}
 {% load colors %}
-{% load cache %}
 <div class="card">
   <article class="card-content">
     {% if request.user.is_admin %}
@@ -10,7 +9,6 @@
       </a>
     {% endif %}
 
-    {% cache 6000 request.path %}
       <h1 class="center-align">
         {{ article.title }}
       </h1>
@@ -41,7 +39,6 @@
           {{ article.content|markup }}
         {% endautoescape %}
       </div>
-    {% endcache %}
   </article>
 
   <div class="divider"></div>
