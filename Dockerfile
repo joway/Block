@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     libmemcached-dev \
     rubygems-integration \
     inotify-tools \
-    && gem install sass
+    && sudo su -c "gem install sass"
 
 
 RUN mkdir /code /code/log/
@@ -20,8 +20,8 @@ WORKDIR /code
 
 # for cache
 ADD ./requirements.txt /code/requirements.txt
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt
 
 # Configure Nginx and uwsgi
 RUN rm /etc/nginx/sites-enabled/default && \
