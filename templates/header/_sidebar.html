@@ -20,12 +20,10 @@
       </a>
       <ul id='category' class="hidden">
         <div class="divider"></div>
-        {% cache 36000 sidebar.categories %}
-          {% for category in categories %}
-            <li><a href="/a/?category={{ category.identify }}">{{ category.name }}<span
-                    class="badge red white-text right">{{ category.count }}</span></a></li>
-          {% endfor %}
-        {% endcache %}
+        {% for category in categories %}
+          <li><a href="/a/?category={{ category.identify }}">{{ category.name }}<span
+              class="badge red white-text right">{{ category.count }}</span></a></li>
+        {% endfor %}
         <div class="divider"></div>
       </ul>
     </li>

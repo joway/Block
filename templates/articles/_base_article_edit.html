@@ -33,7 +33,6 @@
       app.editor = simplemde;
 
       $('#article-category').val(app.article.category);
-      $('#article-title').val(app.article.title);
 
       $('select').material_select();
 
@@ -41,7 +40,7 @@
 
         var article_content = simplemde.value();
         var article_category = $('#article-category').val();
-        var article_title = $('#article-title').val().trim();
+        var article_title = $('#article-title').val();
         if (!(article_content && article_title && article_category)) {
           prompt_warning('请输入完整的信息');
         } else {
