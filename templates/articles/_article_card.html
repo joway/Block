@@ -23,9 +23,11 @@
         <span class="left small">{{ article.created_at | date }}</span>
       </div>
       <div class="col l4 m6 s6 offset-l4">
-        <span class="badge {{ 'lighten' | random_color }} right">
-          <strong>{{ article.get_catalog_display }}</strong>
+        <a href="/a/?category={{ article.category }}">
+          <span class="badge {{ 'lighten' | random_color }} right">
+          <strong>{{ article.get_category_display }}</strong>
         </span>
+        </a>
         <i class="material-icons right">turned_in</i>
       </div>
     </div>

@@ -14,11 +14,11 @@
     <li><a href="/"><i class="material-icons">home</i>主页</a></li>
 
     <li>
-      <a class='' href='#' id="catalog-dropdown" onclick="sidebarCatalog()">
+      <a class='' href='#' id="category-dropdown" onclick="sidebarCategory()">
         <i class="material-icons">turned_in_not</i>
         目录<i class="material-icons right">arrow_drop_down</i>
       </a>
-      <ul id='catalog' class="hidden">
+      <ul id='category' class="hidden">
         <div class="divider"></div>
         {% cache 36000 sidebar.categories %}
           {% for category in categories %}

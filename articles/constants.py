@@ -1,4 +1,4 @@
-class ArticleCatalogs(object):
+class ArticleCategories(object):
     PROGRAMING = 'programing'
     SOFTWARE = 'software'
     THINKING = 'thinking'
@@ -6,10 +6,10 @@ class ArticleCatalogs(object):
     LITERATURE = 'literature'
 
 
-ARTICLE_CATALOG_CHOICES = (
-    (ArticleCatalogs.PROGRAMING, '编程'),
-    (ArticleCatalogs.SOFTWARE, '软件'),
-    (ArticleCatalogs.THINKING, '随想'),
-    (ArticleCatalogs.ENVIRONMENT, '环境'),
-    (ArticleCatalogs.LITERATURE, '文艺'),
+ARTICLE_CATEGORY_CHOICES = (
+    (ArticleCategories.PROGRAMING, '编程'),
+    (ArticleCategories.SOFTWARE, '软件'),
+    (ArticleCategories.THINKING, '随想'),
+    (ArticleCategories.ENVIRONMENT, '环境'),
+    (ArticleCategories.LITERATURE, '文艺'),
 )

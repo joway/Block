@@ -10,7 +10,7 @@
       </a>
     {% endif %}
 
-    {% cache 6000 article %}
+    {% cache 6000 article.uid %}
       <h1 class="center-align">
         {{ article.title }}
       </h1>
@@ -20,15 +20,19 @@
         </div>
         <div class="col l3 m3 s5 right right-align">
           <i class="material-icons left">turned_in</i>
-          <span class="badge {{ 'lighten' | random_color }} left">
-          <strong>{{ article.get_catalog_display }}</strong>
-        </span>
+          <a href="/a/?category={{ article.category }}">
+            <span class="badge {{ 'lighten' | random_color }} left">
+              <strong>{{ article.get_category_display }}</strong>
+            </span>
+          </a>
         </div>
         <div class="col l5 m12 s12 hide-on-med-and-down">
           <i class="material-icons left">label</i>
           {% for tag in article.tag_list %}
+            <a href="/a/?tag={{ tag }}">
             <span class="badge {{ 'lighten' | random_color }} left"
                   style="border-radius: 15px"><strong>{{ tag }}</strong></span>
+            </a>
           {% endfor %}
         </div>
       </div>

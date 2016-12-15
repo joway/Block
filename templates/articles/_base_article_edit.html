@@ -9,7 +9,7 @@
     app.article = {
       'uid': null,
       'title': '',
-      'catalog': '',
+      'category': '',
     }
   </script>
 {% endblock %}
@@ -32,7 +32,7 @@
 
       app.editor = simplemde;
 
-      $('#article-catalog').val(app.article.catalog);
+      $('#article-category').val(app.article.category);
       $('#article-title').val(app.article.title);
 
       $('select').material_select();
@@ -40,9 +40,9 @@
       $('#article-submit').click(function () {
 
         var article_content = simplemde.value();
-        var article_catalog = $('#article-catalog').val();
+        var article_category = $('#article-category').val();
         var article_title = $('#article-title').val().trim();
-        if (!(article_content && article_title && article_catalog)) {
+        if (!(article_content && article_title && article_category)) {
           prompt_warning('请输入完整的信息');
         } else {
 
@@ -50,7 +50,7 @@
 
           var formData = new FormData();
           formData.append('title', article_title);
-          formData.append('catalog', article_catalog);
+          formData.append('category', article_category);
           formData.append('content', article_content);
 
           if (app.article.action == 'update') {

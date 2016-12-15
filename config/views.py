@@ -18,7 +18,7 @@ def index(request):
     tag = request.GET.get('tag', '')
 
     if category:
-        articles = articles.filter(catalog=category)
+        articles = articles.filter(category=category)
     if tag:
         articles = articles.filter(articletaggeditem__tag__slug__contains=tag)
 

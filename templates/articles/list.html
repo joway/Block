@@ -10,7 +10,7 @@
         </div>
       {% endcache %}
       <div class="col s12 m10 offset-m1 l8">
-        {% cache 600 'article.list' %}
+        {% cache 600 'article.list' category tag page %}
           {% for article in articles %}
             {% include 'articles/_article_card.html' %}
           {% endfor %}

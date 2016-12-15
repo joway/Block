@@ -1,9 +1,9 @@
-function sidebarCatalog() {
-  var catalog = $('#catalog');
-  if (catalog.css('display') == 'none') {
-    catalog.fadeIn();
+function sidebarCategory() {
+  var category = $('#category');
+  if (category.css('display') == 'none') {
+    category.fadeIn();
   } else {
-    catalog.fadeOut();
+    category.fadeOut();
   }
 }
 
