@@ -1,8 +1,8 @@
 {% extends '_base.html' %}
 {% load staticfiles %}
   {% block css %}
-    {{ block.super }}
-    <link rel="stylesheet" href="{% static 'libs/css/highlight.min.css' %}"/>
+      <link rel="stylesheet" href="{% static 'libs/css/highlight.min.css' %}"/>
+      {{ block.super }}
   {% endblock %}
 {% block content %}
   <div class="container">
