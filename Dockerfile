@@ -10,8 +10,7 @@ RUN apt-get update && apt-get install -y \
     supervisor \
     memcached \
     libmemcached-dev \
-    rubygems-integration \
-    inotify-tools \
+    ruby ruby-dev ruby-bundler
     && su -c "gem install sass"
 
 
