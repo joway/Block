@@ -9,7 +9,10 @@ RUN apt-get update && apt-get install -y \
     nginx \
     supervisor \
     memcached \
-    libmemcached-dev
+    libmemcached-dev \
+    rubygems-integration \
+    inotify-tools \
+    && gem install sass
 
 
 RUN mkdir /code /code/log/
