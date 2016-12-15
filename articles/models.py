@@ -33,6 +33,9 @@ class Article(models.Model):
 
     category = models.CharField('目录', choices=ARTICLE_CATEGORY_CHOICES, max_length=16)
 
+    class Meta:
+        ordering = ('-created_at', )
+
     def tag_list(self):
         return [o.name for o in self.tags.all()]
 
