@@ -6,12 +6,13 @@
     <span class="card-title black-text">
       <a href="/a/{{ article.uid }}" class="grey-text darken-5"
          style="font-size: 1.0em"><strong>{{ article.title }}</strong></a>
-      <div>
-        {% for tag in article.tags.all %}
-          <a href="/a/?tag={{ tag }}"><span class="badge {{ 'lighten' | random_color }}" style="border-radius: 5px"><strong>{{ tag }}</strong></span></a>
-        {% endfor %}
-      </div>
     </span>
+    <div class="row">
+      {% for tag in article.tags.all %}
+        <a href="/a/?tag={{ tag }}"><span class="badge {{ 'lighten' | random_color }}"
+                                          style="border-radius: 5px"><strong>{{ tag }}</strong></span></a>
+      {% endfor %}
+    </div>
     {% autoescape off %}
       {{ article.digest | markup }}
     {% endautoescape %}
