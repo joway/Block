@@ -37,6 +37,7 @@ def list(request):
 
 def detail(request, article_uid):
     article = get_object_or_404(Article, uid=article_uid)
+    comment_obj = article
 
     return render(request, 'articles/detail.html', locals())
 

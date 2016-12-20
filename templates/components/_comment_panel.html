@@ -21,7 +21,7 @@
     {% endif %}
 
     <div class="comment-content">
-      {% get_comment_list for article as comment_list %}
+      {% get_comment_list for comment_obj as comment_list %}
       {% for comment in comment_list %}
         <div class="row">
           <div class="col s2 l1">
@@ -77,7 +77,8 @@
             prompt_success('评论成功', 3000);
             location.reload();
           } else {
-            prompt_warning('评论失败', 3000);
+              console.log(response.body);
+            prompt_warning(response.body, 3000);
           }
         });
       }
