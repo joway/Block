@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     libmysqlclient-dev \
     mysql-client \
     nginx \
-    supervisor \
+    supervisor
 #    memcached \
 #    libmemcached-dev
 
