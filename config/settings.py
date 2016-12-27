@@ -260,11 +260,11 @@ if PRODUCTION:
         DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
         STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
-        'LOCATION': '127.0.0.1:11211',
-    }
-}
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+#         'LOCATION': '127.0.0.1:11211',
+#     }
+# }
 
 CACHES_TIME = 60 * 60

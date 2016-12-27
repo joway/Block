@@ -8,8 +8,8 @@ RUN apt-get update && apt-get install -y \
     mysql-client \
     nginx \
     supervisor \
-    memcached \
-    libmemcached-dev
+#    memcached \
+#    libmemcached-dev
 
 RUN mkdir /code /code/log/
 WORKDIR /code

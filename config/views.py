@@ -1,13 +1,9 @@
 # coding=utf-8
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
-from django.core.cache import cache
 from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from articles.models import Article
-from users.decorators import admin_required
 
 
 def index(request):
@@ -38,11 +34,3 @@ def index(request):
 def error(request):
     error_msg = request.GET.get('error', '未知错误')
     return render(request, 'error.html', locals())
-
-
-@login_required
-@admin_required
-def cache_clear(request):
-    next = request.GET.get('next', '/')
-    cache.clear()
-    return HttpResponseRedirect(redirect_to=next)
