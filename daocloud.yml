@@ -7,7 +7,8 @@ test:
         - mysql
 
     env:
-        - MYSQL_INSTANCE_NAME = "block"
+        - MYSQL_HOST = "mysql"
+        - MYSQL_INSTANCE_NAME = "test"
         - MYSQL_USERNAME = "root"
         - MYSQL_PASSWORD = ""
 
@@ -16,6 +17,8 @@ test:
 
     before_script:
         - pip install -r requirements.txt
+        - mkdir -p /log/
+        - touch django.log
 
     script:
         - coverage run --source='.' manage.py test
