@@ -1,0 +1,38 @@
+version: 2.0
+
+test:
+    image:
+        daocloud/ci-python:3.5
+
+    services:
+        - mysql
+
+    env:
+        - MYSQL_INSTANCE_NAME = "block"
+        - MYSQL_USERNAME = "root"
+        - MYSQL_PASSWORD = ""
+
+    install:
+        - pip install coverage
+
+    before_script:
+        - pip install -r requirements.txt
+
+    script:
+        - coverage run --source='.' manage.py test
+        - coverage report
+
+build:
+    lite_image:
+        compile:
+            dockerfile_path: Dockerfile
+            build_dir: /
+            cache: true
+
+        extract:
+            - /go/bin/app
+
+        package:
+              dockerfile_path: Dockerfile.sec
+              build_dir: /
+              cache: true
