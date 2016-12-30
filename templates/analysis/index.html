@@ -1,5 +1,6 @@
 {% extends '_base.html' %}
 {% load staticfiles %}
+{% load cache %}
 {% block script %}
   {{ block.super }}
   <script src="{% static 'libs/js/Chart.bundle.min.js' %}"></script>
@@ -7,11 +8,13 @@
 {% block javascript %}
   {{ block.super }}
   <script>
-    $(document).ready(function () {
-      initLineChart($("#weekly-pageview-chart"), {{ weekly_data | safe }}, '周PV');
+      {% cache 36000 analysis %}
+          $(document).ready(function () {
+              initLineChart($("#weekly-pageview-chart"), {{ weekly_data | safe }}, '周PV');
 
-      initLineChart($("#monthly-pageview-chart"), {{ monthly_data | safe }}, '月PV');
-    });
+              initLineChart($("#monthly-pageview-chart"), {{ monthly_data | safe }}, '月PV');
+          });
+      {% endcache %}
   </script>
 {% endblock %}
 {% block content %}

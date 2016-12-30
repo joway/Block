@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col s10 l10 offset-s1 offset-l1">
+        <div class="card center-align">
+          <div class="card-content" style="padding: 50px">
+            <h1> NOT FOUND </h1>
+            <a href="/"><h3 class="green-text">返回首页</h3></a>
+          </div>
+          <div style="padding: 50px">
+            <h5> 您要找的页面可能已被移除, 文章备份请前往 : <a
+                href="https://joway.github.io{{ request.path }}">https://joway.github.io{{ request.path }}</a></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,45 +1,51 @@
 {% load staticfiles %}
-<ul id="slide-out" class="side-nav black-text">
-  <div class="sidenav-top">
-    <li>
-      <div class="userView">
-        <div class="background" style="background-color: deepskyblue"></div>
-        <a href="/"><img class="circle" src="{% static 'img/logo/logo.png' %}"></a>
-        <a href="#!name"><span class="white-text name">Joway Wang</span></a>
-        <a href="#!email"><span class="white-text email">joway.w@gmail.com</span></a>
-      </div>
-    </li>
+{% load cache %}
+{% cache 86400 sidebar %}
+  <ul id="slide-out" class="side-nav black-text">
+    <div class="sidenav-top">
+      <li>
+        <div class="userView">
+          <div class="background" style="background-color: deepskyblue"></div>
+          <a href="/"><img class="circle" src="{% static 'img/logo/logo.png' %}"></a>
+          <a href="#!name"><span class="white-text name">Joway Wang</span></a>
+          <a href="#!email"><span class="white-text email">joway.w@gmail.com</span></a>
+        </div>
+      </li>
 
-    <li><a href="/"><i class="material-icons">home</i>主页</a></li>
+      <li class="row">
+        <form method="get" action="/search" class="col s10 l10 offset-l1 offset-s1">
+          <input id="id_q" name="q" type="search" class="col s10 l10">
+          <label for="id_q" class="col s1 l1"><i class="material-icons">search</i></label>
+        </form>
+      </li>
 
-    <li>
-      <a class='' href='#' id="category-dropdown" onclick="sidebarCategory()">
-        <i class="material-icons">turned_in_not</i>
-        目录<i class="material-icons right">arrow_drop_down</i>
-      </a>
-      <ul id='category' class="hidden">
-        <div class="divider"></div>
-        {% for category in categories %}
-          <li><a href="/a/?category={{ category.identify }}">{{ category.name }}<span
-              class="badge red white-text right">{{ category.count }}</span></a></li>
-        {% endfor %}
-        <div class="divider"></div>
-      </ul>
-    </li>
+      <li><a href="/"><i class="material-icons">home</i>主页</a></li>
 
-
-    <li><a href="/timeline/"><i class="material-icons">av_timer</i>Timeline</a></li>
-    <li><a href="https://www.instagram.com/joway.w/" target="_blank"><i class="material-icons">photo_library</i>画廊</a>
-    </li>
-    <li><a href="/analysis/"><i class="material-icons">assessment</i>统计</a></li>
-{#    <li><a href="https://joway.github.io/Resume/" target="_blank"><i class="material-icons">receipt</i>简历</a></li>#}
-    <li><a href="/about/"><i class="material-icons">info</i>关于</a></li>
-  </div>
-
-  <div class="sidenav-bottom">
-    {% include 'components/_social_btns.html' %}
-  </div>
-
-</ul>
+      <li>
+        <a class='' href='#' id="category-dropdown" onclick="sidebarCategory()">
+          <i class="material-icons">turned_in_not</i>
+          目录<i class="material-icons right">arrow_drop_down</i>
+        </a>
+        <ul id='category' class="hidden">
+          <div class="divider"></div>
+          {% for category in categories %}
+            <li><a href="/a/?category={{ category.identify }}">{{ category.name }}<span
+                class="badge red white-text right">{{ category.count }}</span></a></li>
+          {% endfor %}
+          <div class="divider"></div>
+        </ul>
+      </li>
 
 
+      <li><a href="/timeline/"><i class="material-icons">av_timer</i>Timeline</a></li>
+      <li><a href="https://www.instagram.com/joway.w/" target="_blank"><i class="material-icons">photo_library</i>画廊</a>
+      </li>
+      <li><a href="/analysis/"><i class="material-icons">assessment</i>统计</a></li>
+      {#      <li><a href="https://joway.github.io/Resume/" target="_blank"><i class="material-icons">receipt</i>简历</a></li>#}
+      <li><a href="/about/"><i class="material-icons">info</i>关于</a></li>
+    </div>
+    <div class="sidenav-bottom">
+      {% include 'components/_social_btns.html' %}
+    </div>
+  </ul>
+{% endcache %}

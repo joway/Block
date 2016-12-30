@@ -1,0 +1,48 @@
+{% extends '_base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col s12 l10 offset-l1">
+        <div class="card">
+          <div class="card-content row">
+            <h2 class="center-align">搜索</h2>
+            <form method="get" action="." class="row">
+              <input id="id_q" name="q" type="search" value="{{ query }}" class="col s10 l8 offset-s1 offset-l2">
+              <label for="id_q"><i class="material-icons">search</i></label>
+            </form>
+            {% if query %}
+              <div class="row">
+                {% for result in page.object_list %}
+                  {% with article=result.object %}
+                    <div class="col s12 l8 offset-l2">
+                      {% include 'articles/_article_card.html' %}
+                    </div>
+                  {% endwith %}
+                {% empty %}
+                  <div class="row center-align" style="margin: 100px">
+                    <h3>No results found.</h3>
+                  </div>
+                {% endfor %}
+              </div>
+
+              <div class="col l10 s12 offset-l1">
+                {% if page.has_previous %}
+                  <a href="?q={{ query }}&&page={{ page.previous_page_number }}"
+                     class="left">
+                    <i class="material-icons medium">navigate_before</i>
+                  </a>
+                {% endif %}
+                {% if page.has_next %}
+                  <a href="?q={{ query }}&&page={{ page.next_page_number }}"
+                     class="right">
+                    <i class="material-icons medium">navigate_next</i>
+                  </a>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

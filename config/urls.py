@@ -21,8 +21,11 @@ urlpatterns = [
     url(r'^timeline/', include('timeline.urls')),
     url(r"^oauth/", include('oauth.urls'), name='oauth'),
     url(r"^about/", include('about.urls')),
+    url(r'^search/', include('haystack.urls')),
 
     # api
     url(r"^api/", include(router.urls)),
     url(r'^api/comments/', include('django_comments.urls')),
 ]
+
+handler404 = 'config.views.not_fount'

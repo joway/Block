@@ -1,25 +1,28 @@
 {% extends '_base.html' %}
+{% load cache %}
 {% load activity_tags %}
 {% block content %}
-  <div class="container">
-    <div class="row">
-      <div class="col s12 l10 offset-l1">
-        <div class="card">
-          <div class="card-content" style="padding: 50px">
-            <ul class="collection" style="border: none">
-              {% activity_stream 'actor' admin %}
-              {% for action in stream %}
-                <li class="collection-item avatar" style="border: none">
-                  <img src="{{ action.actor.avatar }}" class="circle">
-                  <span class="title">{{ action.verb }}了</span>
-                  <p class="blue-text"><a href="{{ action.action_object.url }}">{{ action.action_object }}</a></p>
-                  <span class="secondary-content small grey-text darken-2">{{ action.timestamp|timesince }} 之前</span>
-                </li>
-              {% endfor %}
-            </ul>
+  {% cache 3600 timeline %}
+    <div class="container">
+      <div class="row">
+        <div class="col s12 l10 offset-l1">
+          <div class="card">
+            <div class="card-content" style="padding: 50px">
+              <ul class="collection" style="border: none">
+                {% activity_stream 'actor' admin %}
+                {% for action in stream %}
+                  <li class="collection-item avatar" style="border: none">
+                    <img src="{{ action.actor.avatar }}" class="circle">
+                    <span class="title">{{ action.verb }}了</span>
+                    <p class="blue-text"><a href="{{ action.action_object.url }}">{{ action.action_object }}</a></p>
+                    <span class="secondary-content small grey-text darken-2">{{ action.timestamp|timesince }} 之前</span>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  {% endcache %}
 {% endblock %}

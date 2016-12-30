@@ -34,3 +34,7 @@ def index(request):
 def error(request):
     error_msg = request.GET.get('error', '未知错误')
     return render(request, 'error.html', locals())
+
+
+def not_fount(request):
+    return render(request, '404.html', locals())

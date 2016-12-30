@@ -50,6 +50,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    'haystack',
+
     # local apps
     'users',
     'articles',
@@ -201,9 +203,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "collected_static")
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-
-    # other finders..
-    'compressor.finders.CompressorFinder',
 )
 
 AUTH_USER_MODEL = 'users.User'
@@ -268,5 +267,18 @@ if QINIU_STORAGE == 'True':
 #         'LOCATION': '127.0.0.1:11211',
 #     }
 # }
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
 
 CACHES_TIME = 60 * 60
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'config.cn_whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    },
+}
