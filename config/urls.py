@@ -3,6 +3,7 @@ from django.contrib import admin
 
 from config import views
 from config.router import router
+from config.views import proxy_post_comment
 
 admin.autodiscover()
 
@@ -25,7 +26,9 @@ urlpatterns = [
 
     # api
     url(r"^api/", include(router.urls)),
+    url(r'^api/comments/post/$', proxy_post_comment, name='comments-post-comment'),
     url(r'^api/comments/', include('django_comments.urls')),
+
 ]
 
 handler404 = 'config.views.not_fount'

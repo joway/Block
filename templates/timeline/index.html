@@ -2,15 +2,14 @@
 {% load cache %}
 {% load activity_tags %}
 {% block content %}
-  {% cache 3600 timeline %}
+  {% cache 3600 timeline page %}
     <div class="container">
       <div class="row">
         <div class="col s12 l10 offset-l1">
           <div class="card">
             <div class="card-content" style="padding: 50px">
               <ul class="collection" style="border: none">
-                {% activity_stream 'actor' admin %}
-                {% for action in stream %}
+                {% for action in actions %}
                   <li class="collection-item avatar" style="border: none">
                     <img src="{{ action.actor.avatar }}" class="circle">
                     <span class="title">{{ action.verb }}了</span>
@@ -19,6 +18,19 @@
                   </li>
                 {% endfor %}
               </ul>
+              <div class="row">
+                {% if actions.has_previous %}
+                  <a href="?page={{ actions.previous_page_number }}">
+                    <i class="material-icons col s1 l1 left medium">navigate_before</i>
+                  </a>
+                {% endif %}
+                {% if actions.has_next %}
+                  <a href="?page={{ actions.next_page_number }}">
+                    <i class="material-icons col s1 l1 right medium">navigate_next</i>
+                  </a>
+                {% endif %}
+              </div>
+
             </div>
           </div>
         </div>

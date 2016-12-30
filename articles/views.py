@@ -13,14 +13,11 @@ def list(request):
     page = request.GET.get('page', '1')
     category = request.GET.get('category', '')
     tag = request.GET.get('tag', '')
-    print(category)
 
     if category:
         articles = articles.filter(category=category)
     if tag:
         articles = articles.filter(articletaggeditem__tag__slug__contains=tag)
-
-    print(articles)
 
     paginator = Paginator(articles, settings.PAGING_SIZE)
     try:
