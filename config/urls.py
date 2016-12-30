@@ -17,12 +17,14 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r"^a/", include('articles.urls')),
     url(r"^user/", include('users.urls')),
-    url(r'^error/$', views.error),
     url(r'^analysis/', include('analysis.urls')),
     url(r'^timeline/', include('timeline.urls')),
     url(r"^oauth/", include('oauth.urls'), name='oauth'),
     url(r"^about/", include('about.urls')),
     url(r'^search/', include('haystack.urls')),
+
+    url(r'^error/$', views.error),
+    url(r'^cache/clear/$', views.cache_clear),
 
     # api
     url(r"^api/", include(router.urls)),

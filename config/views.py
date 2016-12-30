@@ -1,8 +1,11 @@
 # coding=utf-8
 from django.apps import apps
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.html import escape
 from django.views.decorators.csrf import csrf_protect
@@ -11,6 +14,7 @@ from django_comments.views.comments import post_comment, CommentPostBadRequest
 
 from analysis.services import ActionService
 from articles.models import Article
+from users.decorators import admin_required
 
 
 def index(request):
@@ -76,3 +80,11 @@ def proxy_post_comment(request, next=None, using=None):
                 escape(ctype), escape(object_pk), e.__class__.__name__))
     ActionService.comment(request.user, target)
     return post_comment(request, next, using)
+
+
+@login_required
+@admin_required
+def cache_clear(request):
+    next = request.GET.get('next', '/')
+    cache.clear()
+    return HttpResponseRedirect(redirect_to=next)
