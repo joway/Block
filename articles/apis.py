@@ -46,7 +46,5 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
         headers = self.get_success_headers(serializer.data)
 
-        ActionService.update(request.user, instance)
-
         return Response(self.get_serializer(instance=serializer.instance).data, status=status.HTTP_201_CREATED,
                         headers=headers)

@@ -17,10 +17,6 @@ class ActionService(object):
         action.send(user, verb=ActivityType.COMMENT, target=user.groups.first(), action_object=obj)
 
     @classmethod
-    def update(cls, user, obj):
-        action.send(user, verb=ActivityType.UPDATE, target=user.groups.first(), action_object=obj)
-
-    @classmethod
     def post(cls, user, obj):
         action.send(user, verb=ActivityType.POST, target=user.groups.first(), action_object=obj)
 
