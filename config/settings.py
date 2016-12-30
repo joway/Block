@@ -195,13 +195,15 @@ USE_TZ = True
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-# STATIC_URL = 'dn-stk.qbox.me/'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "collected_static")
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+
+    # other finders..
+    'compressor.finders.CompressorFinder',
 )
 
 AUTH_USER_MODEL = 'users.User'
@@ -247,18 +249,18 @@ else:
     SOCIAL_CALLBACK_REDIRECT_BASE_URL = 'http://%s:8000' % DOMAIN + '/oauth/'
 GITHUB_SOCIAL_CALLBACK_REDIRECT_URL = SOCIAL_CALLBACK_REDIRECT_BASE_URL + 'github/'
 
-if PRODUCTION:
-    # qiniu
-    QINIU_STORAGE = os.environ.get('QINIU_STORAGE', False)
-    if QINIU_STORAGE == 'True':
-        STATIC_ROOT = '/static/'
-        QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY', 'xxx')
-        QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY', 'xxx')
-        QINIU_BUCKET_NAME = 'block'
-        QINIU_BUCKET_DOMAIN = 'static.joway.wang'
-        QINIU_SECURE_URL = True
-        DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
-        STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
+
+# qiniu
+QINIU_STORAGE = os.environ.get('QINIU_STORAGE', False)
+if QINIU_STORAGE == 'True':
+    STATIC_ROOT = '/static/'
+    QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY', 'xxx')
+    QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY', 'xxx')
+    QINIU_BUCKET_NAME = 'block'
+    QINIU_BUCKET_DOMAIN = 'static.joway.wang'
+    QINIU_SECURE_URL = True
+    DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
+    STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
 # CACHES = {
 #     'default': {
