@@ -1,6 +1,6 @@
 certifi==2016.9.26
 defusedxml==0.4.1
-Django==1.9.1
+Django==1.9.12
 django-activity-stream==0.6.3
 django-appconf==1.0.2
 django-contrib-comments==1.7.3

@@ -17,7 +17,7 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TESTING = ((" ".join(sys.argv)).find('manage.py test') != -1)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost', '.joway.wang']
 APPEND_SLASH = True
 PRODUCTION = True
 
@@ -174,7 +174,7 @@ else:
             'USER': os.environ.get("MYSQL_USERNAME", 'xxx'),
             'PASSWORD': os.environ.get("MYSQL_PASSWORD", 'xxx'),
             'HOST': os.environ.get("MYSQL_HOST", 'xxx'),
-            'PORT': os.environ.get("MYSQL_PORT", 3306),
+            'PORT': os.environ.get("MYSQL_PORT", '3306'),
         },
     }
 
