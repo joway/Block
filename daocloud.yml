@@ -11,6 +11,7 @@ test:
         - MYSQL_INSTANCE_NAME = "test"
         - MYSQL_USERNAME = "root"
         - MYSQL_PASSWORD = ""
+        - MYSQL_PORT = "3306"
 
     install:
         - pip install coverage
