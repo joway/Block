@@ -17,8 +17,8 @@ test:
 
     before_script:
         - pip install -r requirements.txt
-        - mkdir -p /log/
-        - touch django.log
+        - mkdir -p log/
+        - touch log/django.log
 
     script:
         - coverage run --source='.' manage.py test
