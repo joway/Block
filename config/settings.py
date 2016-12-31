@@ -69,6 +69,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.gzip.GZipMiddleware',
     'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
     'tracking.middleware.VisitorTrackingMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -81,7 +82,6 @@ MIDDLEWARE_CLASSES = (
 
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
-    'django.middleware.gzip.GZipMiddleware',
 )
 
 ROOT_URLCONF = 'config.urls'
