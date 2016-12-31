@@ -23,7 +23,7 @@ RUN pip install --upgrade pip \
 # Configure Nginx and uwsgi
 ADD ./.deploy/supervisord.conf /etc/supervisor/conf.d/
 ADD . /code
-RUN chmod +x ./*.sh ; sync; && ./compile-scss.sh
+RUN chmod +x ./*.sh; sync; ./compile-scss.sh
 
 EXPOSE 8080 8081
 
