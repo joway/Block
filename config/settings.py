@@ -81,6 +81,7 @@ MIDDLEWARE_CLASSES = (
 
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
 )
 
 ROOT_URLCONF = 'config.urls'
