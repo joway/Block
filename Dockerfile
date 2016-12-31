@@ -3,13 +3,12 @@ MAINTAINER joway wong "joway.w@gmail.com"
 
 # Install packages
 RUN apt-get update && apt-get install -y \
-    git \
     libmysqlclient-dev \
     mysql-client \
-    nginx \
     supervisor \
     ruby-full rubygems \
-    && gem install sass
+    && gem install sass \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /code/log/
 
