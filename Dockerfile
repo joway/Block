@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     supervisor \
     ruby-full rubygems \
     nodejs npm \
+    && ln -s /usr/bin/nodejs /usr/bin/node \
     && gem install sass \
     && npm install -g gulp \
     && rm -rf /var/lib/apt/lists/*
