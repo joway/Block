@@ -258,7 +258,7 @@ if QINIU_STORAGE == 'True':
     QINIU_BUCKET_DOMAIN = 'static.joway.wang'
     QINIU_SECURE_URL = True
     DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
-    STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
+    # STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
 # CACHES = {
 #     'default': {

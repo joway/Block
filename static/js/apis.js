@@ -55,3 +55,14 @@ function updateArticle(id, formData) {
     credentials: 'include'
   });
 }
+
+function uploadFile(formData) {
+  return fetch('/imgbox/api/', {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': getCookie('csrftoken')
+    },
+    body: formData,
+    credentials: 'include'
+  });
+}

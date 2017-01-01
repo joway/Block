@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col s10 l10 offset-s1 offset-l1">
         <div class="card center-align">
-          <div class="card-content" style="padding: 50px">
+          <div class="card-content demo demo-noninputable" style="padding: 50px">
             <form method="post" enctype="multipart/form-data" style="padding: 50px">
               {% csrf_token %}
               <div class="file-field input-field">
@@ -20,6 +20,11 @@
                 </button>
               </div>
             </form>
+            <div class="file-url-wrapper">
+              <i class="material-icons">call_made</i>
+              <a href="" target="_blank" class="vertical-top file-url">
+              </a>
+            </div>
             {% if file_url %}
               <i class="material-icons">call_made</i>
               <a href="{{ file_url }}" target="_blank" class="vertical-top">
@@ -30,4 +35,35 @@
       </div>
     </div>
   </div>
+  </div>
 {% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+      $(function () {
+          $('.file-url-wrapper').hide();
+          $('.demo-noninputable').pastableNonInputable();
+          $('.demo').on('pasteImage', function (ev, data) {
+              beginCircleLoding();
+
+              var formData = new FormData();
+              formData.append('file', data.blob, 'data.png');
+
+              uploadFile(formData).then(function (response) {
+                  response.json().then(function (data) {
+                      endCircleLoding();
+                      if (response.ok) {
+                          prompt_success('上传成功', 3000);
+                          $('.file-url-wrapper').show();
+                          $('.file-url').html(data.url);
+                          $('.file-url').attr('href', data.url);
+                      } else {
+                          prompt_warning('上传失败', 3000);
+                      }
+                  })
+              });
+          });
+      })
+  </script>
+{% endblock %}
+
