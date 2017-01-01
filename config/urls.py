@@ -21,6 +21,8 @@ urlpatterns = [
     url(r'^timeline/', include('timeline.urls')),
     url(r"^oauth/", include('oauth.urls'), name='oauth'),
     url(r"^about/", include('about.urls')),
+    url(r'^imgbox/', include('imgbox.urls')),
+
     url(r'^search/', include('haystack.urls')),
 
     url(r'^error/$', views.error),

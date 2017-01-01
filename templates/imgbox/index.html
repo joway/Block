@@ -1,0 +1,33 @@
+{% extends '_base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col s10 l10 offset-s1 offset-l1">
+        <div class="card center-align">
+          <div class="card-content" style="padding: 50px">
+            <form method="post" enctype="multipart/form-data" style="padding: 50px">
+              {% csrf_token %}
+              <div class="file-field input-field">
+                <div class="btn">
+                  <span><i class="material-icons large">tab</i></span>
+                  <input type="file" name="file">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="上传文件">
+                </div>
+                <button type="submit" class="right waves-effect waves-light btn-large light-blue">
+                  <i class="material-icons left">cloud</i>上传
+                </button>
+              </div>
+            </form>
+            {% if file_url %}
+              <i class="material-icons">call_made</i>
+              <a href="{{ file_url }}" target="_blank" class="vertical-top">
+                {{ file_url }}</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
