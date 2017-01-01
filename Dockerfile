@@ -20,14 +20,15 @@ WORKDIR /code
 # for cache
 ADD ./requirements.txt /code/requirements.txt
 ADD ./package.json /code/package.json
-RUN npm install && gulp
-RUN pip install --upgrade pip \
+RUN npm install \
+    && pip install --upgrade pip \
     && pip install -r requirements.txt
 
 # Configure Nginx and uwsgi
 ADD ./.deploy/supervisord.conf /etc/supervisor/conf.d/
 ADD . /code
-RUN chmod +x ./*.sh; sync; ./compile-scss.sh
+RUN chmod +x ./*.sh; sync; ./compile-scss.sh \
+    && gulp
 
 EXPOSE 8080 8081
 
