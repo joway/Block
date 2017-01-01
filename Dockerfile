@@ -17,8 +17,9 @@ RUN mkdir -p /code/log/
 WORKDIR /code
 
 # for cache
-RUN npm install && gulp
 ADD ./requirements.txt /code/requirements.txt
+ADD ./package.json /code/package.json
+RUN npm install && gulp
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt
 
