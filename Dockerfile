@@ -2,13 +2,12 @@ FROM python:3.5.1
 MAINTAINER joway wong "joway.w@gmail.com"
 
 # Install packages
-RUN add-apt-repository ppa:chris-lea/node.js \
-    && apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \
     libmysqlclient-dev \
     mysql-client \
     supervisor \
     ruby-full rubygems \
-    nodejs \
+    nodejs npm \
     && gem install sass \
     && npm install -g gulp \
     && rm -rf /var/lib/apt/lists/*
