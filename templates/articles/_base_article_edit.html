@@ -5,13 +5,12 @@
   <link rel="stylesheet" href="{% static 'plugins/simplemde/simplemde.min.css' %}">
 {% endblock %}
 {% block init_block %}
-  <script>
-    app.article = {
-      'uid': null,
-      'title': '',
-      'category': '',
-    }
-  </script>
+  {{ block.super }}
+  app.article = {
+  'uid': null,
+  'title': '',
+  'category': '',
+  }
 {% endblock %}
 {% block script %}
   {{ block.super }}
@@ -23,57 +22,57 @@
 {% block javascript %}
   {{ block.super }}
   <script>
-    $(document).ready(function () {
-      var simplemde = new SimpleMDE({
-        element: document.getElementById("markdown-editor"),
-        autofocus: true,
-        spellChecker: false,
-      });
-
-      app.editor = simplemde;
-
-      $('#article-category').val(app.article.category);
-
-      $('select').material_select();
-
-      $('#article-submit').click(function () {
-
-        var article_content = simplemde.value();
-        var article_category = $('#article-category').val();
-        var article_title = $('#article-title').val();
-        if (!(article_content && article_title && article_category)) {
-          prompt_warning('请输入完整的信息');
-        } else {
-
-          beginCircleLoding();
-
-          var formData = new FormData();
-          formData.append('title', article_title);
-          formData.append('category', article_category);
-          formData.append('content', article_content);
-
-          if (app.article.action == 'update') {
-            var action = updateArticle(app.article.uid, formData);
-          } else {
-            var action = createArticle(formData);
-          }
-
-          action.then(function (response) {
-            response.json().then(function (data) {
-              endCircleLoding();
-
-              if (response.ok) {
-                prompt_success('发布成功', 3000);
-                location.href = '/a/' + data.uid + '';
-              } else {
-                prompt_warning('发布失败', 3000);
-              }
-            })
+      $(document).ready(function () {
+          var simplemde = new SimpleMDE({
+              element: document.getElementById("markdown-editor"),
+              autofocus: true,
+              spellChecker: false,
           });
 
-        }
+          app.editor = simplemde;
+
+          $('#article-category').val(app.article.category);
+
+          $('select').material_select();
+
+          $('#article-submit').click(function () {
+
+              var article_content = simplemde.value();
+              var article_category = $('#article-category').val();
+              var article_title = $('#article-title').val();
+              if (!(article_content && article_title && article_category)) {
+                  prompt_warning('请输入完整的信息');
+              } else {
+
+                  beginCircleLoding();
+
+                  var formData = new FormData();
+                  formData.append('title', article_title);
+                  formData.append('category', article_category);
+                  formData.append('content', article_content);
+
+                  if (app.article.action == 'update') {
+                      var action = updateArticle(app.article.uid, formData);
+                  } else {
+                      var action = createArticle(formData);
+                  }
+
+                  action.then(function (response) {
+                      response.json().then(function (data) {
+                          endCircleLoding();
+
+                          if (response.ok) {
+                              prompt_success('发布成功', 3000);
+                              location.href = '/a/' + data.uid + '';
+                          } else {
+                              prompt_warning('发布失败', 3000);
+                          }
+                      })
+                  });
+
+              }
+          });
       });
-    });
 
   </script>
 {% endblock %}

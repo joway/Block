@@ -10,17 +10,28 @@
   <title>城西笔谈 - Joway's Blog</title>
   <link rel="icon" type="image/x-icon" href="{% static 'img/logo/favicon.ico' %}"/>
   {% block css %}
-    <link rel="stylesheet" href="{% static 'libs/css/normalize.css' %}"/>
-    <link rel="stylesheet" href="{% static 'libs/css/font-awesome.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'libs/css/animate.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'libs/css/typo.css' %}"/>
+    <link rel="stylesheet" href="{% static 'libs/css/lib.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
   {% endblock %}
+  <script type="text/javascript" language="javascript">
+      window.onload = function () {
+          {% block init_block %}
+              app = {};
+              app.modal = {
+                  delete: {
+                      id: null,
+                      redirect: null
+                  }
+              };
+              {% ifequal flavour 'mobile' %}
+                  window.app.flavour = 'mobile';
+              {% else %}
+                  window.app.flavour = 'desktop';
+              {% endifequal %}
+          {% endblock %}
+      };
+  </script>
 
-  <script src="{% static 'js/app.js' %}"></script>
-
-  {% block init_block %}
-  {% endblock %}
 </head>
 <body>
 <div class="main">
@@ -39,27 +50,15 @@
 </body>
 
 {% block script %}
-  <script src="{% static 'libs/js/fetch.js' %}"></script>
+  <script src="{% static 'libs/js/fetch.min.js' %}"></script>
   <script src="{% static 'libs/js/jquery.min.js' %}"></script>
   <script src="{% static 'libs/js/materialize.min.js' %}"></script>
 
-  <script src="{% static 'js/apis.js' %}"></script>
-  <script src="{% static 'js/init.js' %}"></script>
-  <script src="{% static 'js/funcions.js' %}"></script>
-  <script src="{% static 'js/prompts.js' %}"></script>
-  <script src="{% static 'js/modals.js' %}"></script>
-  <script src="{% static 'js/proloader.js' %}"></script>
+  <script src="{% static 'js/index.js' %}"></script>
 {% endblock %}
 
 
 {% block javascript %}
-  <script>
-      {% ifequal flavour 'mobile' %}
-          window.app.flavour = 'mobile';
-      {% else %}
-          window.app.flavour = 'desktop';
-      {% endifequal %}
-  </script>
 {% endblock %}
 
 </html>
