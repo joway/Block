@@ -15,7 +15,10 @@ from utils.qiniu import upload_file
 @admin_required
 def imgbox(request):
     if request.method == 'POST':
-        file = request.FILES['file']
+        try:
+            file = request.FILES['file']
+        except:
+            return render(request, 'imgbox/index.html', locals())
         ext = os.path.splitext(file.name)[1]
         file_url = upload_file(key=str(int(time.time() * 10)) + ext, data=file.read())
     return render(request, 'imgbox/index.html', locals())
@@ -25,7 +28,10 @@ def imgbox(request):
 @admin_required
 @require_POST
 def imgbox_api(request):
-    file = request.FILES['file']
+    try:
+        file = request.FILES['file']
+    except:
+        return HttpResponse(json.dumps({'error': '缺少文件file参数'}))
     ext = os.path.splitext(file.name)[1]
     file_url = upload_file(key=str(int(time.time() * 10)) + ext, data=file.read())
     return HttpResponse(json.dumps({'url': file_url}))

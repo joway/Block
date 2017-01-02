@@ -247,7 +247,6 @@ else:
     SOCIAL_CALLBACK_REDIRECT_BASE_URL = 'http://%s:8000' % DOMAIN + '/oauth/'
 GITHUB_SOCIAL_CALLBACK_REDIRECT_URL = SOCIAL_CALLBACK_REDIRECT_BASE_URL + 'github/'
 
-
 # qiniu
 QINIU_STORAGE = os.environ.get('QINIU_STORAGE', False)
 if QINIU_STORAGE == 'True':
@@ -281,3 +280,5 @@ HAYSTACK_CONNECTIONS = {
         'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
     },
 }
+# 自动同步
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
