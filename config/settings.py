@@ -66,6 +66,7 @@ INSTALLED_APPS = (
     'tracking',
     'django_comments',
     'opbeat.contrib.django',
+    'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (

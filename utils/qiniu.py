@@ -1,3 +1,6 @@
+import json
+
+import requests
 from django.conf import settings
 from qiniu import Auth
 from qiniu import put_data
@@ -27,3 +30,16 @@ def upload_file(key, data, _prefix='upload/'):
     except:
         url = None
     return url
+
+
+def refresh(data):
+    refresh_api = 'http://fusion.qiniuapi.com/v2/tune/refresh'
+    ak = q.token_of_request('http://fusion.qiniuapi.com/v2/tune/refresh')
+    headers = {
+        'Authorization': 'QBox ' + ak,
+        'Content-Type': 'application/json'
+    }
+    req = requests.post(url=refresh_api,
+                        headers=headers, data=json.dumps(data))
+
+    return req.json()
