@@ -7,9 +7,9 @@ upload
 log
 collected_static
 whoosh_index
-static/js/index.js
-static/libs/css/lib.css
-static/libs/js/lib.js
+static/dist/index.js
+static/dist/lib.css
+static/dist/lib.js
 node_modules
 # C extensions
 *.so

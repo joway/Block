@@ -249,13 +249,13 @@ GITHUB_SOCIAL_CALLBACK_REDIRECT_URL = SOCIAL_CALLBACK_REDIRECT_BASE_URL + 'githu
 
 # qiniu
 QINIU_STORAGE = os.environ.get('QINIU_STORAGE', False)
+QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY', 'xxx')
+QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY', 'xxx')
+QINIU_BUCKET_NAME = 'block'
+QINIU_BUCKET_DOMAIN = 'static.joway.wang'
+QINIU_SECURE_URL = True
 if QINIU_STORAGE == 'True':
     STATIC_ROOT = '/static/'
-    QINIU_ACCESS_KEY = os.environ.get('QINIU_ACCESS_KEY', 'xxx')
-    QINIU_SECRET_KEY = os.environ.get('QINIU_SECRET_KEY', 'xxx')
-    QINIU_BUCKET_NAME = 'block'
-    QINIU_BUCKET_DOMAIN = 'static.joway.wang'
-    QINIU_SECURE_URL = True
     DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
     STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 

@@ -9,22 +9,17 @@
     </div>
   </div>
 {% endblock %}
-
-{% block script %}
-  {{ block.super }}
-  <script src="{% static 'libs/js/highlight.min.js' %}"></script>
-{% endblock %}
 {% block javascript %}
   {{ block.super }}
   <script>
-    var options = [
-      {
-        selector: '#comment-panel', offset: 0, callback: function (el) {
-        Materialize.fadeInImage($(el));
-      }
-      }
-    ];
-    Materialize.scrollFire(options);
-    hljs.initHighlightingOnLoad();
+      var options = [
+          {
+              selector: '#comment-panel', offset: 0, callback: function (el) {
+              Materialize.fadeInImage($(el));
+          }
+          }
+      ];
+      Materialize.scrollFire(options);
+      hljs.initHighlightingOnLoad();
   </script>
 {% endblock %}

@@ -12,7 +12,8 @@
         <div class="col s12 l12">
           <i class="material-icons prefix">mode_edit</i>
           <label for="comment-textarea">评论</label>
-          <textarea id="comment-textarea" class="materialize-textarea" name="comment"></textarea>
+          <textarea id="comment-textarea" class="materialize-textarea OwO-textarea" name="comment"></textarea>
+          <div class="OwO" style="z-index: 100"></div>
           <button class="btn waves-effect waves-light right" name="action" id="comment-submit">提交
             <i class="material-icons right">send</i>
           </button>
@@ -37,9 +38,11 @@
                 <span class="comment-date vertical-top">{{ comment.submit_date }}</span>
                 <div style="display: inline;margin-left: 32px">
                   <a onclick="referredTo(this)" href="javascript:void(0);"
-                   data-username="{{ comment.user.username }}"><i class="material-icons grey-text">forum</i></a>
-                  <a onclick="commentUp(this)" href="javascript:void(0);" data-id="{{ comment.id }}"><i class="material-icons grey-text" id="thumb-up-{{ comment.id }}">thumb_up</i></a>
-                  <a onclick="commentDown(this)" href="javascript:void(0);" data-id="{{ comment.id }}"><i class="material-icons grey-text" id="thumb-down-{{ comment.id }}">thumb_down</i></a>
+                     data-username="{{ comment.user.username }}"><i class="material-icons grey-text">forum</i></a>
+                  <a onclick="commentUp(this)" href="javascript:void(0);" data-id="{{ comment.id }}"><i
+                      class="material-icons grey-text" id="thumb-up-{{ comment.id }}">thumb_up</i></a>
+                  <a onclick="commentDown(this)" href="javascript:void(0);" data-id="{{ comment.id }}"><i
+                      class="material-icons grey-text" id="thumb-down-{{ comment.id }}">thumb_down</i></a>
                   {% if request.user.is_admin %}
                     <a href="#modal-delete" data-id="{{ comment.id }}"><i class="material-icons red-text">delete</i></a>
                   {% endif %}
@@ -53,35 +56,46 @@
   </div>
 </div>
 <script>
-  document.addEventListener("DOMContentLoaded", function (event) {
-    $('#comment-submit').click(function () {
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('#comment-submit').click(function () {
 
-      var comment = $('#comment-textarea').val().trim();
-      if (!(comment)) {
-        prompt_warning('请输入完整的信息');
-      } else {
-        beginCircleLoding();
+            var comment = $('#comment-textarea').val().trim();
+            if (!(comment)) {
+                prompt_warning('请输入完整的信息');
+            } else {
+                beginCircleLoding();
 
-        {% get_comment_form for article as form %}
-        var formData = new FormData();
-        formData.append('comment', comment);
-        formData.append('url', '{{ site.cur_full_url }}');
-        formData.append("content_type", '{{ form.content_type.value }}');
-        formData.append("object_pk", '{{ form.object_pk.value }}');
-        formData.append("timestamp", '{{ form.timestamp.value }}');
-        formData.append("security_hash", '{{ form.security_hash.value }}');
+                {% get_comment_form for article as form %}
+                var formData = new FormData();
+                formData.append('comment', comment);
+                formData.append('url', '{{ site.cur_full_url }}');
+                formData.append("content_type", '{{ form.content_type.value }}');
+                formData.append("object_pk", '{{ form.object_pk.value }}');
+                formData.append("timestamp", '{{ form.timestamp.value }}');
+                formData.append("security_hash", '{{ form.security_hash.value }}');
 
-        createComment(formData).then(function (response) {
-          endCircleLoding();
-          if (response.ok) {
-            prompt_success('评论成功', 3000);
-            location.reload();
-          } else {
-              console.log(response.body);
-            prompt_warning(response.body, 3000);
-          }
+                createComment(formData).then(function (response) {
+                    endCircleLoding();
+                    if (response.ok) {
+                        prompt_success('评论成功', 3000);
+                        location.reload();
+                    } else {
+                        console.log(response.body);
+                        prompt_warning(response.body, 3000);
+                    }
+                });
+            }
         });
-      }
+
+        var OwO_demo = new OwO({
+            logo: '<i class="material-icons">insert_emoticon</i>',
+            container: document.getElementsByClassName('OwO')[0],
+            target: document.getElementsByClassName('OwO-textarea')[0],
+            api: 'https://static.joway.wang/static/dist/kaomoji.json',
+            position: 'down',
+            width: '100%',
+            maxHeight: '250px'
+        });
+
     });
-  });
 </script>

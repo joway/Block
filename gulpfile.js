@@ -7,14 +7,9 @@ var gulp = require('gulp'),
 
 // 样式处理任务
 gulp.task('styles', function () {
-    // return gulp.src(['libs/css/normalize.min.css',
-    //    'libs/css/font-awesome.min.css',
-    //    'libs/css/animate.min.css',
-    //    'libs/css/typo.min.css'])    //引入所有CSS
-    return gulp.src('libs/css/*.min.css')    //引入所有CSS
+    return gulp.src('static/libs/css/*.min.css')    //引入所有CSS
         .pipe(concat('lib.css'))           //合并CSS文件
-        .pipe(minifycss())                  //CSS压缩
-        .pipe(gulp.dest('static/libs/css/'))      //压缩版输出
+        .pipe(gulp.dest('static/dist/'))      //压缩版输出
         .pipe(notify({message: '样式文件处理完成'}));
 });
 
@@ -24,18 +19,20 @@ gulp.task('scripts', function () {
     return gulp.src('static/js/*.js')      //引入所有需处理的JS
         .pipe(concat('index.js'))                  //合并JS文件
         .pipe(uglify())                           //压缩JS
-        .pipe(gulp.dest('static/js/'))        //压缩版输出
+        .pipe(gulp.dest('static/dist/'))        //压缩版输出
         .pipe(notify({message: 'JS文件处理完成'}));
 });
 gulp.task('scripts-lib', function () {
     return gulp.src([
         'static/libs/js/jquery.min.js',
         'static/libs/js/materialize.min.js',
+        'static/libs/js/highlight.min.js',
         'static/libs/js/fetch.min.js',
         'static/libs/js/paste.min.js',
+        'static/libs/js/kaomoji.min.js',
     ])
         .pipe(concat('lib.js'))                  //合并JS文件
-        .pipe(gulp.dest('static/libs/js/'))        //压缩版输出
+        .pipe(gulp.dest('static/dist/'))        //压缩版输出
         .pipe(notify({message: 'Lib JS文件处理完成'}));
 });
 
@@ -52,7 +49,7 @@ gulp.task('images', function () {
 gulp.task('watch', function () {
 
     // 监听所有css文档
-    // gulp.watch('static/css/*.css', ['styles']);
+    gulp.watch('static/css/*.css', ['styles']);
 
     // 监听所有.js档
     gulp.watch('static/js/*.js', ['scripts']);
