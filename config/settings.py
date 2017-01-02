@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import codecs
 import os
 import sys
 
@@ -159,6 +160,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+codecs.register(lambda name: codecs.lookup('utf8') if name == 'utf8mb4' else None)
 if not PRODUCTION:
     DATABASES = {
         'default': {
