@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from articles.models import ArticleRSSFeed
 from config import views
 from config.router import router
 from config.views import proxy_post_comment
@@ -27,6 +28,7 @@ urlpatterns = [
 
     url(r'^error/$', views.error),
     url(r'^cache/clear/$', views.cache_clear),
+    url(r'^feed/$', ArticleRSSFeed(), name="article_rss"),
 
     # api
     url(r"^api/", include(router.urls)),

@@ -8,6 +8,7 @@ def run(*args):
             'https://static.joway.wang/static/css/index.css',
             'https://static.joway.wang/static/dist/lib.js',
             'https://static.joway.wang/static/dist/index.js',
+            'https://static.joway.wang/static/dist/kaomoji.json'
         ]
     }
 

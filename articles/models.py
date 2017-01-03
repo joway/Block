@@ -3,6 +3,7 @@ from random import choice
 
 import markdown2
 from django.conf import settings
+from django.contrib.syndication.views import Feed
 from django.db import models
 from taggit.managers import TaggableManager
 
@@ -34,7 +35,10 @@ class Article(models.Model):
     category = models.CharField('目录', choices=ARTICLE_CATEGORY_CHOICES, max_length=16)
 
     class Meta:
-        ordering = ('-created_at', )
+        ordering = ('-created_at',)
+
+    def get_absolute_url(self):
+        return '/a/%s/' % self.uid
 
     def tag_list(self):
         return [o.name for o in self.tags.all()]
@@ -54,3 +58,20 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+
+class ArticleRSSFeed(Feed):
+    title = "城西笔谈 - 文章列表"
+    link = "/"
+    description = "城西笔谈 - blog posts"
+
+    def items(self):
+        return Article.objects.order_by('-created_at')
+
+    def item_title(self, item):
+        return item.title
+
+    def item_pubdate(self, item):
+        return item.created_at
+
+    def item_description(self, item):
+        return item.markdown_content
