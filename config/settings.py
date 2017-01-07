@@ -56,6 +56,12 @@ INSTALLED_APPS = (
     # local apps
     'users',
     'articles',
+    'feed',
+    'timeline',
+    'oauth',
+    'imgbox',
+    'analysis',
+    'about',
 
     # third part
     'rest_framework',
@@ -68,6 +74,7 @@ INSTALLED_APPS = (
     'django_comments',
     'opbeat.contrib.django',
     'django_extensions',
+    'django_celery_results',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -286,3 +293,6 @@ HAYSTACK_CONNECTIONS = {
 }
 # 自动同步
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# celery
+CELERY_BROKER_URL = 'amqp://%s:5672' % os.environ.get('BROKER_URL', '127.0.0.1')

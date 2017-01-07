@@ -1,0 +1,52 @@
+{% extends '_base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col s10 l10 offset-s1 offset-l1">
+        <div class="card">
+          <div class="card-content">
+            <h1 class="center-align">
+              订阅
+            </h1>
+            <div class="row" style="margin: 30px">
+              {% for stream in streams %}
+                <div class="row">
+                  <div class="col l10 s12">
+                    <a href="{{ stream.link }}" target="_blank" class="black-text">{{ stream.title }}</a>
+                    <a href="{{ stream.feed.homepage }}" target="_blank" class="hide-on-small-and-down">
+                      <i class="material-icons tiny grey-text">place</i><span
+                        class="lighten-2 light-blue-text">{{ stream.feed.name }}</span>
+                    </a>
+                  </div>
+
+
+                  <a href="{{ stream.feed.homepage }}" target="_blank" class="col s6 hide-on-med-and-up">
+                    <i class="material-icons tiny grey-text">place</i><span
+                      class="lighten-2 light-blue-text">{{ stream.feed.name }}</span>
+                  </a>
+                  <span class="badge white-text col l2 s6 m3 offset-m9"
+                        style="background-color: #26a69a;border-radius: 3px;font-size: 0.8rem">
+                    {{ stream.created_at }}
+                  </span>
+                </div>
+              {% endfor %}
+
+            </div>
+            <div class="row">
+              {% if streams.has_previous %}
+                <a href="?page={{ streams.previous_page_number }}">
+                  <i class="material-icons col s1 l1 left medium">navigate_before</i>
+                </a>
+              {% endif %}
+              {% if streams.has_next %}
+                <a href="?page={{ streams.next_page_number }}">
+                  <i class="material-icons col s1 l1 right medium">navigate_next</i>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

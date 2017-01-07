@@ -23,6 +23,7 @@ urlpatterns = [
     url(r"^oauth/", include('oauth.urls'), name='oauth'),
     url(r"^about/", include('about.urls')),
     url(r'^imgbox/', include('imgbox.urls')),
+    url(r'^feeds/', include('feed.urls')),
 
     url(r'^search/', include('haystack.urls')),
 

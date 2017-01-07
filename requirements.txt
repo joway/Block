@@ -1,3 +1,6 @@
+amqp==2.1.4
+billiard==3.5.0.2
+celery==4.0.2
 certifi==2016.9.26
 coverage==4.3.1
 defusedxml==0.4.1
@@ -16,6 +19,7 @@ django-taggit==0.21.3
 django-tracking2==0.3.3
 djangorestframework==3.5.3
 jieba==0.38
+kombu==4.0.2
 markdown2==2.3.2
 mysqlclient==1.3.9
 oauthlib==2.0.1
@@ -36,4 +40,5 @@ shortuuid==0.4.3
 six==1.10.0
 urllib3==1.19.1
 uWSGI==2.0.14
+vine==1.1.3
 Whoosh==2.7.4
