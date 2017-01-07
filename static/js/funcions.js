@@ -7,6 +7,15 @@ function sidebarCategory() {
   }
 }
 
+function sidebarLib() {
+  var lib = $('#lib');
+  if (lib.css('display') == 'none') {
+    lib.fadeIn();
+  } else {
+    lib.fadeOut();
+  }
+}
+
 function referredTo(element) {
   var username = element.dataset.username;
   var editor = $('#comment-textarea');
