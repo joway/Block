@@ -74,7 +74,6 @@ INSTALLED_APPS = (
     'django_comments',
     'opbeat.contrib.django',
     'django_extensions',
-    'django_celery_results',
 )
 
 MIDDLEWARE_CLASSES = (

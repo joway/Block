@@ -1,4 +1,5 @@
 amqp==2.1.4
+Babel==2.3.4
 billiard==3.5.0.2
 celery==4.0.2
 certifi==2016.9.26
@@ -7,6 +8,7 @@ defusedxml==0.4.1
 Django==1.9.12
 django-activity-stream==0.6.3
 django-appconf==1.0.2
+django-celery-results==1.0.1
 django-contrib-comments==1.7.3
 django-extensions==1.7.5
 django-filter==1.0.1
@@ -18,6 +20,8 @@ django-qiniu-storage==2.3.0
 django-taggit==0.21.3
 django-tracking2==0.3.3
 djangorestframework==3.5.3
+feedparser==5.2.1
+flower==0.9.1
 jieba==0.38
 kombu==4.0.2
 markdown2==2.3.2
@@ -38,6 +42,8 @@ requests-oauthlib==0.7.0
 rjsmin==1.0.12
 shortuuid==0.4.3
 six==1.10.0
+SQLAlchemy==1.1.4
+tornado==4.2
 urllib3==1.19.1
 uWSGI==2.0.14
 vine==1.1.3
