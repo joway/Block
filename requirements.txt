@@ -37,6 +37,7 @@ python3-openid==3.0.10
 pytz==2016.10
 qiniu==7.1.0
 rcssmin==1.0.6
+redis==2.10.5
 requests==2.12.3
 requests-oauthlib==0.7.0
 rjsmin==1.0.12

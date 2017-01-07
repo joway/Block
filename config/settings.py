@@ -294,4 +294,4 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # celery
-CELERY_BROKER_URL = os.environ.get('BROKER_URL', '127.0.0.1')
+CELERY_BROKER_URL = os.environ.get('BROKER_URL', 'redis://:password@127.0.0.1:6379/0')
