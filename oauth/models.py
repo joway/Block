@@ -11,6 +11,6 @@ class SocialAccount(models.Model):
     access_token = models.CharField(max_length=255)
     refresh_token = models.CharField('refresh_token', max_length=255, blank=True, null=True)
 
-    provider = models.IntegerField('类别', choices=PROVIDERS_CHOICES, max_length=10)
+    provider = models.IntegerField('类别', choices=PROVIDERS_CHOICES)
     bound_at = models.DateTimeField('绑定时间', auto_now_add=True)
     expire_at = models.DateTimeField('token失效时间', blank=True, null=True)
