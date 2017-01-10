@@ -10,6 +10,10 @@ def feed(request):
     streams = FeedStream.objects.all()
 
     page = request.GET.get('page', '1')
+    query = request.GET.get('query', None)
+
+    if query:
+        streams = FeedStream.objects.filter(title__search=query)
 
     paginator = Paginator(streams, settings.PAGING_SIZE * 2)
     try:
