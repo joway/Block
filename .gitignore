@@ -11,6 +11,8 @@ static/dist/index.js
 static/dist/lib.css
 static/dist/lib.js
 node_modules
+celerybeat-schedule
+celerybeat.pid
 # C extensions
 *.so
 

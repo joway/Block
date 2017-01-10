@@ -12,17 +12,17 @@
               {% for stream in streams %}
                 <div class="row">
                   <div class="col l10 s12">
-                    <a href="{{ stream.link }}" target="_blank" class="black-text">{{ stream.title }}</a>
+                    <a href="{{ stream.link }}" target="_blank" class="feed-title">{{ stream.title }}</a>
                     <a href="{{ stream.feed.homepage }}" target="_blank" class="hide-on-small-and-down">
                       <i class="material-icons tiny grey-text">place</i><span
-                        class="lighten-2 light-blue-text">{{ stream.feed.name }}</span>
+                        class="lighten-2 grey-text">{{ stream.feed.name }}</span>
                     </a>
                   </div>
 
 
                   <a href="{{ stream.feed.homepage }}" target="_blank" class="col s6 hide-on-med-and-up">
                     <i class="material-icons tiny grey-text">place</i><span
-                      class="lighten-2 light-blue-text">{{ stream.feed.name }}</span>
+                      class="lighten-2 grey-text">{{ stream.feed.name }}</span>
                   </a>
                   <span class="badge white-text col l2 s6 m3 offset-m9"
                         style="background-color: #26a69a;border-radius: 3px;font-size: 0.8rem">
