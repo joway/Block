@@ -57,11 +57,6 @@ INSTALLED_APPS = (
     'users',
     'articles',
     'feed',
-    'timeline',
-    'oauth',
-    'imgbox',
-    'analysis',
-    'about',
 
     # third part
     'rest_framework',
