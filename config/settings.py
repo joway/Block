@@ -263,6 +263,7 @@ QINIU_BUCKET_DOMAIN = 'static.joway.wang'
 QINIU_SECURE_URL = True
 if QINIU_STORAGE == 'True':
     STATIC_ROOT = '/static/'
+    STATIC_URL = 'https://static.joway.wang/static/'
     DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
     STATICFILES_STORAGE = 'qiniustorage.backends.QiniuStaticStorage'
 
