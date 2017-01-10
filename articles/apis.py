@@ -1,3 +1,5 @@
+import os
+
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
@@ -31,6 +33,8 @@ class ArticleViewSet(viewsets.ModelViewSet):
         article.tags.add(*topk(serializer.validated_data['content'], 3))
 
         ActionService.post(request.user, serializer.instance)
+
+        os.system('nohup python manage.py update_index &')
 
         return Response(self.get_serializer(instance=serializer.instance).data, status=status.HTTP_201_CREATED,
                         headers=headers)
