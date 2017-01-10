@@ -10,7 +10,7 @@ from feed.models import Feed, FeedStream
 logger = get_task_logger(__name__)
 
 
-@periodic_task(run_every=(crontab(minute='*/1')),
+@periodic_task(run_every=(crontab(minute='*/30')),
                name="feed_update", ignore_result=True)
 def feed_update():
     feeds = Feed.objects.all()
