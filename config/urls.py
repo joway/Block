@@ -9,6 +9,8 @@ from config.views import proxy_post_comment
 admin.autodiscover()
 
 urlpatterns = [
+    url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
     url(r'^admin/', include(admin.site.urls)),
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
     url(r'^tracking/', include('tracking.urls')),

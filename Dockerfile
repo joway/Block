@@ -31,6 +31,8 @@ COPY . /code
 RUN chmod +x ./*.sh; sync; ./compile-scss.sh \
     && gulp
 
+RUN curl https://www.google-analytics.com/analytics.js > static/dist/analytics.js
+
 EXPOSE 8080 8081
 
 VOLUME /code/log/
