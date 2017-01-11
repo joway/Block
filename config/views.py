@@ -1,54 +1,41 @@
 # coding=utf-8
 from django.apps import apps
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
-from django.core.paginator import PageNotAnInteger, Paginator, EmptyPage
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.utils.html import escape
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
 from django_comments.views.comments import post_comment, CommentPostBadRequest
-from mail.tasks import mail_has_commented
 
 from analysis.services import ActionService
-from articles.models import Article
+from articles.views import list as article_list
+from mail.tasks import mail_has_commented
 from users.decorators import admin_required
 
 
 def index(request):
-    articles = Article.objects.all()
+    return article_list(request)
 
-    page = request.GET.get('page', '1')
-    category = request.GET.get('category', '')
-    tag = request.GET.get('tag', '')
 
-    if category:
-        articles = articles.filter(category=category)
-    if tag:
-        articles = articles.filter(articletaggeditem__tag__slug__contains=tag)
-
-    paginator = Paginator(articles, settings.PAGING_SIZE)
-    try:
-        articles = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        articles = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        articles = paginator.page(paginator.num_pages)
-
-    return render(request, 'articles/list.html', locals())
+def robots(request):
+    with open('robots.txt', 'rb') as f:
+        data = f.read()
+    return HttpResponse(data, content_type='text/plain')
 
 
 def error(request):
+    title = '错误'
+
     error_msg = request.GET.get('error', '未知错误')
     return render(request, 'error.html', locals())
 
 
 def not_fount(request):
+    title = 'Not Found'
+
     return render(request, '404.html', locals())
 
 

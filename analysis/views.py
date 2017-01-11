@@ -17,6 +17,8 @@ def handle_report(report):
 
 
 def index(request):
+    title = '统计分析'
+
     weekly_report = cache.get('weekly_report')
     if not weekly_report:
         weekly_report = TrackingService.chart_report(7)

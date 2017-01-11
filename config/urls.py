@@ -43,6 +43,7 @@ urlpatterns = [
     url(r'^error/$', views.error),
     url(r'^cache/clear/$', views.cache_clear),
     url(r'^feed/$', ArticleRSSFeed(), name="article_rss"),
+    url(r'^robots.txt$', views.robots, name="robots"),
 
     # api
     url(r"^api/", include(router.urls)),

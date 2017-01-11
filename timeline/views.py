@@ -5,6 +5,8 @@ from django.shortcuts import render
 
 
 def timeline(request):
+    title = '时间线'
+
     actions = Action.objects.all()
 
     page = request.GET.get('page', '1')

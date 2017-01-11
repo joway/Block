@@ -7,6 +7,8 @@ from feed.models import FeedStream
 
 
 def feed(request):
+    title = '订阅'
+
     streams = FeedStream.objects.all()
 
     page = request.GET.get('page', '1')

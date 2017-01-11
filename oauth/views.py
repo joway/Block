@@ -8,6 +8,8 @@ from users.models import User
 
 
 def index(request):
+    title = '登陆'
+
     return render(request, 'oauth/social.html', locals())
 
 

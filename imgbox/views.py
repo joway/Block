@@ -14,6 +14,7 @@ from utils.qiniu import upload_file
 @login_required
 @admin_required
 def imgbox(request):
+    title = '图床'
     return render(request, 'imgbox/index.html', locals())
 
 
