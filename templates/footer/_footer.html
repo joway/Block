@@ -14,17 +14,19 @@
           </p>
           <div class="center-align">
             <i class="material-icons">insert_chart</i>
-            <span class="vertical-top">日UV: {{ analysis.pageview.UV_DAILY }} , PV: {{ analysis.pageview.PV_DAILY }} ;
-            周 UV : {{ analysis.pageview.UV_WEEKLY }} , PV : {{ analysis.pageview.PV_WEEKLY }} ;
-            月 UV : {{ analysis.pageview.UV_MONTHLY }}, PV : {{ analysis.pageview.PV_MONTHLY }} ;
-            总 UV : {{ analysis.pageview.UV_TOTAL }} , PV : {{ analysis.pageview.PV_TOTAL }}</span>
+            <span class="vertical-top">
+              日UV: {{ analysis.pageview.UV_DAILY }} , PV: {{ analysis.pageview.PV_DAILY }} ;
+              周 UV : {{ analysis.pageview.UV_WEEKLY }} , PV : {{ analysis.pageview.PV_WEEKLY }} ;
+              月 UV : {{ analysis.pageview.UV_MONTHLY }}, PV : {{ analysis.pageview.PV_MONTHLY }}
+            </span>
           </div>
           <div>
             <i class="material-icons">dns</i>
             <span class="vertical-top">内存占用 : {{ analysis.server.mem_available }} G,
             内存使用率: {{ analysis.server.mem_percent }} % </span>
           </div>
-          <p>Powered by <a href="https://joway.wang">Joway</a></p>
+          <p>Powered by <a href="https://joway.wang/about/">Joway</a>,
+             开放源代码: <a href="https://github.com/joway/Block">Block</a></p>
         </div>
       </div>
     </div>
