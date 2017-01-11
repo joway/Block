@@ -303,11 +303,12 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'YOUR-SECRET-ACC
 AWS_SES_REGION_NAME = 'us-west-2'
 AWS_SES_REGION_ENDPOINT = 'email.us-west-2.amazonaws.com'
 
+EMAIL_HOST_USER = 'joway@joway.wang'
+
 # 邮件配置
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.exmail.qq.com'
 # EMAIL_PORT = 465
-# EMAIL_HOST_USER = 'joway@joway.wang'
 # EMAIL_HOST_PASSWORD = 'xxx'
 # EMAIL_SUBJECT_PREFIX = '[城西笔谈]'
 # EMAIL_USE_TLS = False
