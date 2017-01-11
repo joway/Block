@@ -20,7 +20,7 @@
                 </button>
               </div>
             </form>
-            <div class="row file-url-wrapper" style="margin: 32px" >
+            <div class="row file-url-wrapper" style="margin: 32px;display: none">
               <div class="input-field col l9 s9 offset-l1 offset-s1">
                 <input readonly value="{{ file_url }}"
                        type="text" class="validate file-url" id="file-url">
@@ -30,6 +30,12 @@
                         class="btn-floating waves-effect waves-light green darken-1"><i class="material-icons ">content_copy</i>
                 </button>
               </div>
+            </div>
+            <div class="row">
+              <a href="" target="_blank" id="image-preview-link">
+                <img id="image-preview" style="display: none"
+                   class="col l10 s12 offset-l1" alt="preview" />
+              </a>
             </div>
           </div>
         </div>
@@ -42,7 +48,6 @@
 {% block javascript %}
   <script type="text/javascript">
       $(function () {
-          $('.file-url-wrapper').hide();
           $('.pastable-noninputable').pastableNonInputable();
           $('.pastable').on('pasteImage', function (ev, data) {
               beginCircleLoding();
@@ -57,6 +62,11 @@
                           prompt_success('上传成功', 3000);
                           $('.file-url-wrapper').show();
                           $('#file-url').val(data.url);
+                          $('#image-preview').attr('src', data.url);
+                          $('#image-preview-link').attr('href', data.url);
+
+                          $('.file-url-wrapper').show();
+                          $('#image-preview').show();
                       } else {
                           prompt_warning('上传失败', 3000);
                       }

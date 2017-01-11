@@ -14,7 +14,7 @@ def about_me(request):
 
 
 def about_site(request):
-    about_title = 'About Title'
+    about_title = 'About Site'
     about_path = settings.BASE_DIR + '/README.md'
     with open(about_path, encoding='utf-8') as file:
         about_content = file.read()
