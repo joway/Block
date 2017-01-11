@@ -65,7 +65,7 @@
             } else {
                 beginCircleLoding();
 
-                {% get_comment_form for article as form %}
+                {% get_comment_form for comment_obj as form %}
                 var formData = new FormData();
                 formData.append('comment', comment);
                 formData.append('url', '{{ site.cur_full_url }}');

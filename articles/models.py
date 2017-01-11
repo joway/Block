@@ -25,14 +25,14 @@ class Article(models.Model):
     title = models.CharField('标题', max_length=255)
     author = models.ForeignKey(verbose_name='作者', to=settings.AUTH_USER_MODEL)
 
-    content = models.TextField('Markdown 文本')
+    tags = TaggableManager(blank=True, through=ArticleTaggedItem)
+
+    category = models.CharField('目录', choices=ARTICLE_CATEGORY_CHOICES, max_length=16)
 
     created_at = models.DateTimeField('创建时间', auto_now_add=True)
     updated_at = models.DateTimeField('更新时间', auto_now_add=True)
 
-    tags = TaggableManager(blank=True, through=ArticleTaggedItem)
-
-    category = models.CharField('目录', choices=ARTICLE_CATEGORY_CHOICES, max_length=16)
+    content = models.TextField('Markdown 文本')
 
     class Meta:
         ordering = ('-created_at',)

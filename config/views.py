@@ -71,6 +71,7 @@ def proxy_post_comment(request, next=None, using=None):
 
     if not request.user.is_admin:
         ActionService.comment(request.user, target)
+    print(target)
     return post_comment(request, next, using)
 
 
