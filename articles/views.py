@@ -36,6 +36,7 @@ def detail(request, article_uid):
     article = get_object_or_404(Article, uid=article_uid)
 
     meta_description = article.digest
+    meta_keywords = ', '.join(article.tag_list())
 
     title = article.title
     comment_obj = article

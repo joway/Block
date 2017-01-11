@@ -8,7 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
   <meta name="format-detection" content="telephone=no">
   <meta name="author" content="Joway Wang">
-  <meta name="keywords" content="Joway, 城西笔谈, 编程, 算法, Python, 随笔, Django"/>
+
+  {% if meta_keywords %}
+    <meta name="keywords" content="{{ meta_keywords }}"/>
+  {% else %}
+    <meta name="keywords" content="Joway, 城西笔谈, 编程, 算法, Python, 随笔, Django"/>
+  {% endif %}
 
 
   {% if meta_description %}
