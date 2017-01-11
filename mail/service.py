@@ -8,7 +8,12 @@ class MailService(object):
     def sent_email_has_commented(cls, username, comment_content):
         send_mail(
             subject='[城西笔谈] 您有一个来自%s新的评论 ' % username,
-            message=comment_content,
+            message="""
+            %s :
+
+            %s
+
+            """ % (username, comment_content),
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=['joway.w@gmail.com'])
 

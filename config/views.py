@@ -11,6 +11,7 @@ from django.utils.html import escape
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
 from django_comments.views.comments import post_comment, CommentPostBadRequest
+from mail.tasks import mail_has_commented
 
 from analysis.services import ActionService
 from articles.models import Article
@@ -78,6 +79,8 @@ def proxy_post_comment(request, next=None, using=None):
         return CommentPostBadRequest(
             "Attempting go get content-type %r and object PK %r exists raised %s" % (
                 escape(ctype), escape(object_pk), e.__class__.__name__))
+
+    mail_has_commented.delay(request.user.username, data['comment'])
     ActionService.comment(request.user, target)
     return post_comment(request, next, using)
 
