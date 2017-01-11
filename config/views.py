@@ -81,7 +81,9 @@ def proxy_post_comment(request, next=None, using=None):
                 escape(ctype), escape(object_pk), e.__class__.__name__))
 
     mail_has_commented.delay(request.user.username, data['comment'])
-    ActionService.comment(request.user, target)
+
+    if not request.user.is_admin:
+        ActionService.comment(request.user, target)
     return post_comment(request, next, using)
 
 
