@@ -49,7 +49,12 @@ class Article(models.Model):
 
     @property
     def digest(self):
-        return self.content[:140] + '...'
+        content = self.content
+        if len(content.split('\n')) > 8:
+            content = ''.join(content.split('\n')[:8])
+        if len(content) > 140:
+            content = content[:140]
+        return content + ' ... '
 
     @property
     def url(self):

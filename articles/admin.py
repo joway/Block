@@ -5,7 +5,7 @@ from articles.models import Article
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['uid', 'title', 'tag_list', 'author']
+    list_display = ['uid', 'title', 'category', 'tag_list', 'created_at']
     form = ArticleModelForm
 
     class Meta:
