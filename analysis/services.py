@@ -7,6 +7,7 @@ from django.utils import timezone
 from tracking.models import Visitor
 
 from analysis.constants import ActivityType
+from mail.tasks import mail_has_commented
 from utils.helpers import days_ago, yesterday
 from utils.tracking import tracking_report
 
@@ -14,6 +15,7 @@ from utils.tracking import tracking_report
 class ActionService(object):
     @classmethod
     def comment(cls, user, obj):
+        mail_has_commented.delay(obj)
         action.send(user, verb=ActivityType.COMMENT, target=user.groups.first(), action_object=obj)
 
     @classmethod

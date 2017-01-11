@@ -294,3 +294,20 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # celery
 CELERY_BROKER_URL = os.environ.get('BROKER_URL', 'redis://:password@127.0.0.1:6379/0')
+
+# # amazon ses
+# EMAIL_BACKEND = 'django_ses.SESBackend'
+# AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'YOUR-ACCESS-KEY-ID')
+# AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', 'YOUR-SECRET-ACCESS-KEY')
+# AWS_SES_REGION_NAME = 'us-west-2'
+# AWS_SES_REGION_ENDPOINT = 'email.us-west-2.amazonaws.com'
+
+# 邮件配置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.exmail.qq.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'joway@joway.wang'
+EMAIL_HOST_PASSWORD = 'xxx'
+EMAIL_SUBJECT_PREFIX = '[城西笔谈]'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
