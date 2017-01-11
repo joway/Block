@@ -2,8 +2,6 @@
 
 > Another blog based on Django . 
 
-===
-
 ## Usage
 
 ### Env
