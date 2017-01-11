@@ -17,10 +17,7 @@ def list(request):
     if category:
         articles = articles.filter(category=category)
     if tag:
-        if settings.PRODUCTION:
-            articles = articles.filter(articletaggeditem__tag__name__search=tag)
-        else:
-            articles = articles.filter(articletaggeditem__tag__name__contains=tag)
+        articles = articles.filter(articletaggeditem__tag__name__contains=tag)
 
     paginator = Paginator(articles, settings.PAGING_SIZE)
     try:
