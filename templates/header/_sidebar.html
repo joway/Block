@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% load cache %}
-{% cache 86400 sidebar %}
+{% cache 86400 sidebar request.user.is_admin %}
   <ul id="slide-out" class="side-nav black-text">
     <div class="sidenav-top">
       <li>

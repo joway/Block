@@ -1,36 +1,6 @@
 # Block
 
-> Another blog based on Django . 
-
-## Usage
-
-### Env
-
-- Python 3.5.1
-- Mysql
-- Redis
-- [Nginx]
-
-### Install
-
-	git clone 
-	
-	cd Block 
-	
-	pip install -r requirements.txt 
-	
-	python manage.py runserver 0.0.0.0:8000
-	
-### Custom
-
-	cp prov_settings.py local_settings.py
-	
-	change env in local_settings.py
-	
-	
-### Docker
-
-	docker build . 
+> Another blog based on Django .
 	
 ## Overview
 
@@ -57,7 +27,7 @@
 
 ![](https://static.joway.wang/upload/14841136332.png)
 
-![](https://static.joway.wang/upload/14841207254.png)
+![](https://static.joway.wang/upload/14841266251.png)
 
 ### Create Article
 
@@ -100,3 +70,33 @@
 
 ![](https://static.joway.wang/upload/14841195369.png)
 
+
+## Usage
+
+### Env
+
+- Python 3.5.1
+- Mysql
+- Redis
+- [Nginx]
+
+### Install
+
+	git clone
+
+	cd Block
+
+	pip install -r requirements.txt
+
+	python manage.py runserver 0.0.0.0:8000
+
+### Custom
+
+	cp prov_settings.py local_settings.py
+
+	change env in local_settings.py
+
+
+### Docker
+
+	docker build .

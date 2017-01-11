@@ -7,11 +7,11 @@ class MailService(object):
     @classmethod
     def sent_email_has_commented(cls, username, comment_content):
         send_mail(
-            subject='[城西笔谈] 您有一个来自%s新的评论 ' % username,
+            subject='[城西笔谈] 您有一个来自 %s 的新评论 ' % username,
             message="""
             %s :
 
-            %s
+                %s
 
             """ % (username, comment_content),
             from_email=settings.EMAIL_HOST_USER,
