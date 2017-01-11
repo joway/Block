@@ -4,14 +4,6 @@
   {{ block.super }}
   <link rel="stylesheet" href="{% static 'plugins/simplemde/simplemde.min.css' %}">
 {% endblock %}
-{% block init_block %}
-  {{ block.super }}
-  app.article = {
-  'uid': null,
-  'title': '',
-  'category': '',
-  }
-{% endblock %}
 {% block script %}
   {{ block.super }}
   <script src="{% static 'plugins/simplemde/simplemde.min.js' %}"></script>
@@ -31,6 +23,7 @@
 
           app.editor = simplemde;
 
+          console.log(app.article)
           $('#article-category').val(app.article.category);
 
           $('select').material_select();

@@ -50,6 +50,15 @@
             </a>
           </li>
           <div class="divider"></div>
+          {% if request.user.is_admin %}
+            <li>
+              <a href="/imgbox/">
+                <i class="material-icons">burst_mode</i>
+                图床
+              </a>
+            </li>
+          {% endif %}
+          <div class="divider"></div>
         </ul>
       </li>
 

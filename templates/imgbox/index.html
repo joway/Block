@@ -20,16 +20,17 @@
                 </button>
               </div>
             </form>
-            <div class="file-url-wrapper">
-              <i class="material-icons">call_made</i>
-              <a href="" target="_blank" class="vertical-top file-url">
-              </a>
+            <div class="row file-url-wrapper" style="margin: 32px" >
+              <div class="input-field col l9 s9 offset-l1 offset-s1">
+                <input readonly value="{{ file_url }}"
+                       type="text" class="validate file-url" id="file-url">
+              </div>
+              <div class="col l1 s1">
+                <button style="margin-top: 15px;" id="copy-file-url" data-clipboard-target="#file-url"
+                        class="btn-floating waves-effect waves-light green darken-1"><i class="material-icons ">content_copy</i>
+                </button>
+              </div>
             </div>
-            {% if file_url %}
-              <i class="material-icons">call_made</i>
-              <a href="{{ file_url }}" target="_blank" class="vertical-top">
-                {{ file_url }}</a>
-            {% endif %}
           </div>
         </div>
       </div>
@@ -55,14 +56,15 @@
                       if (response.ok) {
                           prompt_success('上传成功', 3000);
                           $('.file-url-wrapper').show();
-                          $('.file-url').html(data.url);
-                          $('.file-url').attr('href', data.url);
+                          $('#file-url').val(data.url);
                       } else {
                           prompt_warning('上传失败', 3000);
                       }
                   })
               });
           });
+
+          new Clipboard('#copy-file-url');
       })
   </script>
 {% endblock %}

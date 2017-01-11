@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'users',
     'articles',
     'feed',
+    'mail',
 
     # third part
     'rest_framework',
