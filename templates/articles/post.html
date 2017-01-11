@@ -1,10 +1,11 @@
 {% extends 'articles/_base_article_edit.html' %}
 {% block javascript %}
   <script>
-    app.article = {
-        'title': '',
-        'category': 'programing',
-        'action': 'create'
-    };
-    {{ block.super }}
+      app.article = {
+          'title': '',
+          'category': 'programing',
+          'action': 'create'
+      };
+  </script>
+  {{ block.super }}
 {% endblock %}
