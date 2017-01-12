@@ -5,22 +5,28 @@
   <meta charset="UTF-8"/>
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="renderer" content="webkit">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-  <meta name="format-detection" content="telephone=no">
-  <meta name="author" content="Joway Wang">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no,  shrink-to-fit=no"/>
+  <!-- 允许控制资源的过度加载 -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
 
+  <meta name="application-name" content="城西笔谈">
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+  <meta name="format-detection" content="telephone=no">
   {% if meta_keywords %}
     <meta name="keywords" content="{{ meta_keywords }}"/>
   {% else %}
     <meta name="keywords" content="Joway, 城西笔谈, 编程, 算法, Python, 随笔, Django"/>
   {% endif %}
-
-
   {% if meta_description %}
     <meta name="description" content="{{ meta_description }}"/>
   {% else %}
     <meta name="description" content="城西笔谈 - 一只致力于向 Full Stack 发展最后变成 Full Heap 的学渣 ."/>
   {% endif %}
+
+  <link rel="icon" type="image/x-icon" href="{% static 'img/logo/favicon.ico' %}"/>
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed"/> <!-- 添加 RSS 订阅 -->
+  <link href="/" rel="parent" charset="UTF-8" hreflang="zh-Hans"/>
 
   {% if title %}
     <title>城西笔谈 - {{ title }}</title>
@@ -28,12 +34,7 @@
     <title>城西笔谈 - Joway's Blog</title>
   {% endif %}
 
-  <link rel="icon" type="image/x-icon" href="{% static 'img/logo/favicon.ico' %}"/>
-
-  {% block css %}
-    <link rel="stylesheet" href="{% static 'dist/lib.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
-  {% endblock %}
+  {% include 'components/_google_analytics.html' %}
 
   <script type="text/javascript" language="javascript">
       window.onload = function () {
@@ -50,10 +51,14 @@
               {% else %}
                   window.app.flavour = 'desktop';
               {% endifequal %}
-              $(".popimg-container img").popImg();
           {% endblock %}
       };
   </script>
+
+  {% block css %}
+    <link rel="stylesheet" href="{% static 'dist/lib.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+  {% endblock %}
 </head>
 <body>
 <div class="main">
@@ -76,11 +81,10 @@
   <script src="{% static 'dist/index.js' %}"></script>
 {% endblock %}
 
-
 {% block javascript %}
+  <script>
+      $(".popimg-container img").popImg();
+  </script>
 {% endblock %}
-
-{% include 'components/_google_analytics.html' %}
-
 </body>
 </html>

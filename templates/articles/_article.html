@@ -2,7 +2,7 @@
 {% load markup %}
 {% load colors %}
 <div class="card">
-  <article class="card-content popimg-container">
+  <article class="card-content">
     {% if request.user.is_admin %}
       <a class="btn-floating waves-effect waves-light black right" href="edit">
         <i class="material-icons">mode_edit</i>
@@ -33,7 +33,7 @@
         {% endfor %}
       </div>
     </div>
-    <div class="article-content">
+    <div class="article-content popimg-container">
       {% autoescape off %}
         {{ article.content|markup }}
       {% endautoescape %}
