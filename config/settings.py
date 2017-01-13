@@ -314,3 +314,6 @@ EMAIL_HOST_USER = 'joway@joway.wang'
 # EMAIL_SUBJECT_PREFIX = '[城西笔谈]'
 # EMAIL_USE_TLS = False
 # EMAIL_USE_SSL = True
+STATSD_HOST = os.environ.get('STATSD_HOST', 'localhost')
+STATSD_PREFIX = 'TEST'
+

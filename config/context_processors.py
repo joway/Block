@@ -3,6 +3,7 @@ from django.core.cache import cache
 from taggit.models import Tag
 
 from analysis.services import TrackingService
+from apm.apmstatsd import statsd
 from articles.constants import ARTICLE_CATEGORY_CHOICES
 from articles.models import Article
 from utils.server import server_info
@@ -35,6 +36,8 @@ def tags(request):
 
 
 def site_info(request):
+    statsd.incr('pageview')
+
     site_analysis = cache.get('site_analysis')
     if not site_analysis:
         site_analysis = {
