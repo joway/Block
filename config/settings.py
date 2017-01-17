@@ -317,3 +317,5 @@ EMAIL_HOST_USER = 'joway@joway.wang'
 STATSD_HOST = os.environ.get('STATSD_HOST', 'localhost')
 STATSD_PREFIX = 'TEST'
 
+# session
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
