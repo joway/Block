@@ -1,12 +1,10 @@
 {% extends 'articles/_base_article_edit.html' %}
-{% block javascript %}
-  <script>
-      app.article = {
-          'uid': '{{ article.uid }}',
-          'title': '{{ article.title }}',
-          'category': '{{ article.category }}',
-          'action': 'update'
-      }
-  </script>
+{% block init_block %}
   {{ block.super }}
+  app.article = {
+    'uid': '{{ article.uid }}',
+    'title': '{{ article.title }}',
+    'category': '{{ article.category }}',
+    'action': 'update'
+  }
 {% endblock %}
