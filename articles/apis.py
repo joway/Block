@@ -46,8 +46,6 @@ class ArticleViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
 
-        instance.tags.clear()
-
         if not instance.tag_list():
             instance.tags.add(*topk(serializer.data['content'], 3))
 
