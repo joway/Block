@@ -29,11 +29,24 @@ def callback_github(request):
     if 'message' in user_info:
         return HttpResponseRedirect('/error/?error=%s' % user_info['message'])
 
+    if not user_info['name']:
+        username = user_info['login']
+    else:
+        username = user_info['name']
+
+    if not user_info['email']:
+        email = '%s@github.com' % user_info['login']
+    else:
+        email = user_info['email']
+
     try:
-        user = User.objects.get(email=user_info['email'])
+        user = User.objects.get(email=email)
+        user.username = username
+        user.avatar_url = user_info['avatar_url']
+        user.save()
     except User.DoesNotExist:
         user = User.objects.create_user(email=user_info['email'],
-                                        username=user_info['name'],
+                                        username=username,
                                         avatar=user_info['avatar_url'])
 
     user.backend = 'django.contrib.auth.backends.ModelBackend'
