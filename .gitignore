@@ -12,6 +12,7 @@ static/dist/lib.css
 static/dist/lib.js
 node_modules
 celerybeat-schedule
+nohup
 celerybeat.pid
 # C extensions
 *.so
