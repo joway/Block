@@ -18,8 +18,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
     pagination_class = ArticlePagination
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset().filter(is_post=True)
-        page = self.paginate_queryset(queryset=queryset)
+        page = self.paginate_queryset(queryset=self.queryset)
         serializer = self.get_serializer(page, many=True)
         return self.get_paginated_response(serializer.data)
 
