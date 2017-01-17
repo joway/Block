@@ -34,7 +34,7 @@
   {% include 'components/_google_analytics.html' %}
 
   <script type="text/javascript" language="javascript">
-      window.onload = function () {
+      document.addEventListener("DOMContentLoaded", function () {
           {% block init_block %}
               app = {};
               app.modal = {
@@ -44,12 +44,12 @@
                   }
               };
               {% ifequal flavour 'mobile' %}
-                  window.app.flavour = 'mobile';
+                  app.flavour = 'mobile';
               {% else %}
-                  window.app.flavour = 'desktop';
+                  app.flavour = 'desktop';
               {% endifequal %}
           {% endblock %}
-      };
+      });
   </script>
 
   {% block css %}

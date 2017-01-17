@@ -80,22 +80,23 @@
                         prompt_success('评论成功', 3000);
                         location.reload();
                     } else {
-                        console.log(response.body);
                         prompt_warning(response.body, 3000);
                     }
                 });
             }
         });
 
-        var OwO_demo = new OwO({
-            logo: '<i class="material-icons">insert_emoticon</i>',
-            container: document.getElementsByClassName('OwO')[0],
-            target: document.getElementsByClassName('OwO-textarea')[0],
-            api: 'https://static.joway.wang/static/dist/kaomoji.json',
-            position: 'down',
-            width: '100%',
-            maxHeight: '250px'
-        });
-
+        var owo_container = document.getElementsByClassName('OwO');
+        if (owo_container.length >= 1) {
+            var OwO_demo = new OwO({
+                logo: '<i class="material-icons">insert_emoticon</i>',
+                container: owo_container[0],
+                target: document.getElementsByClassName('OwO-textarea')[0],
+                api: 'https://static.joway.wang/static/dist/kaomoji.json',
+                position: 'down',
+                width: '100%',
+                maxHeight: '250px'
+            });
+        }
     });
 </script>
