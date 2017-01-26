@@ -49,7 +49,7 @@ def detail(request, slug_or_uid):
         article = _cache
     else:
         try:
-            article = get_object_or_404(Article, slug=slug_or_uid)
+            article = Article.objects.get(slug=slug_or_uid)
         except Article.DoesNotExist:
             article = get_object_or_404(Article, uid=slug_or_uid)
 
