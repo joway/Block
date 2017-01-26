@@ -42,16 +42,16 @@ def list(request):
     return render(request, 'articles/list.html', locals())
 
 
-def detail(request, title_or_uid):
-    _cache = cache.get('detail#%s' % title_or_uid)
+def detail(request, slug_or_uid):
+    _cache = cache.get('detail#%s' % slug_or_uid)
 
     if _cache:
         article = _cache
     else:
-        if re.match('[A-Za-z0-9]+', title_or_uid):
-            article = get_object_or_404(Article, uid=title_or_uid)
+        if re.match('[A-Za-z0-9]+', slug_or_uid):
+            article = get_object_or_404(Article, uid=slug_or_uid)
         else:
-            article = get_object_or_404(Article, title=title_or_uid)
+            article = get_object_or_404(Article, slug=slug_or_uid)
 
     meta_description = article.digest
     meta_keywords = ', '.join(article.tag_list())
