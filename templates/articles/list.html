@@ -1,6 +1,18 @@
 {% extends '_base.html' %}
 {% load staticfiles %}
 {% block content %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "https://joway.wang/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://joway.wang/search/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
   <div class="container">
     <div class="row">
       <div class="col s12 m12 l4 right hide-on-med-and-down">
