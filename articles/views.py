@@ -48,10 +48,10 @@ def detail(request, slug_or_uid):
     if _cache:
         article = _cache
     else:
-        if re.match('[A-Za-z0-9]+', slug_or_uid):
-            article = get_object_or_404(Article, uid=slug_or_uid)
-        else:
+        try:
             article = get_object_or_404(Article, slug=slug_or_uid)
+        except Article.DoesNotExist:
+            article = get_object_or_404(Article, uid=slug_or_uid)
 
     meta_description = article.digest
     meta_keywords = ', '.join(article.tag_list())
