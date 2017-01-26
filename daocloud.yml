@@ -5,6 +5,7 @@ test:
 
     services:
         - mysql
+        - redis
 
     env:
         - MYSQL_HOST = "mysql"
@@ -12,6 +13,8 @@ test:
         - MYSQL_USERNAME = "root"
         - MYSQL_PASSWORD = ""
         - MYSQL_PORT = "3306"
+        - REDIS_PASSWORD=""
+        - BROKER_URL="redis://127.0.0.1:6379"
 
     install:
         - pip install coverage
