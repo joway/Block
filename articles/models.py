@@ -5,6 +5,7 @@ import markdown2
 from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.db import models
+from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
 
 from articles.constants import ARTICLE_CATEGORY_CHOICES
@@ -23,6 +24,7 @@ class Article(models.Model):
     uid = models.CharField('Unique ID', primary_key=True, editable=False, max_length=5, default=unique_id)
 
     title = models.CharField('标题', max_length=255)
+
     author = models.ForeignKey(verbose_name='作者', to=settings.AUTH_USER_MODEL)
 
     tags = TaggableManager(blank=True, through=ArticleTaggedItem)
@@ -38,7 +40,7 @@ class Article(models.Model):
         ordering = ('-created_at',)
 
     def get_absolute_url(self):
-        return '/a/%s/' % self.uid
+        return '/a/%s/' % self.title
 
     def tag_list(self):
         return [o.name for o in self.tags.all()]

@@ -1,6 +1,4 @@
 User-agent: *
-Crawl-delay: 10
 
 Disallow: /admin
 Disallow: /logout
-Disallow: /search

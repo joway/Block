@@ -1,5 +1,8 @@
+import re
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 
@@ -14,10 +17,17 @@ def list(request):
     category = request.GET.get('category', '')
     tag = request.GET.get('tag', '')
 
-    if category:
-        articles = articles.filter(category=category)
-    if tag:
-        articles = articles.filter(articletaggeditem__tag__name__contains=tag)
+    if tag or category:
+        meta_keywords = ', '.join([category, tag])
+
+    _cache = cache.get('list#%s' % str(request.GET))
+    if not _cache:
+        if category:
+            articles = articles.filter(category=category)
+        if tag:
+            articles = articles.filter(articletaggeditem__tag__name__contains=tag)
+    else:
+        articles = _cache
 
     paginator = Paginator(articles, settings.PAGING_SIZE)
     try:
@@ -32,8 +42,16 @@ def list(request):
     return render(request, 'articles/list.html', locals())
 
 
-def detail(request, article_uid):
-    article = get_object_or_404(Article, uid=article_uid)
+def detail(request, title_or_uid):
+    _cache = cache.get('detail#%s' % title_or_uid)
+
+    if _cache:
+        article = _cache
+    else:
+        if re.match('[A-Za-z0-9]+', title_or_uid):
+            article = get_object_or_404(Article, uid=title_or_uid)
+        else:
+            article = get_object_or_404(Article, title=title_or_uid)
 
     meta_description = article.digest
     meta_keywords = ', '.join(article.tag_list())

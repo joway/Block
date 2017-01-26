@@ -276,12 +276,22 @@ if QINIU_STORAGE == 'True':
 #         'LOCATION': '127.0.0.1:11211',
 #     }
 # }
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+#         'LOCATION': 'unique-snowflake',
+#     }
+# }
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": '%s/%s' % (os.environ.get('BROKER_URL', 'redis://:password@127.0.0.1:6379/'), 1),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
     }
 }
+
 
 CACHES_TIME = 60 * 60
 
@@ -295,7 +305,7 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # celery
-CELERY_BROKER_URL = os.environ.get('BROKER_URL', 'redis://:password@127.0.0.1:6379/0')
+CELERY_BROKER_URL = '%s/%s' % (os.environ.get('BROKER_URL', 'redis://:password@127.0.0.1:6379'), 0)
 
 # # amazon ses
 EMAIL_BACKEND = 'django_ses.SESBackend'

@@ -43,7 +43,7 @@ def feed_update():
             except KeyError:
                 content = ''
 
-            if not FeedStream.objects.filter(link=link).exists():
+            if not FeedStream.objects.filter(link=link).exists() and created_at > feed.created_at:
                 stream = FeedStream.objects.create(author=author,
                                                    created_at=created_at,
                                                    link=link,

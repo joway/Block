@@ -4,7 +4,7 @@ log_filename = '/code/log/django.log'
 # log_filename = 'log/django.log'
 
 with open(log_filename) as file:
-    while 1:
+    while True:
         where = file.tell()
         line = file.readline()
         if not line:
