@@ -37,6 +37,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('注册邮箱', unique=True, db_index=True)
     username = models.CharField('昵称', max_length=255, null=True, blank=True)
+    github_username = models.CharField('Github Username', max_length=48, blank=True, null=True)
 
     is_staff = models.IntegerField('维护人员', default=False)
 

@@ -9,9 +9,11 @@ from analysis.constants import ALL_METRICS
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'config/client_secrets.json'
 
-credentials = GoogleCredentials.get_application_default()
+if settings.PRODUCTION:
 
-analytics_service = build('analytics', 'v3')
+    credentials = GoogleCredentials.get_application_default()
+
+    analytics_service = build('analytics', 'v3')
 
 
 def get_ga_report(start_date, end_date):

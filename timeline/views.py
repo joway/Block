@@ -3,6 +3,8 @@ from django.conf import settings
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
 
+from users.models import User
+
 
 def timeline(request):
     title = '时间线'
@@ -22,3 +24,9 @@ def timeline(request):
         actions = paginator.page(paginator.num_pages)
 
     return render(request, 'timeline/index.html', locals())
+
+
+def my_friends(request):
+    friends = User.objects.filter(is_superuser=False,
+                                  github_username__isnull=False).all()
+    return render(request, 'timeline/friends.html', locals())

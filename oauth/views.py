@@ -42,12 +42,14 @@ def callback_github(request):
     try:
         user = User.objects.get(email=email)
         user.username = username
+        user.github_username = user_info['login']
         user.avatar_url = user_info['avatar_url']
         user.save()
     except User.DoesNotExist:
         user = User.objects.create_user(email=user_info['email'],
                                         username=username,
-                                        avatar=user_info['avatar_url'])
+                                        avatar=user_info['avatar_url'],
+                                        github_username=user_info['login'])
 
     user.backend = 'django.contrib.auth.backends.ModelBackend'
     django_login(request, user)

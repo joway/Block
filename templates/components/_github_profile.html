@@ -1,0 +1,12 @@
+{% if friend %}
+  <div class="github-card"
+       data-user="{{ friend.github_username }}"
+       data-width="100%">
+  </div>
+{% else %}
+  <div class="github-card"
+       data-user="joway"
+       data-width="100%">
+  </div>
+{% endif %}
+

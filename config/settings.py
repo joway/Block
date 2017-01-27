@@ -335,8 +335,9 @@ GA_PROFILE_ID = '135825271'
 GA_ACCOUNT_ID = '53624533'
 
 # redis session
-SESSION_ENGINE = 'redis_sessions.session'
-SESSION_REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
-SESSION_REDIS_DB = 2
-SESSION_REDIS_PASSWORD = os.environ.get('REDIS_PASSWORD', '')
-SESSION_REDIS_PREFIX = 'session'
+if PRODUCTION:
+    SESSION_ENGINE = 'redis_sessions.session'
+    SESSION_REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
+    SESSION_REDIS_DB = 2
+    SESSION_REDIS_PASSWORD = os.environ.get('REDIS_PASSWORD', '')
+    SESSION_REDIS_PREFIX = 'session'
