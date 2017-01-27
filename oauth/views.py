@@ -1,6 +1,7 @@
 from django.contrib.auth import login as django_login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.utils.datetime_safe import datetime
 
 from oauth.constants import SOCIAL_OAUTH_URLS
 from oauth.social_oauth import GithubSocialOauth
@@ -44,6 +45,7 @@ def callback_github(request):
         user.username = username
         user.github_username = user_info['login']
         user.avatar_url = user_info['avatar_url']
+        user.last_login = datetime.now()
         user.save()
     except User.DoesNotExist:
         user = User.objects.create_user(email=user_info['email'],
