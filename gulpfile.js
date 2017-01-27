@@ -32,6 +32,7 @@ gulp.task('scripts-lib', function () {
         'static/libs/js/kaomoji.min.js',
         'static/libs/js/clipboard.min.js',
         'static/libs/js/popimg.min.js',
+        'static/libs/js/random.min.js',
     ])
         .pipe(concat('lib.js'))                  //合并JS文件
         .pipe(gulp.dest('static/dist/'))        //压缩版输出

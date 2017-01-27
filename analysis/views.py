@@ -11,7 +11,7 @@ def handle_report(report):
     weekly_data = OrderedDict()
 
     for k in report:
-        weekly_data[k] = report[k]['pageview_stats']['total']
+        weekly_data[k] = report[k]['pageview_stats']
 
     return json.dumps(weekly_data)
 

@@ -70,7 +70,6 @@ INSTALLED_APPS = (
     'actstream',
     'taggit',
     'pagedown',
-    'tracking',
     'django_comments',
     'opbeat.contrib.django',
     'django_extensions',
@@ -78,7 +77,6 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-    'tracking.middleware.VisitorTrackingMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -247,9 +245,6 @@ SITE_ID = 1
 # paging
 PAGING_SIZE = 10
 
-# django-tracking2
-TRACK_PAGEVIEWS = True
-
 # mysocial
 if PRODUCTION and not DEBUG:
     SOCIAL_CALLBACK_REDIRECT_BASE_URL = 'https://%s' % DOMAIN + '/oauth/'
@@ -329,3 +324,11 @@ STATSD_PREFIX = 'TEST'
 
 # session
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
+
+# google api
+_client_json = os.environ.get('GOOGLE_CLIENT_SECRETS_JSON', '{}')
+with open('config/client_secrets.json', 'wb') as client_secrets:
+    client_secrets.write(_client_json.encode('utf-8'))
+GA_PROPERTY_ID = 'UA-53624533-6'
+GA_PROFILE_ID = '135825271'
+GA_ACCOUNT_ID = '53624533'

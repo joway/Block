@@ -1,14 +1,14 @@
 from collections import OrderedDict
+from datetime import datetime
 
 from actstream import action
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.utils import timezone
-from tracking.models import Visitor
 
 from analysis.constants import ActivityType
+from analysis.tracking import tracking_report
 from utils.helpers import days_ago, yesterday
-from utils.tracking import tracking_report
 
 
 class ActionService(object):
@@ -61,19 +61,15 @@ class TrackingService(object):
 
         # total
         # determine when tracking began
-        try:
-            obj = Visitor.objects.order_by('start_time').first()
-            track_start_time = obj.start_time
-        except (IndexError, Visitor.DoesNotExist, AttributeError):
-            track_start_time = now
+        track_start_time = datetime.strptime('2016-01-01', '%Y-%m-%d')
         total = tracking_report(track_start_time, now)
         return {
-            'PV_DAILY': daily['pageview_stats']['total'],
-            'UV_DAILY': daily['visitor_stats']['unique'],
-            'PV_WEEKLY': weekly['pageview_stats']['total'],
-            'UV_WEEKLY': weekly['visitor_stats']['unique'],
-            'PV_MONTHLY': monthly['pageview_stats']['total'],
-            'UV_MONTHLY': monthly['visitor_stats']['unique'],
-            'PV_TOTAL': total['pageview_stats']['total'],
-            'UV_TOTAL': total['visitor_stats']['unique'],
+            'PV_DAILY': daily['pageview_stats'],
+            'UV_DAILY': daily['visitor_stats'],
+            'PV_WEEKLY': weekly['pageview_stats'],
+            'UV_WEEKLY': weekly['visitor_stats'],
+            'PV_MONTHLY': monthly['pageview_stats'],
+            'UV_MONTHLY': monthly['visitor_stats'],
+            'PV_TOTAL': total['pageview_stats'],
+            'UV_TOTAL': total['visitor_stats'],
         }

@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^sitemap\.xml$', cache_page(60 * 60 * 12)(sitemap), {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
-    url(r'^tracking/', include('tracking.urls')),
     url(r'^activity/', include('actstream.urls')),
 
     # local view
