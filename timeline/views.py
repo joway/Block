@@ -28,5 +28,5 @@ def timeline(request):
 
 def my_friends(request):
     friends = User.objects.filter(is_superuser=False,
-                                  github_username__isnull=False).all()
+                                  github_username__isnull=False).order_by('-create_at')
     return render(request, 'timeline/friends.html', locals())
