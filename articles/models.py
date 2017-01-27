@@ -24,7 +24,7 @@ class Article(models.Model):
     uid = models.CharField('Unique ID', primary_key=True, editable=False, max_length=5, default=unique_id)
 
     title = models.CharField('标题', max_length=255)
-    slug = models.SlugField('slug', max_length=255, blank=True)
+    slug = models.SlugField('slug', max_length=255, blank=True, unique=True)
 
     author = models.ForeignKey(verbose_name='作者', to=settings.AUTH_USER_MODEL)
 
