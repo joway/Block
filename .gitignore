@@ -14,7 +14,6 @@ node_modules
 celerybeat-schedule
 nohup
 celerybeat.pid
-client_secrets.json
 # C extensions
 *.so
 
