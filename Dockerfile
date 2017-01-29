@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
 	&& apt-get install -y nodejs \
     && gem install sass \
     && npm install -g gulp \
+    && pip install --upgrade pip \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /code/log/
@@ -19,13 +20,11 @@ RUN mkdir -p /code/log/
 WORKDIR /code
 
 # for cache
-COPY ./requirements.txt /code/requirements.txt
 COPY ./package.json /code/package.json
-RUN npm install \
-    && pip install --upgrade pip \
-    && pip install -r requirements.txt
+RUN npm install
+COPY ./requirements.txt /code/requirements.txt
+RUN pip install -r requirements.txt
 
-# Configure Nginx and uwsgi
 COPY ./.deploy/supervisord.conf /etc/supervisor/conf.d/
 COPY . /code
 RUN chmod +x ./*.sh; sync; ./compile-scss.sh \

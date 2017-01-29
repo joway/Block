@@ -73,10 +73,13 @@ INSTALLED_APPS = (
     'django_comments',
     'opbeat.contrib.django',
     'django_extensions',
+    'django_statsd',
 )
 
 MIDDLEWARE_CLASSES = (
     'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
+    'django_statsd.middleware.GraphiteRequestTimingMiddleware',
+    'django_statsd.middleware.GraphiteMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -287,7 +290,6 @@ CACHES = {
     }
 }
 
-
 CACHES_TIME = 60 * 60
 
 HAYSTACK_CONNECTIONS = {
@@ -323,6 +325,14 @@ EMAIL_HOST_USER = 'joway@joway.wang'
 STATSD_HOST = os.environ.get('STATSD_HOST', 'localhost')
 STATSD_PORT = 8125
 STATSD_PREFIX = 'TEST'
+STATSD_MAXUDPSIZE = 512
+STATSD_CLIENT = 'django_statsd.clients.normal'
+STATSD_PATCHES = [
+        'django_statsd.patches.db',
+        'django_statsd.patches.cache',
+]
+STATSD_CELERY_SIGNALS = True
+
 
 # session
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30

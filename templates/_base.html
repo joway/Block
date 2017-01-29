@@ -76,11 +76,13 @@
 {% block script %}
   <script src="{% static 'dist/lib.js' %}"></script>
   <script src="{% static 'dist/index.js' %}"></script>
+  <script src="{% static 'stick.js' %}"></script>
 {% endblock %}
 
 {% block javascript %}
   <script>
       $(".popimg-container img").popImg();
+      stick.send('/services/timing/record');
   </script>
 {% endblock %}
 </body>

@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.contrib.sitemaps import GenericSitemap
 from django.contrib.sitemaps.views import sitemap
 from django.views.decorators.cache import cache_page
+from django_statsd.urls import urlpatterns as statsd_patterns
 
 from articles.models import ArticleRSSFeed, Article
 from config import views
@@ -48,6 +49,8 @@ urlpatterns = [
     url(r"^api/", include(router.urls)),
     url(r'^api/comments/post/$', proxy_post_comment, name='comments-post-comment'),
     url(r'^api/comments/', include('django_comments.urls')),
+
+    url('^services/timing/', include(statsd_patterns)),
 
 ]
 
