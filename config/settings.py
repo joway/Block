@@ -54,8 +54,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.postgres',
     'django.contrib.sitemaps',
-
-    'haystack',
+    'django.contrib.algoliasearch',
 
     # local apps
     'users',
@@ -68,7 +67,6 @@ INSTALLED_APPS = (
     'django_mobile',
     'social.apps.django_app.default',
     'actstream',
-    'taggit',
     'pagedown',
     'django_comments',
     'opbeat.contrib.django',
@@ -111,7 +109,6 @@ TEMPLATES = [
                 'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
                 'config.context_processors.categories',
-                'config.context_processors.tags',
                 'config.context_processors.site_info',
             ],
             'loaders': [
@@ -298,11 +295,10 @@ HAYSTACK_CONNECTIONS = {
         'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
     },
 }
-# 自动同步
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # celery
 CELERY_BROKER_URL = '%s/%s' % (os.environ.get('BROKER_URL', 'redis://:password@127.0.0.1:6379'), 0)
+'sqs://ABCDEFGHIJKLMNOPQRST:ZYXK7NiynGlTogH8Nj+P9nlE73sq3@'
 
 # # amazon ses
 EMAIL_BACKEND = 'django_ses.SESBackend'
@@ -353,3 +349,8 @@ if PRODUCTION:
     SESSION_REDIS_DB = 2
     SESSION_REDIS_PASSWORD = os.environ.get('REDIS_PASSWORD', '')
     SESSION_REDIS_PREFIX = 'session'
+
+ALGOLIA = {
+    'APPLICATION_ID': 'CTEG91VXED',
+    'API_KEY': os.environ.get('ALGOLIA_API_KEY', 'xxx')
+}

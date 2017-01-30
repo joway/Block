@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django.contrib import algoliasearch
 
 
 class ArticlesConfig(AppConfig):
@@ -6,4 +7,6 @@ class ArticlesConfig(AppConfig):
 
     def ready(self):
         from actstream import registry
-        registry.register(self.get_model('Article'))
+        article = self.get_model('Article')
+        algoliasearch.register(article)
+        registry.register(article)

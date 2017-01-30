@@ -71,7 +71,6 @@ def proxy_post_comment(request, next=None, using=None):
 
     if not request.user.is_admin:
         ActionService.comment(request.user, target)
-    print(target)
     return post_comment(request, next, using)
 
 
@@ -81,3 +80,9 @@ def cache_clear(request):
     next = request.GET.get('next', '/')
     cache.clear()
     return HttpResponseRedirect(redirect_to=next)
+
+
+def search(request):
+    query = request.GET.get('q', '')
+    tag = request.GET.get('t', '')
+    return render(request, 'search/search.html', locals())

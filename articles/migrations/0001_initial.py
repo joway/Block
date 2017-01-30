@@ -6,7 +6,6 @@ import articles.models
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import taggit.managers
 
 
 class Migration(migrations.Migration):
@@ -14,7 +13,6 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('taggit', '0002_auto_20150616_2121'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -37,15 +35,9 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('object_id', models.CharField(db_index=True, max_length=5, verbose_name='Object id')),
                 ('content_object', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='articles.Article')),
-                ('tag', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='articles_articletaggeditem_tagged_items', to='taggit.Tag')),
             ],
             options={
                 'abstract': False,
             },
-        ),
-        migrations.AddField(
-            model_name='article',
-            name='tags',
-            field=taggit.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.', through='articles.ArticleTaggedItem', to='taggit.Tag', verbose_name='Tags'),
         ),
     ]

@@ -5,14 +5,10 @@ from articles.models import Article
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['uid', 'title', 'category', 'tag_list', 'created_at']
+    list_display = ['uid', 'title', 'category', 'created_at']
     form = ArticleModelForm
 
     class Meta:
         model = Article
-
-    def tag_list(self, obj):
-        return u", ".join(o.name for o in obj.tags.all())
-
 
 admin.site.register(Article, ArticleAdmin)

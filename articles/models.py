@@ -6,11 +6,7 @@ from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.db import models
 from django.utils.text import slugify
-from taggit.managers import TaggableManager
-
 from articles.constants import ARTICLE_CATEGORY_CHOICES
-from articles.tag import ArticleTaggedItem
-
 
 def unique_id(length=5):
     uid = ''.join(choice(string.ascii_uppercase + string.digits) for _ in range(length))
@@ -27,8 +23,6 @@ class Article(models.Model):
     slug = models.SlugField('slug', max_length=255, blank=True)
 
     author = models.ForeignKey(verbose_name='作者', to=settings.AUTH_USER_MODEL)
-
-    tags = TaggableManager(blank=True, through=ArticleTaggedItem)
 
     category = models.CharField('目录', choices=ARTICLE_CATEGORY_CHOICES, max_length=16)
 
@@ -48,9 +42,6 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         return '/a/%s/' % self.slug
-
-    def tag_list(self):
-        return [o.name for o in self.tags.all()]
 
     @property
     def markdown_content(self):

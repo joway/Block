@@ -6,43 +6,64 @@
         <div class="card">
           <div class="card-content row">
             <h2 class="center-align">搜索</h2>
-            <form method="get" action="." class="row">
-              <input id="id_q" name="q" type="search" value="{{ query }}" class="col s10 l8 offset-s1 offset-l2">
-              <label for="id_q"><i class="material-icons">search</i></label>
+            <form method="get" action="." class="row center" id="query-form">
+              <input id="query-input" name="q" type="text" value="{{ query }}">
+              <label for="query-input"><a href="javascript:void(0);" onclick="submitQuery();"><i class="material-icons vertical-center">search</i></a></label>
             </form>
-            {% if query %}
-              <div class="row">
-                {% for result in page.object_list %}
-                  {% with article=result.object %}
-                    <div class="col s12 l8 offset-l2">
-                      {% include 'articles/_article_card.html' %}
-                    </div>
-                  {% endwith %}
-                {% empty %}
-                  <div class="row center-align" style="margin: 100px">
-                    <h3>No results found.</h3>
-                  </div>
-                {% endfor %}
-              </div>
 
-              <div class="col l10 s12 offset-l1">
-                {% if page.has_previous %}
-                  <a href="?q={{ query }}&&page={{ page.previous_page_number }}"
-                     class="left">
-                    <i class="material-icons medium">navigate_before</i>
-                  </a>
-                {% endif %}
-                {% if page.has_next %}
-                  <a href="?q={{ query }}&&page={{ page.next_page_number }}"
-                     class="right">
-                    <i class="material-icons medium">navigate_next</i>
-                  </a>
-                {% endif %}
-              </div>
-            {% endif %}
+            <ul class="collection" id='result-panel' style="margin: 32px;">
+            </ul>
           </div>
         </div>
       </div>
     </div>
   </div>
+{% endblock %}
+{% block javascript %}
+  {{ block.super }}
+  <script>
+      beginCircleLoding();
+      var algolia = algoliasearch('CTEG91VXED', '511ff66f4cd1f553c723461ae984e0a4');
+      var articleIndex = algolia.initIndex('Article');
+      articleIndex.search('{{ query }}', function searchDone(err, content) {
+          endCircleLoding();
+          if (err) {
+              prompt_warning('搜索失败', 2000);
+          } else {
+              var panel = $('#result-panel');
+              for (var i in content.hits) {
+                  var item = content.hits[i];
+                  var digest = item.content.length > 140 ? item.content.substring(0, 140) + ' ... ' : item.content;
+                  var _html_card = "<li class='collection-item'>" +
+                      "<h3 class='title'>" + "<a class='black-text' target='_blank' href='/a/"
+                      + item.slug + "/'>" + item.title + "</a>" + '</h3>' +
+                      "<p>" + digest + "</p>" +
+                      "</li>";
+                  panel.append(_html_card);
+              }
+          }
+      });
+      $('#query-input').autocomplete(
+          {hint: true}, {
+              source: $.fn.autocomplete.sources.hits(articleIndex, {hitsPerPage: 5}),
+              //value to be displayed in input control after user's suggestion selection
+              displayKey: 'title',
+              //hash of templates used when rendering dataset
+              templates: {
+                  //'suggestion' templating function used to render a single suggestion
+                  suggestion: function (suggestion) {
+                      return '<span>' + suggestion._highlightResult.title.value + '</span>';
+                  }
+              }
+          });
+
+      function submitQuery() {
+          $('#query-form').submit();
+      }
+      $('#query-input').keypress(function (e) {
+          if (e.which == 13) {
+              submitQuery();
+          }
+      });
+  </script>
 {% endblock %}

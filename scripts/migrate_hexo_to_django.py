@@ -44,7 +44,6 @@ def run(*args):
             a = Article.objects.create(title=title, author=author, content=content,
                                        category=ArticleCategories.LITERATURE)
             a.created_at = date
-            a.tags.add(*topk(content.replace('#', ''), 3))
             a.save()
 
             print(filename, 'added')

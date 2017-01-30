@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.core.cache import cache
-from taggit.models import Tag
 
 from analysis.services import TrackingService
 from apm.apmstatsd import statsd
@@ -23,17 +22,6 @@ def categories(request):
     context = {'categories': _categories}
 
     return context
-
-
-def tags(request):
-    _tags = cache.get('tags')
-    if not _tags:
-        _tags = Tag.objects.all()
-        cache.set('tags', _tags, 43200)
-    context = {'tags': _tags}
-
-    return context
-
 
 def site_info(request):
     statsd.incr('pageview')

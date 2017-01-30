@@ -38,10 +38,10 @@ urlpatterns = [
     url(r'^imgbox/', include('imgbox.urls')),
     url(r'^feeds/', include('feed.urls')),
 
-    url(r'^search/', include('haystack.urls')),
-
     url(r'^error/$', views.error),
     url(r'^cache/clear/$', views.cache_clear),
+    url(r'^search/$', views.search),
+
     url(r'^feed/$', ArticleRSSFeed(), name="article_rss"),
     url(r'^robots.txt$', views.robots, name="robots"),
 

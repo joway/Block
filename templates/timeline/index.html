@@ -1,6 +1,5 @@
 {% extends '_base.html' %}
 {% load cache %}
-{% load activity_tags %}
 {% block content %}
   {% cache 3600 timeline page %}
     <div class="container">

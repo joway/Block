@@ -28,15 +28,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
         serializer.save(author=request.user)
         headers = self.get_success_headers(serializer.data)
 
-        article = serializer.instance
-
-        if not article.tag_list():
-            article.tags.add(*topk(serializer.validated_data['content'], 3))
-
         ActionService.post(request.user, serializer.instance)
-
-        os.system('nohup python manage.py update_index &')
-
         return Response(self.get_serializer(instance=serializer.instance).data, status=status.HTTP_201_CREATED,
                         headers=headers)
 
@@ -46,12 +38,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
 
-        if not instance.tag_list():
-            instance.tags.add(*topk(serializer.data['content'], 3))
-
         headers = self.get_success_headers(serializer.data)
-
-        os.system('nohup python manage.py update_index &')
 
         return Response(self.get_serializer(instance=serializer.instance).data, status=status.HTTP_201_CREATED,
                         headers=headers)

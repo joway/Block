@@ -15,17 +15,13 @@ def list(request):
 
     page = request.GET.get('page', '1')
     category = request.GET.get('category', '')
-    tag = request.GET.get('tag', '')
-
-    if tag or category:
-        meta_keywords = ', '.join([category, tag])
+    if category:
+        meta_keywords = ', '.join([category, '城西笔谈', '博客'])
 
     _cache = cache.get('list#%s' % str(request.GET))
     if not _cache:
         if category:
             articles = articles.filter(category=category)
-        if tag:
-            articles = articles.filter(articletaggeditem__tag__name__contains=tag)
     else:
         articles = _cache
 
@@ -54,7 +50,7 @@ def detail(request, slug_or_uid):
             article = get_object_or_404(Article, uid=slug_or_uid)
 
     meta_description = article.digest
-    meta_keywords = ', '.join(article.tag_list())
+    meta_keywords = ', '.join([article.category, '城西笔谈'])
 
     title = article.title
     comment_obj = article
