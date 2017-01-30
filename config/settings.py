@@ -311,6 +311,7 @@ CELERY_BROKER_URL = 'sqs://%s:%s@' % (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
 # CELERY_BROKER_TRANSPORT_OPTIONS = {
 #     'region': 'ap-northeast-1'
 # }
+CELERY_TASK_PROTOCOL = 1
 
 # 邮件配置
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
