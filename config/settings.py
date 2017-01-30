@@ -296,10 +296,6 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
-# celery
-CELERY_BROKER_URL = '%s/%s' % (os.environ.get('BROKER_URL', 'redis://:password@127.0.0.1:6379'), 0)
-'sqs://ABCDEFGHIJKLMNOPQRST:ZYXK7NiynGlTogH8Nj+P9nlE73sq3@'
-
 # # amazon ses
 EMAIL_BACKEND = 'django_ses.SESBackend'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', 'YOUR-ACCESS-KEY-ID')
@@ -308,6 +304,13 @@ AWS_SES_REGION_NAME = 'us-west-2'
 AWS_SES_REGION_ENDPOINT = 'email.us-west-2.amazonaws.com'
 
 EMAIL_HOST_USER = 'joway@joway.wang'
+
+# celery
+# CELERY_BROKER_URL = '%s/%s' % (os.environ.get('BROKER_URL', 'redis://:password@127.0.0.1:6379'), 0)
+CELERY_BROKER_URL = 'sqs://%s:%s@' % (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+# CELERY_BROKER_TRANSPORT_OPTIONS = {
+#     'region': 'ap-northeast-1'
+# }
 
 # 邮件配置
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
