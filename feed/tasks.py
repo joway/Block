@@ -13,6 +13,7 @@ logger = get_task_logger(__name__)
 @periodic_task(run_every=(crontab(minute='*/59')),
                name="feed_update", ignore_result=True)
 def feed_update():
+    logger.info('Feed Update Start')
     feeds = Feed.objects.all()
 
     for feed in feeds:
@@ -54,3 +55,5 @@ def feed_update():
                     stream.created_at = stream.indexed_at
                 stream.save()
                 logger.info('%s Added' % title)
+
+    logger.info('Feed Update Finished')
