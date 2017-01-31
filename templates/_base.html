@@ -79,13 +79,21 @@
   <script src="{% static 'libs/js/algoliasearch.min.js' %}"></script>
   <script src="{% static 'libs/js/autocomplete.jquery.min.js' %}"></script>
   <script src="{% static 'stick.js' %}"></script>
-  <script data-no-instant>InstantClick.init(true);</script>
+
+  <script src="{% static 'libs/js/instantclick.min.js' %}" data-no-instant></script>
 {% endblock %}
 
 {% block javascript %}
   <script>
       $(".popimg-container img").popImg();
-{#      stick.send('/services/timing/record');#}
+      {#      stick.send('/services/timing/record');#}
+  </script>
+
+  <script data-no-instant>
+    InstantClick.on('change', function () {
+        ga('send', 'pageview', location.pathname + location.search);
+    });
+    InstantClick.init();
   </script>
 {% endblock %}
 </body>
