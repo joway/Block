@@ -1,11 +1,11 @@
 <div class="row">
   {% if articles.has_previous %}
-    <a href="?page={{ articles.previous_page_number }}&&category={{ category }}">
+    <a href="?page={{ articles.previous_page_number }}&&category={{ category }}" data-instant>
       <i class="material-icons col s1 l1 left medium">navigate_before</i>
     </a>
   {% endif %}
   {% if articles.has_next %}
-    <a href="?page={{ articles.next_page_number }}&&category={{ category }}">
+    <a href="?page={{ articles.next_page_number }}&&category={{ category }}" data-instant>
       <i class="material-icons col s1 l1 right medium">navigate_next</i>
     </a>
   {% endif %}

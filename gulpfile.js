@@ -34,6 +34,7 @@ gulp.task('scripts-lib', function () {
         'static/libs/js/popimg.min.js',
         'static/libs/js/randomColor.min.js',
         'static/libs/js/github-widget.min.js',
+        'static/libs/js/instantclick.min.js',
     ])
         .pipe(concat('lib.js'))                  //合并JS文件
         .pipe(gulp.dest('static/dist/'))        //压缩版输出

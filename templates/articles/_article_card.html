@@ -4,7 +4,7 @@
 <div class="card">
   <div class="card-content">
     <span class="card-title black-text">
-      <a href="{{ article.get_absolute_url }}" class="grey-text darken-5"
+      <a href="{{ article.get_absolute_url }}" data-instant class="grey-text darken-5"
          style="font-size: 1.0em"><strong>{{ article.title }}</strong></a>
     </span>
     {% autoescape off %}
@@ -17,7 +17,7 @@
         <span class="left small">{{ article.created_at | date }}</span>
       </div>
       <div class="col l4 m6 s6 offset-l4">
-        <a href="/a/?category={{ article.category }}">
+        <a href="/a/?category={{ article.category }}" data-instant>
           <span class="badge {{ 'lighten' | random_color }} right">
           <strong>{{ article.get_category_display }}</strong>
         </span>

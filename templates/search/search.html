@@ -35,7 +35,7 @@
                   var item = content.hits[i];
                   var digest = item.content.length > 140 ? item.content.substring(0, 140) + ' ... ' : item.content;
                   var _html_card = "<li class='collection-item'>" +
-                      "<h3 class='title'>" + "<a class='black-text' target='_blank' href='/a/"
+                      "<h3 class='title'>" + "<a class='black-text' data-instant href='/a/"
                       + item.slug + "/'>" + item.title + "</a>" + '</h3>' +
                       "<p>" + digest + "</p>" +
                       "</li>";

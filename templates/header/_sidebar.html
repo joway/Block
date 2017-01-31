@@ -29,7 +29,7 @@
         <ul id='category' class="hidden">
           <div class="divider"></div>
           {% for category in categories %}
-            <li><a href="/a/?category={{ category.identify }}">{{ category.name }}<span
+            <li><a href="/a/?category={{ category.identify }}" data-instant>{{ category.name }}<span
                 class="badge red white-text right">{{ category.count }}</span></a></li>
           {% endfor %}
           <div class="divider"></div>
@@ -44,13 +44,13 @@
         <ul id='lib' class="hidden">
           <div class="divider"></div>
           <li>
-            <a href="/feeds/">
+            <a href="/feeds/" data-instant>
               <i class="material-icons">drafts</i>
               我的订阅
             </a>
           </li>
           <li>
-            <a href="http://status.joway.wang/">
+            <a href="http://status.joway.wang/" data-instant>
               <i class="material-icons">history</i>
               可用性
             </a>
@@ -58,7 +58,7 @@
           <div class="divider"></div>
           {% if request.user.is_admin %}
             <li>
-              <a href="/imgbox/">
+              <a href="/imgbox/" data-instant>
                 <i class="material-icons">burst_mode</i>
                 图床
               </a>
