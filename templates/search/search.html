@@ -1,4 +1,10 @@
 {% extends '_base.html' %}
+{% load staticfiles %}
+{% block script %}
+  {{ block.super }}
+  <script src="{% static 'libs/js/algoliasearch.min.js' %}"></script>
+  <script src="{% static 'libs/js/autocomplete.jquery.min.js' %}"></script>
+{% endblock %}
 {% block content %}
   <div class="container">
     <div class="row">
@@ -8,7 +14,8 @@
             <h2 class="center-align">搜索</h2>
             <form method="get" action="." class="row center" id="query-form">
               <input id="query-input" name="q" type="text" value="{{ query }}">
-              <label for="query-input"><a href="javascript:void(0);" onclick="submitQuery();"><i class="material-icons vertical-center">search</i></a></label>
+              <label for="query-input"><a href="javascript:void(0);" onclick="submitQuery();"><i
+                  class="material-icons vertical-center">search</i></a></label>
             </form>
 
             <ul class="collection" id='result-panel' style="margin: 32px;">
