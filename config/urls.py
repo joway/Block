@@ -43,6 +43,7 @@ urlpatterns = [
     url(r'^search/$', views.search),
 
     url(r'^feed/$', ArticleRSSFeed(), name="article_rss"),
+    url(r'^life/$', views.doubanshow, name="douban"),
     url(r'^robots.txt$', views.robots, name="robots"),
 
     # api

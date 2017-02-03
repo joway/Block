@@ -1,4 +1,5 @@
 # coding=utf-8
+import requests
 from django.apps import apps
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
@@ -86,3 +87,11 @@ def search(request):
     query = request.GET.get('q', '')
     tag = request.GET.get('t', '')
     return render(request, 'search/search.html', locals())
+
+
+def doubanshow(request):
+    book_req = requests.get('https://api.douban.com/v2/book/user/54019708/collections',
+                 params={'status': 'read'})
+    books = book_req.json()['collections']
+
+    return render(request, 'douban/index.html', locals())

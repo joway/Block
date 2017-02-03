@@ -15,6 +15,25 @@ function sidebarLib() {
         lib.fadeOut();
     }
 }
+sidebarAnalysis
+
+function sidebarAnalysis() {
+    var lib = $('#analysis');
+    if (lib.css('display') == 'none') {
+        lib.fadeIn();
+    } else {
+        lib.fadeOut();
+    }
+}
+
+function sidebarLife() {
+    var lib = $('#life');
+    if (lib.css('display') == 'none') {
+        lib.fadeIn();
+    } else {
+        lib.fadeOut();
+    }
+}
 
 function referredTo(element) {
     var username = element.dataset.username;
