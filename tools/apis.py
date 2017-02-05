@@ -37,7 +37,6 @@ class ToolsViewSet(viewsets.ViewSet):
 
         for i in range(pages):
             movie_data['start'] += i * 15
-            print(movie_data['start'])
             movie_html = requests.post(movie_url, movie_data).text
             movie_soup = BeautifulSoup(movie_html, 'lxml')
 
@@ -49,16 +48,11 @@ class ToolsViewSet(viewsets.ViewSet):
                 cover_big_url = cover_small_url.replace('ipst', 'lpst')
                 intro = item.find(class_='intro').string
 
-                # rate_re = re.compile(r"rating[0-5]-t")
-                # rate = re.findall(r'[0-5]+', item.find(class_=rate_re)['class'][0])[0]
-
-
                 movies.append({
                     'title': item.find('em').string,
                     'cover_small_url': cover_small_url,
                     'cover_big_url': cover_big_url,
                     'intro': intro,
-                    # 'rate': rate,
                     'link': item.find(class_='pic').a['href']
                 })
 
