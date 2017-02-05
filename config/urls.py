@@ -37,13 +37,14 @@ urlpatterns = [
     url(r"^about/", include('about.urls')),
     url(r'^imgbox/', include('imgbox.urls')),
     url(r'^feeds/', include('feed.urls')),
+    url(r'^tools/', include('tools.urls')),
 
     url(r'^error/$', views.error),
     url(r'^cache/clear/$', views.cache_clear),
     url(r'^search/$', views.search),
 
     url(r'^feed/$', ArticleRSSFeed(), name="article_rss"),
-    url(r'^life/$', views.doubanshow, name="douban"),
+    url(r'^life/$', cache_page(60 * 60 * 12)(views.doubanshow), name="douban"),
     url(r'^robots.txt$', views.robots, name="robots"),
 
     # api

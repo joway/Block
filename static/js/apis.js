@@ -66,3 +66,13 @@ function uploadFile(formData) {
         credentials: 'include'
     });
 }
+
+function fetchDouban(doubanID) {
+    return fetch('/api/tools/douban/?douban_id=' + doubanID, {
+        method: 'GET',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        credentials: 'include'
+    });
+}

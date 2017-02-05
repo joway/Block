@@ -1,8 +1,5 @@
 {% extends '_base.html' %}
 {% load staticfiles %}
-{% block javascript %}
-  {{ block.super }}
-{% endblock %}
 {% block content %}
   <div class="container">
     <div class="row">
@@ -16,7 +13,9 @@
                 <div class="col s4 m3 l2">
                   <div class="card">
                     <div class="card-image">
-                      <img src="{{ book.book.image }}">
+                      <a target="_blank" href="{{ book.book.alt }}">
+                        <img src="{{ book.book.image }}">
+                      </a>
                     </div>
                   </div>
                   <p>{{ book.book.title }}</p>
@@ -31,13 +30,34 @@
           <div class="card-content center-align">
             <h1>电影</h1>
 
-            <div class="row">
-                  <script type="text/javascript" src="http://www.douban.com/service/badge/54019708/?selection=latest&amp;
-                  picsize=small&amp;hideself=on&amp;show=collection&amp;n=20&amp;hidelogo=on&amp;cat=drama%7Cmovie&amp;columns=6"></script>
+            <div class="row" id="douban-preview">
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+{% endblock %}
+{% block javascript %}
+  {{ block.super }}
+  <script>
+      fetchDouban('54019708').then(function (response) {
+          response.json().then(function (data) {
+              if (response.ok) {
+                  endCircleLoding();
+                  for (var item in data) {
+                      var _html = "<div class='col s2'>" +
+                          "<div class='card' style='max-height: 170px;margin-bottom: 10px'>" +
+                          "<div class='card-image'>" +
+                          "<a target='_blank' href='" + data[item].link + "'>" +
+                          "<img alt='" + data[item].title + "' src='" + data[item].cover_small_url + "'></a>" +
+                          "</div></div></div>";
+                      $('#douban-preview').append(_html);
+                  }
+              } else {
+                  prompt_warning('抓取失败', 3000);
+              }
+          })
+      });
+  </script>
 {% endblock %}

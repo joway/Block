@@ -1,101 +1,108 @@
 {% load staticfiles %}
 {% load cache %}
 {% cache 86400 sidebar request.user.is_admin %}
-<ul id="slide-out" class="side-nav black-text">
-  <div class="sidenav-top">
-    <li>
-      <div class="userView">
-        <div class="background" style="background-color: deepskyblue"></div>
-        <a href="/"><img class="circle" src="{% static 'img/logo/logo.png' %}"></a>
-        <a href="#!name"><span class="white-text name">Joway Wang</span></a>
-        <a href="#!email"><span class="white-text email">joway.w@gmail.com</span></a>
-      </div>
-    </li>
+  <ul id="slide-out" class="side-nav black-text">
+    <div class="sidenav-top">
+      <li>
+        <div class="userView">
+          <div class="background" style="background-color: deepskyblue"></div>
+          <a href="/"><img class="circle" src="{% static 'img/logo/logo.png' %}"></a>
+          <a href="#!name"><span class="white-text name">Joway Wang</span></a>
+          <a href="#!email"><span class="white-text email">joway.w@gmail.com</span></a>
+        </div>
+      </li>
 
-    <li class="row">
-      <form method="get" action="/search/" class="col s10 l10 offset-l1 offset-s1">
-        <input id="id_q" name="q" type="search" class="col s10 l10">
-        <label for="id_q" class="col s1 l1"><i class="material-icons">search</i></label>
-      </form>
-    </li>
+      <li class="row">
+        <form method="get" action="/search/" class="col s10 l10 offset-l1 offset-s1">
+          <input id="id_q" name="q" type="search" class="col s10 l10">
+          <label for="id_q" class="col s1 l1"><i class="material-icons">search</i></label>
+        </form>
+      </li>
 
-    <li><a href="/" data-instant><i class="material-icons">home</i>主页</a></li>
+      <li><a href="/" data-instant><i class="material-icons">home</i>主页</a></li>
 
-    <li>
-      <a class='' href='#' id="category-dropdown" onclick="sidebarCategory()">
-        <i class="material-icons">turned_in_not</i>
-        目录<i class="material-icons right">arrow_drop_down</i>
-      </a>
-      <ul id='category' class="hidden">
-        {% for category in categories %}
-          <li><a href="/a/?category={{ category.identify }}" data-instant>{{ category.name }}<span
-              class="badge red white-text right">{{ category.count }}</span></a></li>
-        {% endfor %}
-        <div class="divider"></div>
-      </ul>
-    </li>
+      <li>
+        <a class='' href='#' id="category-dropdown" onclick="sidebarCategory()">
+          <i class="material-icons">turned_in_not</i>
+          目录<i class="material-icons right">arrow_drop_down</i>
+        </a>
+        <ul id='category' class="hidden">
+          {% for category in categories %}
+            <li><a href="/a/?category={{ category.identify }}" data-instant>{{ category.name }}<span
+                class="badge red white-text right">{{ category.count }}</span></a></li>
+          {% endfor %}
+          <div class="divider"></div>
+        </ul>
+      </li>
 
-    <li>
-      <a class='' href='#' id="lib-dropdown" onclick="sidebarLib()">
-        <i class="material-icons">account_balance</i>
-        实验室<i class="material-icons right">arrow_drop_down</i>
-      </a>
-      <ul id='lib' class="hidden">
-        <li>
-          <a href="/feeds/" data-instant>
-            <i class="material-icons">drafts</i>
-            我的订阅
-          </a>
-        </li>
-        <li>
-          <a href="http://status.joway.wang/" data-instant>
-            <i class="material-icons">history</i>
-            可用性
-          </a>
-        </li>
-        <div class="divider"></div>
-        {% if request.user.is_admin %}
+      <li>
+        <a class='' href='#' id="lib-dropdown" onclick="sidebarLib()">
+          <i class="material-icons">account_balance</i>
+          实验室<i class="material-icons right">arrow_drop_down</i>
+        </a>
+        <ul id='lib' class="hidden">
           <li>
-            <a href="/imgbox/" data-instant>
-              <i class="material-icons">burst_mode</i>
-              图床
+            <a href="/feeds/" data-instant>
+              <i class="material-icons">drafts</i>
+              我的订阅
             </a>
           </li>
-        {% endif %}
-        <div class="divider"></div>
-      </ul>
-    </li>
+          <li>
+            <a href="/tools/douban/" data-instant>
+              <i class="material-icons">play_for_work</i>
+              豆瓣导出
+            </a>
+          </li>
+          <li>
+            <a href="http://status.joway.wang/" data-instant>
+              <i class="material-icons">history</i>
+              可用性
+            </a>
+          </li>
+          <div class="divider"></div>
+          {% if request.user.is_admin %}
+            <li>
+              <a href="/imgbox/" data-instant>
+                <i class="material-icons">burst_mode</i>
+                图床
+              </a>
+            </li>
+          {% endif %}
+          <div class="divider"></div>
+        </ul>
+      </li>
 
-    <li>
-      <a class='' href='#' id="analysis-dropdown" onclick="sidebarAnalysis()">
-        <i class="material-icons">assessment</i>
-        统计<i class="material-icons right">arrow_drop_down</i>
-      </a>
-      <ul id='analysis' class="hidden">
-        <li><a href="/timeline/"><i class="material-icons">av_timer</i>Timeline</a></li>
-        <li><a href="/timeline/friends/"><i class="material-icons">supervisor_account</i>朋友们</a></li>
-        <li><a href="/analysis/"><i class="material-icons">trending_up</i>访问</a></li>
-        <div class="divider"></div>
-      </ul>
-    </li>
+      <li>
+        <a class='' href='#' id="analysis-dropdown" onclick="sidebarAnalysis()">
+          <i class="material-icons">assessment</i>
+          统计<i class="material-icons right">arrow_drop_down</i>
+        </a>
+        <ul id='analysis' class="hidden">
+          <li><a href="/timeline/"><i class="material-icons">av_timer</i>Timeline</a></li>
+          <li><a href="/timeline/friends/"><i class="material-icons">supervisor_account</i>朋友们</a></li>
+          <li><a href="/analysis/"><i class="material-icons">trending_up</i>访问</a></li>
+          <div class="divider"></div>
+        </ul>
+      </li>
 
-    <li>
-      <a class='' href='#' id="life-dropdown" onclick="sidebarLife()">
-        <i class="material-icons">brightness_4</i>
-        生活<i class="material-icons right">arrow_drop_down</i>
-      </a>
-      <ul id='life' class="hidden">
-        <li><a href="https://www.instagram.com/joway.w/" target="_blank"><i class="material-icons">photo_library</i>画廊</a></li>
-        <li><a href="/life/"><i class="material-icons">theaters</i>书影</a></li>
-        <div class="divider"></div>
-      </ul>
-    </li>
+      <li>
+        <a class='' href='#' id="life-dropdown" onclick="sidebarLife()">
+          <i class="material-icons">brightness_4</i>
+          生活<i class="material-icons right">arrow_drop_down</i>
+        </a>
+        <ul id='life' class="hidden">
+          <li><a href="https://www.instagram.com/joway.w/" target="_blank"><i class="material-icons">photo_library</i>画廊</a>
+          </li>
+          <li><a href="/life/"><i class="material-icons">theaters</i>书影</a></li>
+          <div class="divider"></div>
+        </ul>
+      </li>
 
-    {#      <li><a href="https://joway.github.io/Resume/" target="_blank"><i class="material-icons">receipt</i>简历</a></li>#}
-    <li><a href="/about/"><i class="material-icons">info</i>关于</a></li>
-  </div>
-  <div class="sidenav-bottom">
-    {% include 'components/_social_btns.html' %}
-  </div>
-</ul>
+      {#      <li><a href="https://joway.github.io/Resume/" target="_blank"><i class="material-icons">receipt</i>简历</a></li>#}
+      <li><a href="/about/"><i class="material-icons">info</i>关于</a></li>
+    </div>
+    <div class="sidenav-bottom">
+      {% include 'components/_social_btns.html' %}
+    </div>
+  </ul>
 {% endcache %}

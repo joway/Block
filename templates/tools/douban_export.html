@@ -1,0 +1,70 @@
+{% extends '_base.html' %}
+{% load cache %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col s12 l10 offset-l1">
+        <div class="card">
+          <div class="card-content" style="padding: 50px">
+            <div class="row">
+              <div class="col l8 s12 offset-l2" id="douban-panel">
+                <div class="row">
+                  <div class="col s6 l8">
+                    <input id="douban_id" type="text" class="validate">
+                    <label for="douban_id">豆瓣 ID</label>
+                  </div>
+                  <div class="col s6 l4">
+                    <button class="waves-effect waves-light btn" onclick="showDoubanApi()"><i
+                        class="material-icons left">cloud</i>生成
+                    </button>
+                  </div>
+                </div>
+                <div class="row" id="douban_api" style="display: none">
+                  <div class="col s12 l12">
+                    <label for="douban_api_url">豆瓣 API</label>
+                    <input disabled id="douban_api_url" type="text" class="validate black-text">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" id="douban-preview"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block javascript %}
+  {{ block.super }}
+  <script>
+      function showDoubanApi() {
+          var doubanID = $('#douban_id').val();
+          if (doubanID.length == 0) {
+              prompt_warning('请输入豆瓣 ID');
+              return;
+          }
+          $('#douban_api_url').val('https://joway.wang/api/tools/douban/?douban_id=' + doubanID);
+          $('#douban_api').show();
+          beginCircleLoding();
+
+          fetchDouban(doubanID).then(function (response) {
+              response.json().then(function (data) {
+                  if (response.ok) {
+                      endCircleLoding();
+                      for (var item in data) {
+                          var _html = "<div class='col s2'>" +
+                              "<div class='card'>" +
+                              "<div class='card-image'>" +
+                              "<a target='_blank' href='" + data[item].link + "'><img src='" + data[item].cover_small_url + "'></a>" +
+                              "</div> </div></div>";
+                          $('#douban-preview').append(_html);
+                      }
+                  } else {
+                      prompt_warning('抓取失败', 3000);
+                  }
+              })
+          });
+      }
+  </script>
+{% endblock %}

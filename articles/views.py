@@ -48,6 +48,7 @@ def detail(request, slug_or_uid):
             article = Article.objects.get(slug=slug_or_uid)
         except Article.DoesNotExist:
             article = get_object_or_404(Article, uid=slug_or_uid)
+        cache.set('detail#%s' % slug_or_uid, article, 3600)
 
     meta_description = article.digest
     meta_keywords = ', '.join([article.category, '城西笔谈'])
