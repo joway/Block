@@ -337,11 +337,6 @@ STATSD_CELERY_SIGNALS = True
 # session
 SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
-# google api
-# _client_json = os.environ.get('GOOGLE_CLIENT_SECRETS_JSON', None)
-# if _client_json:
-#     with open('config/client_secrets.json', 'wb') as client_secrets:
-#         client_secrets.write(_client_json.encode('utf-8'))
 GA_PROPERTY_ID = 'UA-53624533-6'
 GA_PROFILE_ID = '135825271'
 GA_ACCOUNT_ID = '53624533'

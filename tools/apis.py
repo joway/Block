@@ -18,9 +18,9 @@ class ToolsViewSet(viewsets.ViewSet):
         serializer.is_valid(raise_exception=True)
         douban_id = serializer.validated_data['douban_id']
 
-        _cache = cache.get('douban#%s' % douban_id)
-        if _cache:
-            return Response(data=_cache, status=status.HTTP_200_OK)
+        # _cache = cache.get('douban#%s' % douban_id)
+        # if _cache:
+        #     return Response(data=_cache, status=status.HTTP_200_OK)
 
         movie_url = 'https://movie.douban.com/people/%s/collect' % douban_id
         movie_data = {
