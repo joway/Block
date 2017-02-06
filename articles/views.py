@@ -61,8 +61,11 @@ def detail(request, slug_or_uid):
 
 @login_required
 @admin_required
-def edit(request, article_uid):
-    article = get_object_or_404(Article, uid=article_uid)
+def edit(request, slug_or_uid):
+    try:
+        article = Article.objects.get(slug=slug_or_uid)
+    except Article.DoesNotExist:
+        article = get_object_or_404(Article, uid=slug_or_uid)
 
     return render(request, 'articles/edit.html', locals())
 
