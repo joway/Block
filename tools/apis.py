@@ -1,5 +1,5 @@
 import json
-import re
+from time import sleep
 
 import requests
 from bs4 import BeautifulSoup
@@ -31,14 +31,14 @@ class ToolsViewSet(viewsets.ViewSet):
             'filter': 'all',
             'mode': 'grid',
         }
-        movie_html = requests.post(movie_url, movie_data).text
+        movie_html = requests.get(movie_url, movie_data).text
         movie_soup = BeautifulSoup(movie_html, 'lxml')
         movies = []
         pages = int(movie_soup.find(class_='thispage')['data-total-page'])
 
         for i in range(pages):
             movie_data['start'] += i * 15
-            movie_html = requests.post(movie_url, movie_data).text
+            movie_html = requests.get(movie_url, movie_data).text
             movie_soup = BeautifulSoup(movie_html, 'lxml')
 
             movie_list = movie_soup.find(class_='grid-view').contents
@@ -56,6 +56,7 @@ class ToolsViewSet(viewsets.ViewSet):
                     'intro': intro,
                     'link': item.find(class_='pic').a['href']
                 })
+            sleep(0.5)
 
         cache.set('tool#douban#%s' % douban_id, json.dumps(movies), 3600)
         return Response(data=movies, status=status.HTTP_200_OK)
