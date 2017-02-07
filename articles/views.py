@@ -21,8 +21,9 @@ def list(request):
         meta_keywords = ', '.join([category_display, '城西笔谈', '博客'])
 
     _cache = cache.get('list#%s' % str(request.GET))
-    if not _cache and category:
-        articles = articles.filter(category=category)
+    if not _cache:
+        if category:
+            articles = articles.filter(category=category)
     else:
         articles = _cache
 
