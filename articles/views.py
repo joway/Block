@@ -1,11 +1,10 @@
-import re
-
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 
+from articles.constants import ARTICLE_CATEGORY_CHOICES
 from articles.models import Article
 from users.decorators import admin_required
 
@@ -21,6 +20,10 @@ def list(request):
     _cache = cache.get('list#%s' % str(request.GET))
     if not _cache:
         if category:
+            category_display = [x for x in ARTICLE_CATEGORY_CHOICES if x[0] == category][0][1]
+            meta_keywords = meta_keywords + ', ' + category_display
+            title = '目录: %s | 城西笔谈' % category_display
+            meta_description = title
             articles = articles.filter(category=category)
     else:
         articles = _cache
@@ -50,7 +53,7 @@ def detail(request, slug_or_uid):
             article = get_object_or_404(Article, uid=slug_or_uid)
         cache.set('detail#%s' % slug_or_uid, article, 3600)
 
-    meta_description = article.digest
+    meta_description = article.digest()
     meta_keywords = ', '.join([article.category, '城西笔谈'])
 
     title = article.title

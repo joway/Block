@@ -6,7 +6,9 @@ from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.db import models
 from django.utils.text import slugify
+
 from articles.constants import ARTICLE_CATEGORY_CHOICES
+
 
 def unique_id(length=5):
     uid = ''.join(choice(string.ascii_uppercase + string.digits) for _ in range(length))
@@ -47,14 +49,16 @@ class Article(models.Model):
     def markdown_content(self):
         return markdown2.markdown(self.content)
 
-    @property
-    def digest(self):
+    def digest(self, size=140):
         content = self.content
         if len(content.split('\n')) > 8:
             content = ''.join(content.split('\n')[:8])
-        if len(content) > 140:
-            content = content[:140]
+        if len(content) > size:
+            content = content[:size]
         return content + ' ... '
+
+    def digest_html(self, size=140):
+        return markdown2.markdown(self.digest(size))
 
     @property
     def url(self):
