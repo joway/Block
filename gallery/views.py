@@ -26,6 +26,6 @@ def gallery_detail(request, album):
     for root, dirs, files in os.walk("static/gallery/%s" % album):
         for name in files:
             if os.path.splitext(name)[1] == '.jpg' or os.path.splitext(name)[1] == '.jpeg':
-                url = '%s%s/%s/%s' % (base_url, 'gallery', album, name)
+                url = '%s%s/%s/%s?imageView2/2/w/1000' % (base_url, 'gallery', album, name)
                 images.append(url)
     return render(request, 'gallery/detail.html', locals())
