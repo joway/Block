@@ -9,8 +9,9 @@ from django.shortcuts import render
 
 def gallery_list(request):
     base_url = settings.STATIC_URL + 'gallery/'
-    meta_description = '画廊 | 城西笔谈 : Joway 的摄影人生'
-    title = '画廊 | 城西笔谈'
+    title = '画廊 | 城西笔谈 : Joway 的摄影人生'
+    meta_description = title
+
     if request.flavour == 'mobile':
         width = 256
     else:
@@ -19,7 +20,7 @@ def gallery_list(request):
     _cache = cache.get(cache_key)
     if _cache:
         albums = json.loads(_cache)
-        meta_keywords = ', '.join(['城西笔谈', '画廊', '摄影'] + albums)
+        meta_keywords = ', '.join(['城西笔谈', '画廊', '摄影'] + [x['name'] for x in albums])
         return render(request, 'gallery/list.html', locals())
 
     albums = []
@@ -33,13 +34,14 @@ def gallery_list(request):
             'cover': base_url + cover,
         })
     cache.set(cache_key, json.dumps(albums), 3600)
-    meta_keywords = ', '.join(['城西笔谈', '画廊', '摄影'] + albums)
+    meta_keywords = ', '.join(['城西笔谈', '画廊', '摄影'] + [x['name'] for x in albums])
     return render(request, 'gallery/list.html', locals())
 
 
 def gallery_detail(request, album):
     base_url = settings.STATIC_URL
     title = '画廊 ： %s | 城西笔谈' % album
+    meta_description = title
 
     if request.flavour == 'mobile':
         width = 256
