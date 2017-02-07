@@ -93,4 +93,4 @@ def doubanshow(request):
     book_req = requests.get('https://api.douban.com/v2/book/user/54019708/collections',
                     params={'status': 'read'})
     books = book_req.json()['collections']
-    return render(request, 'douban/index.html', locals())
+    return render(request, 'douban/douban.html', locals())

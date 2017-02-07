@@ -1,0 +1,27 @@
+{% extends '_base.html' %}
+{% load staticfiles %}
+{% block content %}
+  <div class="container popimg-container">
+    <div class="row">
+      <div class="col s12 l10 offset-l1">
+        <div class="card">
+          <div class="card-content center-align">
+            <div class="row">
+              <h1>{{ album }}</h1>
+              {% for image in images %}
+                <div class="col s12 l6">
+                  <img src="{{ image }}" alt="" style="width: 100%">
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block javascript %}
+  {{ block.super }}
+  <script>
+  </script>
+{% endblock %}

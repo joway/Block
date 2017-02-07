@@ -26,6 +26,7 @@ urlpatterns = [
         name='django.contrib.sitemaps.views.sitemap'),
     url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
     url(r'^activity/', include('actstream.urls')),
+    url(r'^gallery/', include('gallery.urls')),
 
     # local view
     url(r'^$', views.index),
