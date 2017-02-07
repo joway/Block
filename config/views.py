@@ -86,11 +86,11 @@ def cache_clear(request):
 def search(request):
     query = request.GET.get('q', '')
     tag = request.GET.get('t', '')
-    return render(request, 'search/search.html', locals())
+    return render(request, 'search.html', locals())
 
 
 def doubanshow(request):
     book_req = requests.get('https://api.douban.com/v2/book/user/54019708/collections',
                     params={'status': 'read'})
     books = book_req.json()['collections']
-    return render(request, 'douban/douban.html', locals())
+    return render(request, 'douban.html', locals())
