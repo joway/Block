@@ -31,8 +31,6 @@
     <title>城西笔谈 - Joway's Blog</title>
   {% endif %}
 
-  {% include 'components/_google_analytics.html' %}
-
   <script type="text/javascript" language="javascript">
       document.addEventListener("DOMContentLoaded", function () {
           {% block init_block %}
@@ -80,7 +78,7 @@
 
   <script src="{% static 'libs/js/instantclick.min.js' %}" data-no-instant></script>
 {% endblock %}
-
+{% include 'components/_google_analytics.html' %}
 {% block javascript %}
   <script>
       $(".popimg-container img").popImg();
