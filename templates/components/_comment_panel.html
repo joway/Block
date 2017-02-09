@@ -1,6 +1,9 @@
 {% load comments %}
 {% load markup %}
 {% load i18n %}
+{% load cache %}
+{% get_comment_list for comment_obj as comment_list %}
+{% cache 36000 comments comment_list %}
 <div class="row comment-panel" id="comment-panel">
   <div class="col s10 l10 offset-s1 offset-l1">
     {% if request.user.is_anonymous %}
@@ -22,7 +25,6 @@
     {% endif %}
 
     <div class="comment-content">
-      {% get_comment_list for comment_obj as comment_list %}
       {% for comment in comment_list %}
         <div class="row">
           <div class="col s2 l1">
@@ -55,6 +57,8 @@
     </div>
   </div>
 </div>
+{% endcache %}
+{% cache 360000 comments_script %}
 <script>
     document.addEventListener("DOMContentLoaded", function (event) {
         $('#comment-submit').click(function () {
@@ -100,3 +104,4 @@
         }
     });
 </script>
+{% endcache %}

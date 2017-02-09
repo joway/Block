@@ -1,8 +1,7 @@
 {% load staticfiles %}
 {% load markup %}
-{% load colors %}
 {% load cache %}
-{% cache 36000 article.uid %}
+{% cache 36000 article article.uid %}
 <div class="card">
   <div class="card-content">
     <span class="card-title black-text">
@@ -18,13 +17,11 @@
       <div class="col l4 m6 s6">
         <span class="left small">{{ article.created_at | date }}</span>
       </div>
-      <div class="col l4 m6 s6 offset-l4">
+      <div class="col l2 m3 s4 offset-l6 offset-m3 offset-s2">
+        <i class="material-icons vertical-bottom">turned_in</i>
         <a href="/a/?category={{ article.category }}" data-instant>
-          <span class="badge {{ 'lighten' | random_color }} right">
           <strong>{{ article.get_category_display }}</strong>
-        </span>
         </a>
-        <i class="material-icons right">turned_in</i>
       </div>
     </div>
   </div>

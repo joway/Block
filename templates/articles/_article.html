@@ -1,40 +1,40 @@
 {% load staticfiles %}
 {% load markup %}
-{% load colors %}
+{% load cache %}
 <div class="card">
-  <article class="card-content">
-    {% if request.user.is_admin %}
-      <a class="btn-floating waves-effect waves-light black right" href="edit">
-        <i class="material-icons">mode_edit</i>
-      </a>
-    {% endif %}
-    <h1 class="center-align">
-      {{ article.title }}
-    </h1>
-    <div class="row">
-      <div class="col l4 m9 s7 left">
-        <span>{{ article.created_at | date }}</span>
+  {% cache 36000 article_detail article.uid request.user.is_admin %}
+    <article class="card-content">
+      {% if request.user.is_admin %}
+        <a class="btn-floating waves-effect waves-light black right" href="edit">
+          <i class="material-icons">mode_edit</i>
+        </a>
+      {% endif %}
+      <h1 class="center-align">
+        {{ article.title }}
+      </h1>
+      <div class="row">
+        <div class="col l4 m9 s7 left">
+          <span>{{ article.created_at | date }}</span>
+        </div>
+        <div class="col l3 m3 s5 right right-align">
+          <i class="material-icons vertical-bottom">turned_in</i>
+          <a href="/a/?category={{ article.category }}">
+            <strong>{{ article.get_category_display }}</strong>
+          </a>
+        </div>
       </div>
-      <div class="col l3 m3 s5 right right-align">
-        <i class="material-icons left">turned_in</i>
-        <a href="/a/?category={{ article.category }}">
-            <span class="badge {{ 'lighten' | random_color }} left">
-              <strong>{{ article.get_category_display }}</strong>
-            </span>
+      <div class="article-content popimg-container">
+        {% autoescape off %}
+          {{ article.content|markup }}
+        {% endautoescape %}
+      </div>
+      <div class="copyright center-align" style="margin: 50px">
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">
+          <img src="{% static 'img/svg/License-CC BY--SA 4.0-lightgrey.svg' %}" alt="License: CC BY-SA 4.0">
         </a>
       </div>
-    </div>
-    <div class="article-content popimg-container">
-      {% autoescape off %}
-        {{ article.content|markup }}
-      {% endautoescape %}
-    </div>
-    <div class="copyright center-align" style="margin: 50px">
-      <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">
-        <img src="{% static 'img/svg/License-CC BY--SA 4.0-lightgrey.svg' %}" alt="License: CC BY-SA 4.0">
-      </a>
-    </div>
-  </article>
+    </article>
+  {% endcache %}
 
   <div class="divider"></div>
   {% include 'components/_comment_panel.html' %}
