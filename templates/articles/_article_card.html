@@ -1,6 +1,8 @@
 {% load staticfiles %}
 {% load markup %}
 {% load colors %}
+{% load cache %}
+{% cache 36000 article.uid %}
 <div class="card">
   <div class="card-content">
     <span class="card-title black-text">
@@ -27,3 +29,4 @@
     </div>
   </div>
 </div>
+{% endcache %}
