@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'articles',
     'feed',
     'mail',
+    'monitor',
 
     # third part
     'rest_framework',

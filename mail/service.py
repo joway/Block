@@ -21,6 +21,24 @@ class MailService(object):
     def sent_email_comment_reply(cls, to):
         send_mail(
             subject='[城西笔谈] 您的评论已被回复 ',
-            message='Here is the message.',
+            message='您的评论已被回复.',
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[to])
+
+    @classmethod
+    def sent_email_monitor_trigger(cls, to, task):
+        send_mail(
+            subject='[城西笔谈] 您的监控任务 %s 已触发更新 ' % task.name,
+            message="""
+            尊敬的用户 :
+
+                您好
+
+                您创建的监控任务 <a href='%s'>%s</a> 已触发更新 。
+
+                请登陆 <a href='https://joway.wang/monitor/task/%s'>%s | 城西笔谈 - 监控 </a> 进行查看 。
+
+
+            """ % (task.link, task.name, task.id, task.name),
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[to])

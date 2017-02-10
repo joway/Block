@@ -1,3 +1,14 @@
 from django.db import models
 
-# Create your models here.
+from monitor.constants import MONITOR_FREQUENCY_CHOICES, MonitorFrequency, MONITOR_TYPE_CHOICES
+
+
+class MonitorTask(models.Model):
+    name = models.CharField('名称', max_length=255)
+    link = models.URLField('监控链接')
+    regex = models.CharField('正则表达式', max_length=255)
+    data = models.CharField(max_length=512, default='')
+    type = models.IntegerField(choices=MONITOR_TYPE_CHOICES)
+    frequency = models.IntegerField(choices=MONITOR_FREQUENCY_CHOICES, default=MonitorFrequency.ONE_HOUR)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)

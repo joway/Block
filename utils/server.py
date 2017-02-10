@@ -1,3 +1,5 @@
+import os
+
 import psutil
 
 
@@ -10,3 +12,8 @@ def server_info():
         'mem_percent': mem.percent,
         'cpu_user': cpu.user,
     }
+
+
+def check_ping(host):
+    response = os.system("ping -c 1 " + host)
+    return response == 0

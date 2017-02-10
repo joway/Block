@@ -1,6 +1,5 @@
-# Create your views here.
 from django.shortcuts import render
 
 
-def air(request):
-    return render(request, 'monitor/air.html', locals())
+def monitor_list(request):
+    return render(request, 'monitor/list.html', locals())
