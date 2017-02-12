@@ -8,7 +8,7 @@ from utils.cosine_similiarity import cosine_similarity
 logger = get_task_logger(__name__)
 
 
-@periodic_task(run_every=(crontab(hour='*/12')),
+@periodic_task(run_every=(crontab(minute='*/59')),
                name="article_cosine_similarity", ignore_result=True)
 def article_cosine_similarity():
     articles = Article.objects.all()
@@ -22,3 +22,5 @@ def article_cosine_similarity():
             cosine += cosine_similarity(source.title, target.title)
             a = ArticleSimilarity.objects.create(source=source, target=target, cosine=cosine)
             a.save()
+
+        logger.info('%s done' % source.title)

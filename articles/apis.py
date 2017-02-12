@@ -30,7 +30,6 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
         ActionService.post(request.user, serializer.instance)
 
-        os.system('nohup nice -19 python manage.py algolia_reindex &')
         return Response(self.get_serializer(instance=serializer.instance).data, status=status.HTTP_201_CREATED,
                         headers=headers)
 
@@ -41,7 +40,6 @@ class ArticleViewSet(viewsets.ModelViewSet):
         self.perform_update(serializer)
 
         headers = self.get_success_headers(serializer.data)
-        os.system('nohup nice -19 python manage.py algolia_reindex &')
 
         return Response(self.get_serializer(instance=serializer.instance).data, status=status.HTTP_201_CREATED,
                         headers=headers)
