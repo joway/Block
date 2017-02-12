@@ -28,7 +28,7 @@ class MonitorService(object):
     def extract_html_block(cls, task):
         req = requests.get(task.link)
         result = re.findall(task.regex, req.text)
-        return result[0] if result else ''
+        return result[0].replace(' ', '') if result else ''
 
     @classmethod
     def handle_contains_or_not(cls, task, fake=False):

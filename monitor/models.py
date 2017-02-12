@@ -1,6 +1,7 @@
 from django.db import models
 
 from monitor.constants import MONITOR_FREQUENCY_CHOICES, MonitorFrequency, MONITOR_TYPE_CHOICES
+from monitor.services import MonitorService
 
 
 class MonitorTask(models.Model):
@@ -12,3 +13,6 @@ class MonitorTask(models.Model):
     frequency = models.IntegerField(choices=MONITOR_FREQUENCY_CHOICES, default=MonitorFrequency.ONE_HOUR)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
+
+    def element(self):
+        return MonitorService.extract_html_block(self)
