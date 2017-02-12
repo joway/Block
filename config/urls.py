@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^imgbox/', include('imgbox.urls')),
     url(r'^feeds/', include('feed.urls')),
     url(r'^tools/', include('tools.urls')),
+    url(r'^monitor/', include('monitor.urls')),
 
     url(r'^error/$', views.error),
     url(r'^cache/clear/$', views.cache_clear),

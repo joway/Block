@@ -1,0 +1,161 @@
+{% extends '_base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col s12 l12 m12">
+        <div class="card center-align">
+          <div class="card-content">
+            <div class="row">
+              <h1>Create Monitor Task</h1>
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s6 m4 l3 offset-m2 offset-l3">
+                    <input placeholder="Task Name *" id="monitor-name" type="text" class="validate">
+                  </div>
+                  <div class="input-field col s6 m4 l3">
+                    <select id="monitor-frequency">
+                      <option value="1">每5分钟</option>
+                      <option value="2">每1小时</option>
+                      <option value="3">每12小时</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12 m8 l6 offset-m2 offset-l3">
+                    <input placeholder="Monitor Link *" id="monitor-link" type="text" class="validate">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6 m4 l3 offset-m2 offset-l3">
+                    <input placeholder="Regex" id="monitor-regex" type="text" class="validate" value="Pre(.+?)Post">
+                  </div>
+                  <div class="input-field col s6 m4 l3">
+                    <select id="monitor-type">
+                      <option value="1">包含</option>
+                      <option value="2">不包含</option>
+                      <option value="3">Ping</option>
+                      <option value="4">大于</option>
+                      <option value="5">小于</option>
+                      <option value="6">等于</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12 m8 l6 offset-m2 offset-l3">
+                    <input placeholder="data" id="monitor-data" type="text" class="validate">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s6 m4 l3 offset-m2 offset-l3">
+                    <button id="monitor-task-verify" type="button" class="waves-effect waves-light btn" href="javascript:void(0);">
+                      <i class="material-icons left">cloud</i>Verify
+                    </button>
+                  </div>
+                  <div class="col s6 m4 l3">
+                    <button id="monitor-task-submit" type="button" class="waves-effect waves-light btn">
+                      <i class="material-icons left">cloud</i>Submit
+                    </button>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12 m8 l6 offset-m2 offset-l3" id="element-preview-box">
+                    <textarea disabled id="element-preview" class="materialize-textarea" data-length="100" placeholder="Preview"></textarea>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block javascript %}
+  {{ block.super }}
+  <script>
+      $(document).ready(function () {
+          $('select').material_select();
+      });
+
+      $('#element-preview-box').hide();
+
+      $('#monitor-task-submit').click(function () {
+
+          var name = $('#monitor-name').val().trim();
+          var link = $('#monitor-link').val().trim();
+          var type = $('#monitor-type').val().trim();
+          var regex = $('#monitor-regex').val().trim();
+          var data = $('#monitor-data').val().trim();
+          var frequency = $('#monitor-frequency').val().trim();
+          if (!(name) || !(link) || !(type)) {
+              prompt_warning('请输入完整的信息', 3000);
+          } else {
+              beginCircleLoding();
+
+              var formData = new FormData();
+              formData.append('name', name);
+              formData.append('link', link);
+              formData.append("type", type);
+              formData.append("data", data);
+              formData.append("regex", regex);
+              formData.append("frequency", frequency);
+
+              createMonitorTask(formData).then(function (response) {
+                  response.json().then(function (data) {
+                      console.log(data);
+                      endCircleLoding();
+                      if (response.ok) {
+                          prompt_success('创建成功', 3000);
+                      } else {
+                          for (d in data) {
+                              prompt_warning(d + ' : ' + data[d], 3000);
+                          }
+                      }
+                  });
+              });
+          }
+      });
+
+      $('#monitor-task-verify').click(function () {
+
+          var name = $('#monitor-name').val().trim();
+          var link = $('#monitor-link').val().trim();
+          var type = $('#monitor-type').val().trim();
+          var regex = $('#monitor-regex').val().trim();
+          var data = $('#monitor-data').val().trim();
+          var frequency = $('#monitor-frequency').val().trim();
+          if (!(name) || !(link) || !(type)) {
+              prompt_warning('请输入完整的信息', 3000);
+          } else {
+              beginCircleLoding();
+
+              var formData = new FormData();
+              formData.append('name', name);
+              formData.append('link', link);
+              formData.append("type", type);
+              formData.append("data", data);
+              formData.append("regex", regex);
+              formData.append("frequency", frequency);
+
+              verifyMonitorTask(formData).then(function (response) {
+                  response.json().then(function (data) {
+                      endCircleLoding();
+
+                      $('#element-preview').val(data.element);
+                      $('#element-preview-box').show();
+
+                      if (response.ok) {
+                          prompt_success('验证成功', 3000);
+                      } else {
+                          for (d in data) {
+                              prompt_warning(d + ' : ' + data[d], 3000);
+                          }
+                          prompt_warning(data.exception, 3000);
+                      }
+                  });
+              });
+          }
+      });
+  </script>
+{% endblock %}

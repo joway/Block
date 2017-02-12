@@ -76,3 +76,25 @@ function fetchDouban(doubanID) {
         credentials: 'include'
     });
 }
+
+function createMonitorTask(formData) {
+    return fetch('/api/monitor/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: formData,
+        credentials: 'include'
+    });
+}
+
+function verifyMonitorTask(formData) {
+    return fetch('/api/monitor/verify/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: formData,
+        credentials: 'include'
+    });
+}
