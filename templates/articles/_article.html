@@ -2,7 +2,7 @@
 {% load markup %}
 {% load cache %}
 <div class="card">
-  {% cache 1 article_detail article.uid request.user.is_admin %}
+  {% cache 36000 article_detail article.uid request.user.is_admin %}
     <article class="card-content">
       {% if request.user.is_admin %}
         <a class="btn-floating waves-effect waves-light black right" href="edit">

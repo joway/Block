@@ -68,7 +68,7 @@ class Article(models.Model):
         return self.title
 
     def similar_articles(self, size=3):
-        articles = ArticleSimilarity.objects.filter(source=self)
+        articles = ArticleSimilarity.objects.filter(source=self).all()
         sorted_articles = sorted(articles, key=lambda a: a.cosine, reverse=True)
         return sorted_articles[:size]
 
