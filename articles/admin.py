@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from articles.forms import ArticleModelForm
-from articles.models import Article
+from articles.models import Article, ArticleSimilarity
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -12,3 +12,4 @@ class ArticleAdmin(admin.ModelAdmin):
         model = Article
 
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(ArticleSimilarity)

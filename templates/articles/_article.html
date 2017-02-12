@@ -2,7 +2,7 @@
 {% load markup %}
 {% load cache %}
 <div class="card">
-  {% cache 36000 article_detail article.uid request.user.is_admin %}
+  {% cache 1 article_detail article.uid request.user.is_admin %}
     <article class="card-content">
       {% if request.user.is_admin %}
         <a class="btn-floating waves-effect waves-light black right" href="edit">
@@ -32,6 +32,18 @@
         <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">
           <img src="{% static 'img/svg/License-CC BY--SA 4.0-lightgrey.svg' %}" alt="License: CC BY-SA 4.0">
         </a>
+      </div>
+      <div class="row" style="margin: 10px">
+        <h4><a class="black-text" name="recommend">推荐阅读 : </a></h4>
+        <ul>
+          {% for similar_article in similar_articles %}
+            <li>
+              <a href="/a/{{ similar_article.slug }}/">
+                {{ similar_article.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
       </div>
     </article>
   {% endcache %}

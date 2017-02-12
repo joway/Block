@@ -67,6 +67,11 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+    def similar_articles(self, size=3):
+        articles = ArticleSimilarity.objects.filter(source=self)
+        sorted_articles = sorted(articles, key=lambda a: a.cosine, reverse=True)
+        return sorted_articles[:size]
+
 
 class ArticleRSSFeed(Feed):
     title = "城西笔谈 - 文章列表"
@@ -84,3 +89,13 @@ class ArticleRSSFeed(Feed):
 
     def item_description(self, item):
         return item.markdown_content
+
+
+class ArticleSimilarity(models.Model):
+    source = models.ForeignKey(Article, related_name='article_source_similarity')
+    target = models.ForeignKey(Article, related_name='article_target_similarity')
+    cosine = models.DecimalField('余弦相似值', max_digits=12, decimal_places=11)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s %s %s' % (self.source, self.target, self.cosine)

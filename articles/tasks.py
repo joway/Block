@@ -2,7 +2,7 @@ from celery.schedules import crontab
 from celery.task import periodic_task
 from celery.utils.log import get_task_logger
 
-from articles.models import Article
+from articles.models import Article, ArticleSimilarity
 from utils.cosine_similiarity import cosine_similarity
 
 logger = get_task_logger(__name__)
@@ -12,13 +12,13 @@ logger = get_task_logger(__name__)
                name="article_cosine_similarity", ignore_result=True)
 def article_cosine_similarity():
     articles = Article.objects.all()
-    BASE_DIR = 'data/similarity/'
     for source in articles:
-        data = ''
         for target in articles:
+            if ArticleSimilarity.objects.filter(source=source, target=target).exists():
+                continue
             if target.uid == source.uid:
                 continue
             cosine = cosine_similarity(source.content, target.content)
-            data += '%s %s' % (target.uid, cosine)
-        with open(BASE_DIR + source.uid + '.data', 'w') as file:
-            file.write(data)
+            cosine += cosine_similarity(source.title, target.title)
+            a = ArticleSimilarity.objects.create(source=source, target=target, cosine=cosine)
+            a.save()

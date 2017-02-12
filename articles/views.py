@@ -58,6 +58,13 @@ def detail(request, slug_or_uid):
     title = article.title
     comment_obj = article
 
+    similar_cache = cache.get('article#similay#%s' % slug_or_uid)
+    if similar_cache:
+        similar_articles = similar_cache
+    else:
+        similar_articles = [a.target for a in article.similar_articles()]
+        cache.set('article#similay#%s' % slug_or_uid, similar_articles, 36000)
+
     return render(request, 'articles/detail.html', locals())
 
 

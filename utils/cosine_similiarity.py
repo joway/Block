@@ -3,13 +3,13 @@ import copy
 import jieba
 import math
 
-punct = set(u''':!),.:;?]}¢'"、。〉》」』】〕〗〞︰︱︳﹐､﹒
+PRUNCT = set(u''':!),.:;?]}¢'"、。〉》」』】〕〗〞︰︱︳﹐､﹒
 ﹔﹕﹖﹗﹚﹜﹞！），．：；？｜｝︴︶︸︺︼︾﹀﹂﹄﹏､～￠
 々‖•·ˇˉ―--′’”([{£¥'"‵〈《「『【〔〖（［｛￡￥〝︵︷︹︻
 ︽︿﹁﹃﹙﹛﹝（｛“‘-—_…''')
 
 # 对str/unicode
-normalize = lambda s: ''.join(filter(lambda x: x not in punct, s))
+normalize = lambda s: ''.join(filter(lambda x: x not in PRUNCT, s))
 
 
 def cumulative(tokens, frequency):
