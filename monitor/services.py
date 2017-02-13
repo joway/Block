@@ -6,6 +6,7 @@ from django.conf import settings
 
 from mail.service import MailService
 from monitor.constants import MonitorType
+from utils.render import render_to_html
 from utils.server import check_ping
 
 
@@ -26,9 +27,13 @@ class MonitorService(object):
 
     @classmethod
     def extract_html_block(cls, task):
-        req = requests.get(task.link)
+        if task.need_render:
+            content = render_to_html(task.link)
+        else:
+            req = requests.get(task.link)
+            content = req.text
         try:
-            result = re.findall(task.regex, req.text)
+            result = re.findall(task.regex, content)
         except:
             result = ['']
         ele = result[0].replace(' ', '') if result else ''

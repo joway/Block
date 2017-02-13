@@ -13,6 +13,8 @@ class MonitorTask(models.Model):
     frequency = models.IntegerField(choices=MONITOR_FREQUENCY_CHOICES, default=MonitorFrequency.ONE_HOUR)
     selected_element = models.CharField('匹配元素', max_length=1024, default='')
 
+    need_render = models.BooleanField('需要渲染', default=False)
+
     triggered = models.BooleanField('被触发', default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
