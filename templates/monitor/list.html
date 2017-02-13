@@ -5,15 +5,33 @@
       <div class="col s12 l12 m12">
         <div class="card">
           <div class="card-content">
-            {% for task in tasks %}
-              <div class="row">
-                <div class="col s12 m10 l10 offset-l1 offset-m1">
-                  <a href="/monitor/task/{{ task.id }}/">
+            <h3 class="center-align" style="margin: 30px">监控列表</h3>
+            <ul class="collapsible" data-collapsible="accordion">
+              {% for task in tasks %}
+                <li>
+                  <div class="collapsible-header">
+                    {% if task.triggered %}
+                      <span class="badge red white-text">已触发</span>
+                    {% else %}
+                      <span class="badge blue white-text">等待触发</span>
+                    {% endif %}
+                    <i class="material-icons">track_changes</i>
                     {{ task.name }}
-                  </a>
-                </div>
-              </div>
-            {% endfor %}
+                  </div>
+                  <div class="collapsible-body">
+                    <ul style="margin: 15px">
+                      <li>是否触发 : {{ task.triggered }}</li>
+                      <li>正则 : {{ task.regex }}</li>
+                      <li>动作 : {{ task.get_type_display }}</li>
+                      <li>数据 : {{ task.data }}</li>
+                      <li>频率 : {{ task.get_frequency_display }}</li>
+                      <li>上一次更新 : {{ task.updated_at }}</li>
+                    </ul>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+
           </div>
         </div>
       </div>

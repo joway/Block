@@ -12,26 +12,35 @@ logger = get_task_logger(__name__)
 def handle_tasks(tasks):
     for task in tasks:
         logger.info('Monitor task %s has started' % task.name)
-        MonitorService.distribute_task(task)
+        try:
+            MonitorService.distribute_task(task)
+        except Exception as e:
+            logger.error(str(e))
         logger.info('Monitor task %s done' % task.name)
 
 
 @periodic_task(run_every=(crontab(minute='*/5')),
                name="monitor_5_minute_update", ignore_result=True)
 def monitor_5_minute_update():
-    tasks = MonitorTask.objects.filter(frequency=MonitorFrequency.FIVE_MINUTES)
+    tasks = MonitorTask.objects.filter(
+        triggered=False,
+        frequency=MonitorFrequency.FIVE_MINUTES)
     handle_tasks(tasks)
 
 
 @periodic_task(run_every=(crontab(hour='*/1')),
                name="monitor_1_hour_update", ignore_result=True)
 def monitor_1_hour_update():
-    tasks = MonitorTask.objects.filter(frequency=MonitorFrequency.ONE_HOUR)
+    tasks = MonitorTask.objects.filter(
+        triggered=False,
+        frequency=MonitorFrequency.ONE_HOUR)
     handle_tasks(tasks)
 
 
 @periodic_task(run_every=(crontab(hour='*/12')),
                name="monitor_half_day_update", ignore_result=True)
 def monitor_half_day_update():
-    tasks = MonitorTask.objects.filter(frequency=MonitorFrequency.HALF_DAY)
+    tasks = MonitorTask.objects.filter(
+        triggered=False,
+        frequency=MonitorFrequency.HALF_DAY)
     handle_tasks(tasks)

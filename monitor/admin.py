@@ -1,6 +1,15 @@
 from django.contrib import admin
 
-# Register your models here.
 from monitor.models import MonitorTask
 
-admin.site.register(MonitorTask)
+
+class MonitorTaskAdmin(admin.ModelAdmin):
+    list_display = ['name', 'link', 'regex',
+                    'type', 'data', 'frequency',
+                    'triggered']
+
+    class Meta:
+        model = MonitorTask
+
+
+admin.site.register(MonitorTask, MonitorTaskAdmin)

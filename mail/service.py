@@ -42,3 +42,5 @@ class MailService(object):
             """ % (task.link, task.name, task.id, task.name),
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[to])
+        task.triggered = True
+        task.save()
