@@ -11,6 +11,7 @@ class MonitorTask(models.Model):
     data = models.CharField(max_length=512, default='')
     type = models.IntegerField(choices=MONITOR_TYPE_CHOICES)
     frequency = models.IntegerField(choices=MONITOR_FREQUENCY_CHOICES, default=MonitorFrequency.ONE_HOUR)
+    selected_element = models.CharField('匹配元素', max_length=1024, default='')
 
     triggered = models.BooleanField('被触发', default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -19,5 +20,6 @@ class MonitorTask(models.Model):
     class Meta:
         ordering = ('-created_at',)
 
+    @property
     def element(self):
-        return MonitorService.extract_html_block(self)
+        return self.selected_element if self.selected_element else MonitorService.extract_html_block(self)

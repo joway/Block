@@ -9,4 +9,5 @@ def monitor_list(request):
 
 
 def monitor_create(request):
+    request.user.is_authenticated()
     return render(request, 'monitor/create.html', locals())

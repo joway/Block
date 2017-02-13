@@ -6,6 +6,13 @@
         <div class="card">
           <div class="card-content">
             <h3 class="center-align" style="margin: 30px">监控列表</h3>
+            <div class="row">
+              <div class="col l12">
+                {% if request.user.is_authenticated and request.user.is_admin %}
+                  <a class="waves-effect waves-light btn right" href="/monitor/create">创建</a>
+                {% endif %}
+              </div>
+            </div>
             <ul class="collapsible" data-collapsible="accordion">
               {% for task in tasks %}
                 <li>
@@ -20,8 +27,8 @@
                   </div>
                   <div class="collapsible-body">
                     <ul style="margin: 15px">
-                      <li>是否触发 : {{ task.triggered }}</li>
                       <li>正则 : {{ task.regex }}</li>
+                      <li>匹配元素 : {{ task.element }}</li>
                       <li>动作 : {{ task.get_type_display }}</li>
                       <li>数据 : {{ task.data }}</li>
                       <li>频率 : {{ task.get_frequency_display }}</li>
@@ -31,7 +38,6 @@
                 </li>
               {% endfor %}
             </ul>
-
           </div>
         </div>
       </div>

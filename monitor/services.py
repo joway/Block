@@ -27,8 +27,14 @@ class MonitorService(object):
     @classmethod
     def extract_html_block(cls, task):
         req = requests.get(task.link)
-        result = re.findall(task.regex, req.text)
-        return result[0].replace(' ', '') if result else ''
+        try:
+            result = re.findall(task.regex, req.text)
+        except:
+            result = ['']
+        ele = result[0].replace(' ', '') if result else ''
+        task.selected_element = ele
+        task.save()
+        return ele
 
     @classmethod
     def handle_contains_or_not(cls, task, fake=False):
@@ -47,7 +53,6 @@ class MonitorService(object):
     @classmethod
     def handle_compare(cls, task, fake=False):
         block = cls.extract_html_block(task)
-        print(block)
         num = float(block)
         data = float(task.data)
         if fake:
