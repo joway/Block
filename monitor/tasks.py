@@ -28,7 +28,7 @@ def monitor_5_minute_update():
     handle_tasks(tasks)
 
 
-@periodic_task(run_every=(crontab(hour='*/1')),
+@periodic_task(run_every=(crontab(minute=0, hour='*/1')),
                name="monitor_1_hour_update", ignore_result=True)
 def monitor_1_hour_update():
     tasks = MonitorTask.objects.filter(
@@ -37,7 +37,7 @@ def monitor_1_hour_update():
     handle_tasks(tasks)
 
 
-@periodic_task(run_every=(crontab(hour='*/12')),
+@periodic_task(run_every=(crontab(minute=0, hour='*/12')),
                name="monitor_half_day_update", ignore_result=True)
 def monitor_half_day_update():
     tasks = MonitorTask.objects.filter(
