@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
 from analysis.services import ActionService
+from articles.tasks import cosine_similarity_update
 from utils.tag import topk
 from .models import Article
 from .paginations import ArticlePagination
@@ -29,6 +30,8 @@ class ArticleViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
 
         ActionService.post(request.user, serializer.instance)
+
+        cosine_similarity_update.delay(serializer.instance)
 
         return Response(self.get_serializer(instance=serializer.instance).data, status=status.HTTP_201_CREATED,
                         headers=headers)

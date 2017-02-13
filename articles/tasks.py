@@ -1,16 +1,29 @@
-from celery.schedules import crontab
-from celery.task import periodic_task
 from celery.utils.log import get_task_logger
 
 from articles.models import Article, ArticleSimilarity
+from config.celery import app
 from utils.cosine_similiarity import cosine_similarity
 
 logger = get_task_logger(__name__)
 
 
-@periodic_task(run_every=(crontab(minute='*/59')),
-               name="article_cosine_similarity", ignore_result=True)
-def article_cosine_similarity():
+@app.task
+def cosine_similarity_update(new_article):
+    articles = Article.objects.all()
+    for target in articles:
+        if target.uid == new_article.uid:
+            continue
+        cosine = cosine_similarity(new_article.content, target.content)
+        cosine += cosine_similarity(new_article.title, target.title)
+        a = ArticleSimilarity.objects.create(source=new_article, target=target, cosine=cosine)
+        b = ArticleSimilarity.objects.create(source=target, target=new_article, cosine=cosine)
+        a.save()
+        b.save()
+    logger.info('%s done' % new_article.title)
+
+
+@app.task
+def cosine_similarity_init():
     articles = Article.objects.all()
     for source in articles:
         for target in articles:

@@ -22,6 +22,7 @@ def handle_tasks(tasks):
 @periodic_task(run_every=(crontab(minute='*/5')),
                name="monitor_5_minute_update", ignore_result=True)
 def monitor_5_minute_update():
+    logger.info('monitor_5_minute_update  has started')
     tasks = MonitorTask.objects.filter(
         triggered=False,
         frequency=MonitorFrequency.FIVE_MINUTES)
@@ -31,6 +32,7 @@ def monitor_5_minute_update():
 @periodic_task(run_every=(crontab(minute=0, hour='*/1')),
                name="monitor_1_hour_update", ignore_result=True)
 def monitor_1_hour_update():
+    logger.info('monitor_1_hour_update  has started')
     tasks = MonitorTask.objects.filter(
         triggered=False,
         frequency=MonitorFrequency.ONE_HOUR)
@@ -40,6 +42,7 @@ def monitor_1_hour_update():
 @periodic_task(run_every=(crontab(minute=0, hour='*/12')),
                name="monitor_half_day_update", ignore_result=True)
 def monitor_half_day_update():
+    logger.info('monitor_half_day_update  has started')
     tasks = MonitorTask.objects.filter(
         triggered=False,
         frequency=MonitorFrequency.HALF_DAY)
