@@ -40,6 +40,12 @@ def not_fount(request):
     return render(request, '404.html', locals())
 
 
+def server_error(request):
+    title = 'Server Error'
+
+    return render(request, '500.html', locals())
+
+
 @csrf_protect
 @require_POST
 def proxy_post_comment(request, next=None, using=None):
@@ -91,6 +97,6 @@ def search(request):
 
 def doubanshow(request):
     book_req = requests.get('https://api.douban.com/v2/book/user/54019708/collections',
-                    params={'status': 'read'})
+                            params={'status': 'read'})
     books = book_req.json()['collections']
     return render(request, 'douban.html', locals())

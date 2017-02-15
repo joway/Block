@@ -59,3 +59,4 @@ urlpatterns = [
 ]
 
 handler404 = 'config.views.not_fount'
+handler500 = 'config.views.server_error'
