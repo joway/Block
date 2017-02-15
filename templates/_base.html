@@ -77,7 +77,7 @@
   <script src="{% static 'dist/index.js' %}"></script>
   <script src="{% static 'stick.js' %}"></script>
 
-  <script src="{% static 'libs/js/instantclick.min.js' %}" data-no-instant></script>
+{#  <script src="{% static 'libs/js/instantclick.min.js' %}" data-no-instant></script>#}
 {% endblock %}
 {% block javascript %}
   <script>
@@ -85,12 +85,12 @@
       {#      stick.send('/services/timing/record');#}
   </script>
 
-  <script data-no-instant>
-      InstantClick.on('change', function () {
-          ga('send', 'pageview', location.pathname + location.search);
-      });
-      InstantClick.init(true);
-  </script>
+{#  <script data-no-instant>#}
+{#      InstantClick.on('change', function () {#}
+{#          ga('send', 'pageview', location.pathname + location.search);#}
+{#      });#}
+{#      InstantClick.init(true);#}
+{#  </script>#}
 {% endblock %}
 </body>
 </html>
