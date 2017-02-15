@@ -59,50 +59,48 @@
     {% endcache %}
   </div>
 </div>
-{% cache 360000 comments_script %}
-  <script>
-      document.addEventListener("DOMContentLoaded", function (event) {
-          $('#comment-submit').click(function () {
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('#comment-submit').click(function () {
 
-              var comment = $('#comment-textarea').val().trim();
-              if (!(comment)) {
-                  prompt_warning('请输入完整的信息');
-              } else {
-                  beginCircleLoding();
+            var comment = $('#comment-textarea').val().trim();
+            if (!(comment)) {
+                prompt_warning('请输入完整的信息');
+            } else {
+                beginCircleLoding();
 
-                  {% get_comment_form for comment_obj as form %}
-                  var formData = new FormData();
-                  formData.append('comment', comment);
-                  formData.append('url', '{{ site.cur_full_url }}');
-                  formData.append("content_type", '{{ form.content_type.value }}');
-                  formData.append("object_pk", '{{ form.object_pk.value }}');
-                  formData.append("timestamp", '{{ form.timestamp.value }}');
-                  formData.append("security_hash", '{{ form.security_hash.value }}');
+                {% get_comment_form for comment_obj as form %}
+                var formData = new FormData();
+                formData.append('comment', comment);
+                formData.append('url', '{{ site.cur_full_url }}');
+                formData.append("content_type", '{{ form.content_type.value }}');
+                formData.append("object_pk", '{{ form.object_pk.value }}');
+                formData.append("timestamp", '{{ form.timestamp.value }}');
+                formData.append("security_hash", '{{ form.security_hash.value }}');
 
-                  createComment(formData).then(function (response) {
-                      endCircleLoding();
-                      if (response.ok) {
-                          prompt_success('评论成功', 3000);
-                          location.reload();
-                      } else {
-                          prompt_warning(response.body, 3000);
-                      }
-                  });
-              }
-          });
+                createComment(formData).then(function (response) {
+                    endCircleLoding();
+                    if (response.ok) {
+                        prompt_success('评论成功', 3000);
+                        location.reload();
+                    } else {
+                        prompt_warning(response.body, 3000);
+                    }
+                });
+            }
+        });
 
-          var owo_container = document.getElementsByClassName('OwO');
-          if (owo_container.length >= 1) {
-              var OwO_demo = new OwO({
-                  logo: '<i class="material-icons">insert_emoticon</i>',
-                  container: owo_container[0],
-                  target: document.getElementsByClassName('OwO-textarea')[0],
-                  api: 'https://static.joway.wang/static/dist/kaomoji.json',
-                  position: 'down',
-                  width: '100%',
-                  maxHeight: '250px'
-              });
-          }
-      });
-  </script>
-{% endcache %}
+        var owo_container = document.getElementsByClassName('OwO');
+        if (owo_container.length >= 1) {
+            var OwO_demo = new OwO({
+                logo: '<i class="material-icons">insert_emoticon</i>',
+                container: owo_container[0],
+                target: document.getElementsByClassName('OwO-textarea')[0],
+                api: 'https://static.joway.wang/static/dist/kaomoji.json',
+                position: 'down',
+                width: '100%',
+                maxHeight: '250px'
+            });
+        }
+    });
+</script>
