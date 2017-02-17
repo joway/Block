@@ -1,0 +1,9 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+  - include: git_update.yml
+  - name: migrate and deploy
+    command: ./.deploy/migrate_and_deploy.sh
+    args:
+      chdir: {{ base_dir }}

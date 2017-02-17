@@ -1,4 +1,0 @@
-- name: npm install
-  command: nice -19 npm install &&  nice -19 npm run build
-  args:
-    chdir: "{{ base_dir }}"

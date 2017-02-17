@@ -1,4 +1,0 @@
-- name: database migrate
-  command: ENV=PRODUCTION ./manage.py migrate
-  args:
-    chdir: "{{ base_dir }}"

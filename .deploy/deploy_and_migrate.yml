@@ -2,7 +2,8 @@
 - hosts: all
   sudo: yes
   tasks:
-  - include: task/git_update.yml
-  - include: task/npm.yml
-  - include: task/service_restart.yml
-  - include: task/migrate.yml
+    - include: git_update.yml
+    - name: deploy and migrate
+      command: ./.deploy/deploy_and_migrate.sh
+      args:
+        chdir: {{ base_dir }}
