@@ -1,0 +1,2 @@
+- name: update code
+  git: repo={{ repository }} dest={{ base_dir }}

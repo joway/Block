@@ -1,0 +1,8 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+  - include: task/git_update.yml
+  - include: task/npm.yml
+  - include: task/service_restart.yml
+  - include: task/migrate.yml
