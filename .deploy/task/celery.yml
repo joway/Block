@@ -1,4 +1,4 @@
 - name: migrate
   command: ./stop-worker.sh && ./start-worker.sh
   args:
-    chdir: {{ base_dir }}
+    chdir: "{{ base_dir }}"
