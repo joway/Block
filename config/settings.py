@@ -307,8 +307,8 @@ AWS_SES_REGION_ENDPOINT = 'email.us-west-2.amazonaws.com'
 EMAIL_HOST_USER = 'joway@joway.wang'
 
 # celery
-# CELERY_BROKER_URL = '%s/%s' % (os.environ.get('BROKER_URL', 'redis://:password@127.0.0.1:6379'), 0)
-CELERY_BROKER_URL = 'sqs://%s:%s@' % (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+CELERY_BROKER_URL = '%s/%s' % (os.environ.get('BROKER_URL', 'redis://:password@127.0.0.1:6379'), 0)
+# CELERY_BROKER_URL = 'sqs://%s:%s@' % (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
 # CELERY_BROKER_TRANSPORT_OPTIONS = {
 #     'region': 'ap-northeast-1'
 # }
