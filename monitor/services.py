@@ -1,4 +1,5 @@
 import re
+from datetime import datetime
 from urllib.parse import urlparse
 
 import requests
@@ -24,6 +25,8 @@ class MonitorService(object):
             MonitorType.EqualTo
         ]:
             cls.handle_compare(task, fake)
+        task.updated_at = datetime.now()
+        task.save()
 
     @classmethod
     def extract_html_block(cls, task):
