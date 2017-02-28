@@ -31,6 +31,8 @@ class Article(models.Model):
     created_at = models.DateTimeField('创建时间', auto_now_add=True)
     updated_at = models.DateTimeField('更新时间', auto_now_add=True)
 
+    visible = models.BooleanField('可见性', default=True)
+
     content = models.TextField('Markdown 文本')
 
     class Meta:

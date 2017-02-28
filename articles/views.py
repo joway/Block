@@ -10,7 +10,7 @@ from users.decorators import admin_required
 
 
 def list(request):
-    articles = Article.objects.all()
+    articles = Article.objects.filter(visible=True)
 
     page = request.GET.get('page', '1')
     category = request.GET.get('category', '')
