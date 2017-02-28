@@ -48,7 +48,7 @@ def callback_github(request):
         user.last_login = datetime.now()
         user.save()
     except User.DoesNotExist:
-        user = User.objects.create_user(email=user_info['email'],
+        user = User.objects.create_user(email=email,
                                         username=username,
                                         avatar=user_info['avatar_url'],
                                         github_username=user_info['login'])
