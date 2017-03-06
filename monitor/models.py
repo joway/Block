@@ -1,6 +1,7 @@
 from django.db import models
 
-from monitor.constants import MONITOR_FREQUENCY_CHOICES, MonitorFrequency, MONITOR_TYPE_CHOICES
+from monitor.constants import MONITOR_FREQUENCY_CHOICES, MonitorFrequency, MONITOR_TYPE_CHOICES, \
+    OBJECT_DATA_TYPE_CHOICES
 from monitor.services import MonitorService
 
 
@@ -25,3 +26,11 @@ class MonitorTask(models.Model):
     @property
     def element(self):
         return self.selected_element if self.selected_element else MonitorService.extract_html_block(self)
+
+
+class ObjectData(models.Model):
+    type = models.IntegerField(choices=OBJECT_DATA_TYPE_CHOICES)
+    key = models.CharField('key', max_length=255)
+    data = models.TextField('数据')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)

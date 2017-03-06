@@ -21,6 +21,11 @@ def index(request):
     return article_list(request)
 
 
+def test(request):
+    print(request.GET)
+    return article_list(request)
+
+
 def robots(request):
     with open('robots.txt', 'rb') as f:
         data = f.read()

@@ -28,3 +28,12 @@ MONITOR_TYPE_CHOICES = (
     (MonitorType.LessThan, '小于'),
     (MonitorType.EqualTo, '等于'),
 )
+
+
+class ObjectDataType(object):
+    Twitter = 1
+
+
+OBJECT_DATA_TYPE_CHOICES = (
+    (ObjectDataType.Twitter, '推特'),
+)

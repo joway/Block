@@ -354,3 +354,14 @@ ALGOLIA = {
     'APPLICATION_ID': 'CTEG91VXED',
     'API_KEY': os.environ.get('ALGOLIA_API_KEY', 'xxx')
 }
+
+# twitter
+TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY', 'xxx')
+TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET', 'xxx')
+TWITTER_ACCESS_TOKEN_KEY = os.environ.get('TWITTER_ACCESS_TOKEN_KEY', 'xxx')
+TWITTER_ACCESS_TOKEN_SECRET = os.environ.get('TWITTER_ACCESS_TOKEN_SECRET', 'xxx')
+
+# weibo
+WEIBO_API_KEY = os.environ.get('WEIBO_API_KEY', 'xxx')
+WEIBO_API_SECRET = os.environ.get('WEIBO_API_SECRET', 'xxx')
+WEIBO_TRUMP_ACCESS_TOKEN = os.environ.get('WEIBO_TRUMP_ACCESS_TOKEN', 'xxx')

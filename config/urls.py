@@ -30,6 +30,7 @@ urlpatterns = [
 
     # local view
     url(r'^$', views.index),
+    url(r"^test/", views.test),
     url(r"^a/", include('articles.urls')),
     url(r"^user/", include('users.urls')),
     url(r'^analysis/', include('analysis.urls')),
