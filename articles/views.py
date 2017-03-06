@@ -10,15 +10,15 @@ from users.decorators import admin_required
 
 
 def list(request):
-    articles = Article.objects.filter(visible=True)
+    articles = Article.objects.filter(visible=True).all()
 
     page = request.GET.get('page', '1')
     category = request.GET.get('category', '')
     if category:
         category_display = [x for x in ARTICLE_CATEGORY_CHOICES if x[0] == category][0][1]
-        title = '目录: %s | 城西笔谈' % category_display
+        title = '目录: %s | 文一西路' % category_display
         meta_description = title
-        meta_keywords = ', '.join([category_display, '城西笔谈', '博客'])
+        meta_keywords = ', '.join([category_display, '文一西路', '博客'])
 
     _cache = cache.get('list#%s' % str(request.GET))
     if not _cache:
@@ -53,7 +53,7 @@ def detail(request, slug_or_uid):
         cache.set('detail#%s' % slug_or_uid, article, 3600)
 
     meta_description = article.digest()
-    meta_keywords = ', '.join([article.get_category_display(), '城西笔谈', article.title])
+    meta_keywords = ', '.join([article.get_category_display(), '文一西路', article.title])
 
     title = article.title
     comment_obj = article

@@ -6,19 +6,19 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="renderer" content="webkit">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no,  shrink-to-fit=no"/>
-  <meta name="application-name" content="城西笔谈">
+  <meta name="application-name" content="文一西路">
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
   <meta name="format-detection" content="telephone=no">
   {% if meta_keywords %}
     <meta name="keywords" content="{{ meta_keywords }}"/>
   {% else %}
-    <meta name="keywords" content="Joway, 城西笔谈, 编程, 算法, Python, 随笔, Django"/>
+    <meta name="keywords" content="Joway, 文一西路, 编程, 算法, Python, 随笔, Django"/>
   {% endif %}
   {% if meta_description %}
     <meta name="description" content="{{ meta_description }}"/>
   {% else %}
-    <meta name="description" content="城西笔谈 - 一只致力于向 Full Stack 发展最后变成 Full Heap 的学渣 ."/>
+    <meta name="description" content="文一西路 - 一只致力于向 Full Stack 发展最后变成 Full Heap 的学渣 ."/>
   {% endif %}
 
   <link rel="icon" type="image/x-icon" href="{% static 'img/logo/favicon.ico' %}"/>
@@ -26,9 +26,9 @@
   <link href="/" rel="parent" charset="UTF-8" hreflang="zh-Hans"/>
 
   {% if title %}
-    <title>城西笔谈 - {{ title }}</title>
+    <title>文一西路 - {{ title }}</title>
   {% else %}
-    <title>城西笔谈 - Joway's Blog</title>
+    <title>文一西路 - Joway's Blog</title>
   {% endif %}
 
   {% include 'components/_google_analytics.html' %}
@@ -55,6 +55,8 @@
     <link rel="stylesheet" href="{% static 'dist/lib.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
   {% endblock %}
+
+  <meta property="wb:webmaster" content="7224be2fec934c9b"/>
 </head>
 <body>
 <div class="main">
@@ -77,7 +79,7 @@
   <script src="{% static 'dist/index.js' %}"></script>
   <script src="{% static 'stick.js' %}"></script>
 
-{#  <script src="{% static 'libs/js/instantclick.min.js' %}" data-no-instant></script>#}
+  {#  <script src="{% static 'libs/js/instantclick.min.js' %}" data-no-instant></script>#}
 {% endblock %}
 {% block javascript %}
   <script>
@@ -85,12 +87,12 @@
       {#      stick.send('/services/timing/record');#}
   </script>
 
-{#  <script data-no-instant>#}
-{#      InstantClick.on('change', function () {#}
-{#          ga('send', 'pageview', location.pathname + location.search);#}
-{#      });#}
-{#      InstantClick.init(true);#}
-{#  </script>#}
+  {#  <script data-no-instant>#}
+  {#      InstantClick.on('change', function () {#}
+  {#          ga('send', 'pageview', location.pathname + location.search);#}
+  {#      });#}
+  {#      InstantClick.init(true);#}
+  {#  </script>#}
 {% endblock %}
 </body>
 </html>

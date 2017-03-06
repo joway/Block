@@ -319,7 +319,7 @@ CELERY_TASK_PROTOCOL = 1
 # EMAIL_HOST = 'smtp.exmail.qq.com'
 # EMAIL_PORT = 465
 # EMAIL_HOST_PASSWORD = 'xxx'
-# EMAIL_SUBJECT_PREFIX = '[城西笔谈]'
+# EMAIL_SUBJECT_PREFIX = '[文一西路]'
 # EMAIL_USE_TLS = False
 # EMAIL_USE_SSL = True
 

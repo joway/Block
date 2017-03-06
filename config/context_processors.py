@@ -23,6 +23,7 @@ def categories(request):
 
     return context
 
+
 def site_info(request):
     statsd.incr('pageview')
 

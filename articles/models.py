@@ -76,9 +76,9 @@ class Article(models.Model):
 
 
 class ArticleRSSFeed(Feed):
-    title = "城西笔谈 - 文章列表"
+    title = "文一西路 - 文章列表"
     link = "/"
-    description = "城西笔谈 - blog posts"
+    description = "文一西路 - blog posts"
 
     def items(self):
         return Article.objects.order_by('-created_at')
