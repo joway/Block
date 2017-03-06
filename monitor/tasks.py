@@ -73,7 +73,7 @@ def monitor_trump():
                       access_token_key=settings.TWITTER_ACCESS_TOKEN_KEY,
                       access_token_secret=settings.TWITTER_ACCESS_TOKEN_SECRET)
 
-    statuses = api.GetUserTimeline(screen_name='realdonaldtrump', count=82)
+    statuses = api.GetUserTimeline(screen_name='realdonaldtrump', count=1)
     statuses.reverse()
     try:
         for status in statuses:
