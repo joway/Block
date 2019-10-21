@@ -28,7 +28,7 @@ django-redis==4.7.0
 django-redis-sessions==0.5.6
 django-ses==0.8.1
 django-statsd-mozilla==0.3.16
-djangorestframework==3.5.3
+djangorestframework==3.9.1
 docutils==0.13.1
 feedparser==5.2.1
 future==0.16.0
