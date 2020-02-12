@@ -12,7 +12,7 @@ cffi==1.9.1
 coverage==4.3.1
 cryptography==1.7.2
 defusedxml==0.4.1
-Django==1.9.12
+Django==1.11.28
 django-activity-stream==0.6.3
 django-appconf==1.0.2
 django-celery-results==1.0.1
